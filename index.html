@@ -222,9 +222,44 @@
                 </div>
             </section>
 
+            <!-- Quick Access -->
+            <section class="quick-access" id="quickAccess" aria-label="常用网站快捷访问">
+                <div class="quick-access-header">
+                    <h3>⚡ 快捷访问</h3>
+                    <span class="quick-access-desc">基于访问历史</span>
+                </div>
+                <div class="quick-access-items" id="quickAccessItems">
+                    <!-- Will be dynamically loaded -->
+                </div>
+            </section>
+
             <!-- Categories will be dynamically loaded here -->
-            <div class="loading-skeleton" aria-label="加载中" aria-live="polite">
-                <!-- Skeleton screen while loading -->
+            <div class="loading-skeleton" id="loadingSkeleton" aria-label="加载中" aria-live="polite">
+                <!-- Skeleton cards -->
+                <div class="skeleton-category">
+                    <div class="skeleton-header">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-title"></div>
+                    </div>
+                    <div class="skeleton-cards">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+                <div class="skeleton-category">
+                    <div class="skeleton-header">
+                        <div class="skeleton-icon"></div>
+                        <div class="skeleton-title"></div>
+                    </div>
+                    <div class="skeleton-cards">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -244,6 +279,7 @@
     <script src="./js/pinyin.js"></script>
     <script src="./js/sites-data.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/effects.js"></script>
 
     <!-- Analytics placeholder - replace with your analytics code -->
     <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->

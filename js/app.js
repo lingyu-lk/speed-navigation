@@ -107,6 +107,15 @@ class StorageManager {
 // ==================== Theme Manager ====================
 class ThemeManager {
     constructor() {
+        this.themes = ['light', 'dark', 'cherry', 'ocean', 'forest', 'sunset'];
+        this.themeNames = {
+            light: '☀️ 明亮',
+            dark: '🌙 暗黑',
+            cherry: '🌸 樱花',
+            ocean: '🌊 海洋',
+            forest: '🌲 森林',
+            sunset: '🌅 日落'
+        };
         this.theme = StorageManager.get(CONFIG.STORAGE_KEYS.THEME) || 'light';
         this.init();
     }
@@ -124,15 +133,16 @@ class ThemeManager {
     }
 
     toggle() {
-        const newTheme = this.theme === 'light' ? 'dark' : 'light';
-        this.applyTheme(newTheme);
+        const currentIndex = this.themes.indexOf(this.theme);
+        const nextIndex = (currentIndex + 1) % this.themes.length;
+        this.applyTheme(this.themes[nextIndex]);
     }
 
     updateToggleButton() {
         const button = document.querySelector('.theme-toggle');
         if (button) {
-            button.textContent = this.theme === 'light' ? '🌙 夜间模式' : '☀️ 日间模式';
-            button.setAttribute('aria-label', this.theme === 'light' ? '切换到夜间模式' : '切换到日间模式');
+            button.textContent = this.themeNames[this.theme];
+            button.setAttribute('aria-label', `当前主题: ${this.themeNames[this.theme]}`);
         }
     }
 
@@ -216,7 +226,6 @@ class HistoryManager {
 class SearchManager {
     constructor() {
         this.searchInput = document.getElementById('searchInput');
-        this.categories = document.querySelectorAll('.category');
         this.init();
     }
 
@@ -231,7 +240,10 @@ class SearchManager {
         const searchTerm = term.toLowerCase();
         const searchPinyin = Utils.toPinyin(term.toLowerCase());
 
-        this.categories.forEach(category => {
+        // Get categories dynamically each time
+        const categories = document.querySelectorAll('.category');
+
+        categories.forEach(category => {
             let hasVisibleCards = false;
             const cards = category.querySelectorAll('.card');
 
@@ -377,10 +389,82 @@ class SiteRenderer {
 
             this.renderCategories(data.categories);
             this.updateStats(data.categories);
+            this.renderQuickAccess(data.categories);
+
+            // Hide skeleton after loading
+            this.hideSkeleton();
         } catch (error) {
             console.error('Error loading sites:', error);
             this.showError();
+            this.hideSkeleton();
         }
+    }
+
+    hideSkeleton() {
+        const skeleton = document.getElementById('loadingSkeleton');
+        if (skeleton) {
+            skeleton.classList.add('hidden');
+        }
+    }
+
+    renderQuickAccess(categories) {
+        const quickAccessContainer = document.getElementById('quickAccess');
+        const quickAccessItems = document.getElementById('quickAccessItems');
+
+        if (!quickAccessContainer || !quickAccessItems) return;
+
+        // Get top 10 most visited sites from history
+        const history = this.historyManager.getAll();
+
+        if (history.length === 0) {
+            quickAccessContainer.classList.add('empty');
+            return;
+        }
+
+        // Sort by visits (descending) and take top 10
+        const topSites = history
+            .sort((a, b) => b.visits - a.visits)
+            .slice(0, 10);
+
+        // Clear existing items
+        quickAccessItems.innerHTML = '';
+
+        // Render quick access items
+        topSites.forEach(site => {
+            const quickItem = this.createQuickAccessItem(site);
+            quickAccessItems.appendChild(quickItem);
+        });
+
+        quickAccessContainer.classList.remove('empty');
+    }
+
+    createQuickAccessItem(site) {
+        const item = document.createElement('a');
+        item.href = site.url;
+        item.className = 'quick-item';
+        item.target = '_blank';
+        item.rel = 'noopener noreferrer';
+
+        // Extract domain for favicon
+        let domain = '';
+        try {
+            const url = new URL(site.url);
+            domain = url.hostname;
+        } catch (e) {
+            domain = site.url;
+        }
+
+        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+        item.innerHTML = `
+            <div class="quick-item-icon">
+                <img src="${faviconUrl}" alt="${site.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${site.icon || '🌐'}</text></svg>'">
+            </div>
+            <div class="quick-item-name">${Utils.sanitizeHTML(site.name)}</div>
+            <span class="quick-item-badge">${site.visits}</span>
+        `;
+
+        return item;
     }
 
     renderCategories(categories) {
@@ -441,10 +525,25 @@ class SiteRenderer {
         }
 
         const visits = this.historyManager.getVisitCount(site.url);
-        const visitBadge = visits > 0 ? `<span class="visit-count" title="访问${visits}次"></span>` : '';
+        const visitBadge = visits > 0 ? `<span class="visit-count" title="访问${visits}次">${visits}</span>` : '';
+
+        // Extract domain for favicon
+        let domain = '';
+        try {
+            const url = new URL(site.url);
+            domain = url.hostname;
+        } catch (e) {
+            domain = site.url;
+        }
+
+        // Use real favicon with fallback to emoji
+        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
         card.innerHTML = `
-            <div class="card-icon">${site.icon}</div>
+            <div class="card-icon-wrapper">
+                <img class="card-favicon" src="${faviconUrl}" alt="${site.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="card-icon-fallback" style="display:none;">${site.icon}</div>
+            </div>
             <div class="card-title">${Utils.sanitizeHTML(site.name)}</div>
             <div class="card-desc">${Utils.sanitizeHTML(site.description)}</div>
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
