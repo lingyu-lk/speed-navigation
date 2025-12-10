@@ -961,6 +961,154 @@ const SITES_DATA =
           "tag": "工具"
         }
       ]
+    },
+    {
+      "id": "procrastination",
+      "icon": "😎",
+      "name": "摸鱼专区",
+      "description": "上班摸鱼，快乐工作",
+      "sites": [
+        {
+          "name": "假装在更新",
+          "url": "https://fakeupdate.net",
+          "icon": "💻",
+          "description": "假装系统在更新，完美摸鱼神器",
+          "tag": "伪装"
+        },
+        {
+          "name": "Hacker Typer",
+          "url": "https://hackertyper.com",
+          "icon": "👨‍💻",
+          "description": "假装在写代码，看起来很忙的样子",
+          "tag": "伪装"
+        },
+        {
+          "name": "GeekTyper",
+          "url": "http://geektyper.com",
+          "icon": "⌨️",
+          "description": "多种黑客界面，假装在工作",
+          "tag": "伪装"
+        },
+        {
+          "name": "小霸王游戏机",
+          "url": "https://www.yikm.net",
+          "icon": "🎮",
+          "description": "在线玩经典FC游戏，魂斗罗、超级玛丽",
+          "tag": "游戏"
+        },
+        {
+          "name": "Slither.io",
+          "url": "https://slither.io",
+          "icon": "🐍",
+          "description": "贪吃蛇大作战，简单上瘾",
+          "tag": "游戏"
+        },
+        {
+          "name": "Agar.io",
+          "url": "https://agar.io",
+          "icon": "⚪",
+          "description": "球球大作战，轻松有趣",
+          "tag": "游戏"
+        },
+        {
+          "name": "2048",
+          "url": "https://play2048.co",
+          "icon": "🔢",
+          "description": "经典2048游戏，烧脑又休闲",
+          "tag": "益智"
+        },
+        {
+          "name": "Quick, Draw!",
+          "url": "https://quickdraw.withgoogle.com",
+          "icon": "🎨",
+          "description": "Google AI 猜画小游戏",
+          "tag": "AI游戏"
+        },
+        {
+          "name": "A Soft Murmur",
+          "url": "https://asoftmurmur.com",
+          "icon": "🌧️",
+          "description": "环境白噪音，帮助专注或放松",
+          "tag": "放松"
+        },
+        {
+          "name": "Rainy Mood",
+          "url": "https://www.rainymood.com",
+          "icon": "☔",
+          "description": "下雨声音，放松神器",
+          "tag": "放松"
+        },
+        {
+          "name": "Purrli",
+          "url": "https://purrli.com",
+          "icon": "🐱",
+          "description": "猫咪呼噜声，治愈系",
+          "tag": "放松"
+        },
+        {
+          "name": "Little Alchemy",
+          "url": "https://littlealchemy.com",
+          "icon": "🧪",
+          "description": "元素合成游戏，很上瘾",
+          "tag": "益智"
+        },
+        {
+          "name": "The Useless Web",
+          "url": "https://theuselessweb.com",
+          "icon": "🎲",
+          "description": "随机跳转到无用但有趣的网站",
+          "tag": "随机"
+        },
+        {
+          "name": "Pointer Pointer",
+          "url": "https://pointerpointer.com",
+          "icon": "👉",
+          "description": "找到指向你鼠标的图片",
+          "tag": "创意"
+        },
+        {
+          "name": "This Person Does Not Exist",
+          "url": "https://thispersondoesnotexist.com",
+          "icon": "👤",
+          "description": "AI生成的不存在的人脸",
+          "tag": "AI"
+        },
+        {
+          "name": "Radio Garden",
+          "url": "http://radio.garden",
+          "icon": "📻",
+          "description": "收听全球各地的广播电台",
+          "tag": "音乐"
+        },
+        {
+          "name": "Calm",
+          "url": "https://www.calm.com",
+          "icon": "🧘",
+          "description": "冥想和放松音乐",
+          "tag": "放松"
+        },
+        {
+          "name": "Every Noise",
+          "url": "https://everynoise.com",
+          "icon": "🎵",
+          "description": "探索所有音乐类型",
+          "tag": "音乐"
+        },
+        {
+          "name": "窗外",
+          "url": "https://window-swap.com",
+          "icon": "🪟",
+          "description": "看看世界各地的窗外风景",
+          "tag": "视频"
+        },
+        {
+          "name": "云游故宫",
+          "url": "https://www.dpm.org.cn/lights/royal.html",
+          "icon": "🏯",
+          "description": "线上逛故宫，文化摸鱼",
+          "tag": "文化"
+        }
+      ]
     }
   ]
 }
