@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Primary Meta Tags -->
+    <title>极速导航 - 发现有趣的网站 | 个人导航页</title>
+    <meta name="title" content="极速导航 - 发现有趣的网站">
+    <meta name="description" content="精心整理的网站导航，包含娱乐、工具、学习、开发、AI等15个分类，120+优质网站。支持夜间模式、收藏功能和智能搜索。">
+    <meta name="keywords" content="网站导航,个人导航,书签管理,在线工具,AI工具,开发工具,学习网站,娱乐网站">
+    <meta name="author" content="极速导航">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yoursite.com/">
+    <meta property="og:title" content="极速导航 - 发现有趣的网站">
+    <meta property="og:description" content="精心整理的网站导航，包含娱乐、工具、学习、开发、AI等15个分类，120+优质网站。">
+    <meta property="og:image" content="https://yoursite.com/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yoursite.com/">
+    <meta property="twitter:title" content="极速导航 - 发现有趣的网站">
+    <meta property="twitter:description" content="精心整理的网站导航，包含娱乐、工具、学习、开发、AI等15个分类，120+优质网站。">
+    <meta property="twitter:image" content="https://yoursite.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "极速导航",
+        "description": "精心整理的网站导航，包含娱乐、工具、学习、开发、AI等15个分类",
+        "url": "https://yoursite.com",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://yoursite.com/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only">跳转到主内容</a>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav" role="navigation" aria-label="主导航">
+        <div class="top-nav-content">
+            <div class="logo" role="heading" aria-level="1">🚀 极速导航</div>
+            <div class="search-box">
+                <label for="searchInput" class="sr-only">搜索网站</label>
+                <input
+                    type="search"
+                    placeholder="🔍 搜索你想要的网站... (Ctrl+K)"
+                    id="searchInput"
+                    aria-label="搜索网站"
+                    autocomplete="off"
+                    spellcheck="false"
+                >
+            </div>
+            <button
+                class="mobile-menu-btn"
+                onclick="toggleSidebar()"
+                aria-label="打开菜单"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+            <button
+                class="theme-toggle"
+                aria-label="切换主题"
+            >
+                🌙 夜间模式
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar" role="complementary" aria-label="分类导航">
+            <div class="sidebar-title">📚 分类导航</div>
+            <nav>
+                <ul class="sidebar-menu" role="menu">
+                    <li role="none">
+                        <a href="#entertainment" class="active" role="menuitem" aria-label="娱乐休闲分类">
+                            <span class="menu-icon" aria-hidden="true">🎮</span>
+                            <span>娱乐休闲</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#tools" role="menuitem" aria-label="实用工具分类">
+                            <span class="menu-icon" aria-hidden="true">🛠️</span>
+                            <span>实用工具</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#learning" role="menuitem" aria-label="学习成长分类">
+                            <span class="menu-icon" aria-hidden="true">📚</span>
+                            <span>学习成长</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#creative" role="menuitem" aria-label="创意灵感分类">
+                            <span class="menu-icon" aria-hidden="true">🎨</span>
+                            <span>创意灵感</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#development" role="menuitem" aria-label="编程开发分类">
+                            <span class="menu-icon" aria-hidden="true">💻</span>
+                            <span>编程开发</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#ai" role="menuitem" aria-label="AI科技分类">
+                            <span class="menu-icon" aria-hidden="true">🤖</span>
+                            <span>AI 科技</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#social" role="menuitem" aria-label="社交媒体分类">
+                            <span class="menu-icon" aria-hidden="true">💬</span>
+                            <span>社交媒体</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#news" role="menuitem" aria-label="新闻资讯分类">
+                            <span class="menu-icon" aria-hidden="true">📰</span>
+                            <span>新闻资讯</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#shopping" role="menuitem" aria-label="在线购物分类">
+                            <span class="menu-icon" aria-hidden="true">🛍️</span>
+                            <span>在线购物</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#music" role="menuitem" aria-label="音乐影音分类">
+                            <span class="menu-icon" aria-hidden="true">🎵</span>
+                            <span>音乐影音</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#office" role="menuitem" aria-label="办公协作分类">
+                            <span class="menu-icon" aria-hidden="true">📊</span>
+                            <span>办公协作</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#cloud" role="menuitem" aria-label="云存储分类">
+                            <span class="menu-icon" aria-hidden="true">☁️</span>
+                            <span>云存储</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#photo" role="menuitem" aria-label="图片视频分类">
+                            <span class="menu-icon" aria-hidden="true">📷</span>
+                            <span>图片视频</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#fun" role="menuitem" aria-label="趣味网站分类">
+                            <span class="menu-icon" aria-hidden="true">🎲</span>
+                            <span>趣味网站</span>
+                        </a>
+                    </li>
+                    <li role="none">
+                        <a href="#finance" role="menuitem" aria-label="金融理财分类">
+                            <span class="menu-icon" aria-hidden="true">💰</span>
+                            <span>金融理财</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content" id="main-content" role="main">
+            <!-- Statistics -->
+            <section class="stats" aria-label="网站统计">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalSites" aria-label="网站总数">120+</div>
+                    <div class="stat-label">网站总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" aria-label="分类数量">15</div>
+                    <div class="stat-label">分类数量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" aria-label="探索可能">∞</div>
+                    <div class="stat-label">探索可能</div>
+                </div>
+            </section>
+
+            <!-- Categories will be dynamically loaded here -->
+            <div class="loading-skeleton" aria-label="加载中" aria-live="polite">
+                <!-- Skeleton screen while loading -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button
+        class="back-to-top"
+        id="backToTop"
+        onclick="scrollToTop()"
+        aria-label="返回顶部"
+        aria-hidden="true"
+    >
+        ↑
+    </button>
+
+    <!-- Scripts -->
+    <script src="./js/pinyin.js"></script>
+    <script src="./js/sites-data.js"></script>
+    <script src="./js/app.js"></script>
+
+    <!-- Analytics placeholder - replace with your analytics code -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+</body>
+</html>

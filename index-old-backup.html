@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的导航页 - 发现有趣的网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .top-nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 30px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 0.95em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .theme-toggle {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: transform 0.2s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        /* 主容器 */
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: 260px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 0;
+            height: calc(100vh - 110px);
+            max-height: calc(100vh - 110px);
+            position: sticky;
+            top: 90px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        /* 侧边栏滚动条样式 */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(102, 126, 234, 0.5);
+        }
+
+        .sidebar-title {
+            padding: 0 25px 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin: 5px 0;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            text-decoration: none;
+            color: #555;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu a:hover {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.1) 0%, transparent 100%);
+            border-left-color: #667eea;
+            color: #667eea;
+        }
+
+        .sidebar-menu a.active {
+            background: linear-gradient(90deg, rgba(102, 126, 234, 0.15) 0%, transparent 100%);
+            border-left-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .menu-icon {
+            font-size: 1.3em;
+            margin-right: 12px;
+            width: 25px;
+            text-align: center;
+        }
+
+        /* 内容区域 */
+        .content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .category {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            scroll-margin-top: 100px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .category-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .category-desc {
+            font-size: 0.9em;
+            color: #888;
+            margin-left: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.15em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .card-desc {
+            font-size: 0.85em;
+            color: #777;
+            line-height: 1.6;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* 移动端汉堡菜单 */
+        .mobile-menu-btn {
+            display: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: static;
+                display: none;
+            }
+
+            .sidebar.mobile-show {
+                display: block;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .cards {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav-content {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+                flex: 1 1 100%;
+                margin: 15px 0 0 0;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .category {
+                padding: 20px;
+            }
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* 统计信息 */
+        .stats {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="top-nav-content">
+            <div class="logo">🚀 极速导航</div>
+            <div class="search-box">
+                <input type="text" placeholder="🔍 搜索你想要的网站..." id="searchInput">
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+            <button class="theme-toggle" onclick="alert('主题切换功能开发中...')">🌙 夜间模式</button>
+        </div>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="main-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-title">📚 分类导航</div>
+            <ul class="sidebar-menu">
+                <li><a href="#entertainment" class="active"><span class="menu-icon">🎮</span>娱乐休闲</a></li>
+                <li><a href="#tools"><span class="menu-icon">🛠️</span>实用工具</a></li>
+                <li><a href="#learning"><span class="menu-icon">📚</span>学习成长</a></li>
+                <li><a href="#creative"><span class="menu-icon">🎨</span>创意灵感</a></li>
+                <li><a href="#development"><span class="menu-icon">💻</span>编程开发</a></li>
+                <li><a href="#ai"><span class="menu-icon">🤖</span>AI 科技</a></li>
+                <li><a href="#social"><span class="menu-icon">💬</span>社交媒体</a></li>
+                <li><a href="#news"><span class="menu-icon">📰</span>新闻资讯</a></li>
+                <li><a href="#shopping"><span class="menu-icon">🛍️</span>在线购物</a></li>
+                <li><a href="#music"><span class="menu-icon">🎵</span>音乐影音</a></li>
+                <li><a href="#office"><span class="menu-icon">📊</span>办公协作</a></li>
+                <li><a href="#cloud"><span class="menu-icon">☁️</span>云存储</a></li>
+                <li><a href="#photo"><span class="menu-icon">📷</span>图片视频</a></li>
+                <li><a href="#fun"><span class="menu-icon">🎲</span>趣味网站</a></li>
+                <li><a href="#finance"><span class="menu-icon">💰</span>金融理财</a></li>
+            </ul>
+        </aside>
+
+        <!-- 内容区域 -->
+        <main class="content">
+            <!-- 统计信息 -->
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalSites">120+</div>
+                    <div class="stat-label">网站总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">分类数量</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">探索可能</div>
+                </div>
+            </div>
+
+            <!-- 娱乐休闲 -->
+            <div class="category" id="entertainment">
+                <div class="category-header">
+                    <span class="category-icon">🎮</span>
+                    <h2 class="category-title">娱乐休闲</h2>
+                    <span class="category-desc">放松身心，享受生活</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.bilibili.com" class="card" target="_blank">
+                        <div class="card-icon">📺</div>
+                        <div class="card-title">哔哩哔哩</div>
+                        <div class="card-desc">国内知名的视频弹幕网站，二次元文化聚集地</div>
+                        <span class="card-tag">视频</span>
+                    </a>
+                    <a href="https://www.youtube.com" class="card" target="_blank">
+                        <div class="card-icon">🎬</div>
+                        <div class="card-title">YouTube</div>
+                        <div class="card-desc">全球最大的视频分享平台</div>
+                        <span class="card-tag">视频</span>
+                    </a>
+                    <a href="https://www.netflix.com" class="card" target="_blank">
+                        <div class="card-icon">🎭</div>
+                        <div class="card-title">Netflix</div>
+                        <div class="card-desc">优质影视剧在线观看平台</div>
+                        <span class="card-tag">影视</span>
+                    </a>
+                    <a href="https://www.twitch.tv" class="card" target="_blank">
+                        <div class="card-icon">🎮</div>
+                        <div class="card-title">Twitch</div>
+                        <div class="card-desc">全球最大的游戏直播平台</div>
+                        <span class="card-tag">直播</span>
+                    </a>
+                    <a href="https://www.douyu.com" class="card" target="_blank">
+                        <div class="card-icon">🐟</div>
+                        <div class="card-title">斗鱼</div>
+                        <div class="card-desc">国内知名游戏直播平台</div>
+                        <span class="card-tag">直播</span>
+                    </a>
+                    <a href="https://www.iqiyi.com" class="card" target="_blank">
+                        <div class="card-icon">🍿</div>
+                        <div class="card-title">爱奇艺</div>
+                        <div class="card-desc">在线视频播放平台</div>
+                        <span class="card-tag">影视</span>
+                    </a>
+                    <a href="https://www.steam.com" class="card" target="_blank">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-title">Steam</div>
+                        <div class="card-desc">全球最大的PC游戏平台</div>
+                        <span class="card-tag">游戏</span>
+                    </a>
+                    <a href="https://www.reddit.com" class="card" target="_blank">
+                        <div class="card-icon">🔥</div>
+                        <div class="card-title">Reddit</div>
+                        <div class="card-desc">互联网的首页，各种有趣的社区</div>
+                        <span class="card-tag">社区</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 实用工具 -->
+            <div class="category" id="tools">
+                <div class="category-header">
+                    <span class="category-icon">🛠️</span>
+                    <h2 class="category-title">实用工具</h2>
+                    <span class="category-desc">提高效率，事半功倍</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.notion.so" class="card" target="_blank">
+                        <div class="card-icon">📝</div>
+                        <div class="card-title">Notion</div>
+                        <div class="card-desc">强大的笔记和协作工具</div>
+                        <span class="card-tag">笔记</span>
+                    </a>
+                    <a href="https://www.canva.com" class="card" target="_blank">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-title">Canva</div>
+                        <div class="card-desc">在线平面设计平台</div>
+                        <span class="card-tag">设计</span>
+                    </a>
+                    <a href="https://excalidraw.com" class="card" target="_blank">
+                        <div class="card-icon">✏️</div>
+                        <div class="card-title">Excalidraw</div>
+                        <div class="card-desc">简单易用的手绘风格白板工具</div>
+                        <span class="card-tag">白板</span>
+                    </a>
+                    <a href="https://www.deepl.com" class="card" target="_blank">
+                        <div class="card-icon">🌐</div>
+                        <div class="card-title">DeepL</div>
+                        <div class="card-desc">最好用的在线翻译工具</div>
+                        <span class="card-tag">翻译</span>
+                    </a>
+                    <a href="https://tinypng.com" class="card" target="_blank">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-title">TinyPNG</div>
+                        <div class="card-desc">免费的图片压缩工具</div>
+                        <span class="card-tag">图片</span>
+                    </a>
+                    <a href="https://www.photopea.com" class="card" target="_blank">
+                        <div class="card-icon">🎨</div>
+                        <div class="card-title">Photopea</div>
+                        <div class="card-desc">在线版 Photoshop</div>
+                        <span class="card-tag">编辑</span>
+                    </a>
+                    <a href="https://www.remove.bg" class="card" target="_blank">
+                        <div class="card-icon">🎭</div>
+                        <div class="card-title">Remove.bg</div>
+                        <div class="card-desc">AI 自动抠图工具</div>
+                        <span class="card-tag">AI</span>
+                    </a>
+                    <a href="https://convertio.co" class="card" target="_blank">
+                        <div class="card-icon">🔄</div>
+                        <div class="card-title">Convertio</div>
+                        <div class="card-desc">在线文件格式转换</div>
+                        <span class="card-tag">转换</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 学习成长 -->
+            <div class="category" id="learning">
+                <div class="category-header">
+                    <span class="category-icon">📚</span>
+                    <h2 class="category-title">学习成长</h2>
+                    <span class="category-desc">终身学习，持续进步</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.coursera.org" class="card" target="_blank">
+                        <div class="card-icon">🎓</div>
+                        <div class="card-title">Coursera</div>
+                        <div class="card-desc">世界顶尖大学的在线课程</div>
+                        <span class="card-tag">课程</span>
+                    </a>
+                    <a href="https://www.udemy.com" class="card" target="_blank">
+                        <div class="card-icon">📖</div>
+                        <div class="card-title">Udemy</div>
+                        <div class="card-desc">海量在线课程平台</div>
+                        <span class="card-tag">课程</span>
+                    </a>
+                    <a href="https://www.khanacademy.org" class="card" target="_blank">
+                        <div class="card-icon">🏫</div>
+                        <div class="card-title">Khan Academy</div>
+                        <div class="card-desc">免费的在线学习平台</div>
+                        <span class="card-tag">免费</span>
+                    </a>
+                    <a href="https://www.duolingo.com" class="card" target="_blank">
+                        <div class="card-icon">🌍</div>
+                        <div class="card-title">Duolingo</div>
+                        <div class="card-desc">免费好玩的语言学习平台</div>
+                        <span class="card-tag">语言</span>
+                    </a>
+                    <a href="https://www.ted.com" class="card" target="_blank">
+                        <div class="card-icon">🎤</div>
+                        <div class="card-title">TED</div>
+                        <div class="card-desc">Ideas worth spreading</div>
+                        <span class="card-tag">演讲</span>
+                    </a>
+                    <a href="https://www.wikipedia.org" class="card" target="_blank">
+                        <div class="card-icon">📚</div>
+                        <div class="card-title">Wikipedia</div>
+                        <div class="card-desc">自由的百科全书</div>
+                        <span class="card-tag">百科</span>
+                    </a>
+                    <a href="https://www.zhihu.com" class="card" target="_blank">
+                        <div class="card-icon">💡</div>
+                        <div class="card-title">知乎</div>
+                        <div class="card-desc">有问题，就会有答案</div>
+                        <span class="card-tag">问答</span>
+                    </a>
+                    <a href="https://www.medium.com" class="card" target="_blank">
+                        <div class="card-icon">✍️</div>
+                        <div class="card-title">Medium</div>
+                        <div class="card-desc">优质文章阅读平台</div>
+                        <span class="card-tag">阅读</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 创意灵感 -->
+            <div class="category" id="creative">
+                <div class="category-header">
+                    <span class="category-icon">🎨</span>
+                    <h2 class="category-title">创意灵感</h2>
+                    <span class="category-desc">激发灵感，释放创造力</span>
+                </div>
+                <div class="cards">
+                    <a href="https://dribbble.com" class="card" target="_blank">
+                        <div class="card-icon">🏀</div>
+                        <div class="card-title">Dribbble</div>
+                        <div class="card-desc">设计师作品展示与交流社区</div>
+                        <span class="card-tag">设计</span>
+                    </a>
+                    <a href="https://www.behance.net" class="card" target="_blank">
+                        <div class="card-icon">🎪</div>
+                        <div class="card-title">Behance</div>
+                        <div class="card-desc">Adobe 旗下创意作品平台</div>
+                        <span class="card-tag">作品</span>
+                    </a>
+                    <a href="https://unsplash.com" class="card" target="_blank">
+                        <div class="card-icon">📷</div>
+                        <div class="card-title">Unsplash</div>
+                        <div class="card-desc">高质量免费图片素材库</div>
+                        <span class="card-tag">图片</span>
+                    </a>
+                    <a href="https://www.pinterest.com" class="card" target="_blank">
+                        <div class="card-icon">📌</div>
+                        <div class="card-title">Pinterest</div>
+                        <div class="card-desc">图片灵感收集平台</div>
+                        <span class="card-tag">灵感</span>
+                    </a>
+                    <a href="https://www.awwwards.com" class="card" target="_blank">
+                        <div class="card-icon">🏆</div>
+                        <div class="card-title">Awwwards</div>
+                        <div class="card-desc">全球优秀网站设计展示</div>
+                        <span class="card-tag">网站</span>
+                    </a>
+                    <a href="https://www.artstation.com" class="card" target="_blank">
+                        <div class="card-icon">🎮</div>
+                        <div class="card-title">ArtStation</div>
+                        <div class="card-desc">游戏艺术作品展示平台</div>
+                        <span class="card-tag">艺术</span>
+                    </a>
+                    <a href="https://www.pixiv.net" class="card" target="_blank">
+                        <div class="card-icon">🎨</div>
+                        <div class="card-title">Pixiv</div>
+                        <div class="card-desc">插画交流平台</div>
+                        <span class="card-tag">插画</span>
+                    </a>
+                    <a href="https://www.deviantart.com" class="card" target="_blank">
+                        <div class="card-icon">🖌️</div>
+                        <div class="card-title">DeviantArt</div>
+                        <div class="card-desc">艺术家社区</div>
+                        <span class="card-tag">艺术</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 编程开发 -->
+            <div class="category" id="development">
+                <div class="category-header">
+                    <span class="category-icon">💻</span>
+                    <h2 class="category-title">编程开发</h2>
+                    <span class="category-desc">程序员的工具箱</span>
+                </div>
+                <div class="cards">
+                    <a href="https://github.com" class="card" target="_blank">
+                        <div class="card-icon">🐙</div>
+                        <div class="card-title">GitHub</div>
+                        <div class="card-desc">全球最大的代码托管平台</div>
+                        <span class="card-tag">代码</span>
+                    </a>
+                    <a href="https://stackoverflow.com" class="card" target="_blank">
+                        <div class="card-icon">❓</div>
+                        <div class="card-title">Stack Overflow</div>
+                        <div class="card-desc">程序员问答社区</div>
+                        <span class="card-tag">问答</span>
+                    </a>
+                    <a href="https://www.figma.com" class="card" target="_blank">
+                        <div class="card-icon">🎨</div>
+                        <div class="card-title">Figma</div>
+                        <div class="card-desc">在线协作设计工具</div>
+                        <span class="card-tag">设计</span>
+                    </a>
+                    <a href="https://codepen.io" class="card" target="_blank">
+                        <div class="card-icon">✏️</div>
+                        <div class="card-title">CodePen</div>
+                        <div class="card-desc">前端代码演示和分享</div>
+                        <span class="card-tag">前端</span>
+                    </a>
+                    <a href="https://replit.com" class="card" target="_blank">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-title">Replit</div>
+                        <div class="card-desc">在线编程协作平台</div>
+                        <span class="card-tag">IDE</span>
+                    </a>
+                    <a href="https://www.leetcode.com" class="card" target="_blank">
+                        <div class="card-icon">🧩</div>
+                        <div class="card-title">LeetCode</div>
+                        <div class="card-desc">算法题刷题平台</div>
+                        <span class="card-tag">算法</span>
+                    </a>
+                    <a href="https://developer.mozilla.org" class="card" target="_blank">
+                        <div class="card-icon">📚</div>
+                        <div class="card-title">MDN</div>
+                        <div class="card-desc">Web 开发者文档</div>
+                        <span class="card-tag">文档</span>
+                    </a>
+                    <a href="https://www.npmjs.com" class="card" target="_blank">
+                        <div class="card-icon">📦</div>
+                        <div class="card-title">npm</div>
+                        <div class="card-desc">JavaScript 包管理器</div>
+                        <span class="card-tag">包管理</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- AI 科技 -->
+            <div class="category" id="ai">
+                <div class="category-header">
+                    <span class="category-icon">🤖</span>
+                    <h2 class="category-title">AI 与科技</h2>
+                    <span class="category-desc">探索人工智能的未来</span>
+                </div>
+                <div class="cards">
+                    <a href="https://chat.openai.com" class="card" target="_blank">
+                        <div class="card-icon">🤖</div>
+                        <div class="card-title">ChatGPT</div>
+                        <div class="card-desc">OpenAI 的智能对话助手</div>
+                        <span class="card-tag">对话</span>
+                    </a>
+                    <a href="https://claude.ai" class="card" target="_blank">
+                        <div class="card-icon">✨</div>
+                        <div class="card-title">Claude</div>
+                        <div class="card-desc">Anthropic 的 AI 助手</div>
+                        <span class="card-tag">对话</span>
+                    </a>
+                    <a href="https://www.midjourney.com" class="card" target="_blank">
+                        <div class="card-icon">🎨</div>
+                        <div class="card-title">Midjourney</div>
+                        <div class="card-desc">AI 图像生成工具</div>
+                        <span class="card-tag">绘画</span>
+                    </a>
+                    <a href="https://huggingface.co" class="card" target="_blank">
+                        <div class="card-icon">🤗</div>
+                        <div class="card-title">Hugging Face</div>
+                        <div class="card-desc">机器学习模型社区</div>
+                        <span class="card-tag">模型</span>
+                    </a>
+                    <a href="https://www.perplexity.ai" class="card" target="_blank">
+                        <div class="card-icon">🔍</div>
+                        <div class="card-title">Perplexity</div>
+                        <div class="card-desc">AI 搜索引擎</div>
+                        <span class="card-tag">搜索</span>
+                    </a>
+                    <a href="https://www.copy.ai" class="card" target="_blank">
+                        <div class="card-icon">✍️</div>
+                        <div class="card-title">Copy.ai</div>
+                        <div class="card-desc">AI 文案生成工具</div>
+                        <span class="card-tag">写作</span>
+                    </a>
+                    <a href="https://runwayml.com" class="card" target="_blank">
+                        <div class="card-icon">🎬</div>
+                        <div class="card-title">Runway</div>
+                        <div class="card-desc">AI 视频编辑工具</div>
+                        <span class="card-tag">视频</span>
+                    </a>
+                    <a href="https://www.jasper.ai" class="card" target="_blank">
+                        <div class="card-icon">📝</div>
+                        <div class="card-title">Jasper</div>
+                        <div class="card-desc">AI 内容创作平台</div>
+                        <span class="card-tag">创作</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 社交媒体 -->
+            <div class="category" id="social">
+                <div class="category-header">
+                    <span class="category-icon">💬</span>
+                    <h2 class="category-title">社交媒体</h2>
+                    <span class="category-desc">连接世界，分享生活</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.twitter.com" class="card" target="_blank">
+                        <div class="card-icon">🐦</div>
+                        <div class="card-title">Twitter (X)</div>
+                        <div class="card-desc">实时信息分享平台</div>
+                        <span class="card-tag">微博客</span>
+                    </a>
+                    <a href="https://www.instagram.com" class="card" target="_blank">
+                        <div class="card-icon">📸</div>
+                        <div class="card-title">Instagram</div>
+                        <div class="card-desc">图片和短视频分享</div>
+                        <span class="card-tag">图片</span>
+                    </a>
+                    <a href="https://www.facebook.com" class="card" target="_blank">
+                        <div class="card-icon">👥</div>
+                        <div class="card-title">Facebook</div>
+                        <div class="card-desc">全球最大社交网络</div>
+                        <span class="card-tag">社交</span>
+                    </a>
+                    <a href="https://www.linkedin.com" class="card" target="_blank">
+                        <div class="card-icon">💼</div>
+                        <div class="card-title">LinkedIn</div>
+                        <div class="card-desc">职业社交平台</div>
+                        <span class="card-tag">职场</span>
+                    </a>
+                    <a href="https://www.weibo.com" class="card" target="_blank">
+                        <div class="card-icon">📱</div>
+                        <div class="card-title">微博</div>
+                        <div class="card-desc">中文社交媒体平台</div>
+                        <span class="card-tag">社交</span>
+                    </a>
+                    <a href="https://www.xiaohongshu.com" class="card" target="_blank">
+                        <div class="card-icon">📕</div>
+                        <div class="card-title">小红书</div>
+                        <div class="card-desc">生活方式分享平台</div>
+                        <span class="card-tag">生活</span>
+                    </a>
+                    <a href="https://www.discord.com" class="card" target="_blank">
+                        <div class="card-icon">🎮</div>
+                        <div class="card-title">Discord</div>
+                        <div class="card-desc">游戏和社群聊天工具</div>
+                        <span class="card-tag">聊天</span>
+                    </a>
+                    <a href="https://www.telegram.org" class="card" target="_blank">
+                        <div class="card-icon">✈️</div>
+                        <div class="card-title">Telegram</div>
+                        <div class="card-desc">安全即时通讯软件</div>
+                        <span class="card-tag">通讯</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 新闻资讯 -->
+            <div class="category" id="news">
+                <div class="category-header">
+                    <span class="category-icon">📰</span>
+                    <h2 class="category-title">新闻资讯</h2>
+                    <span class="category-desc">了解世界，掌握动态</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.36kr.com" class="card" target="_blank">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-title">36氪</div>
+                        <div class="card-desc">科技创业媒体</div>
+                        <span class="card-tag">科技</span>
+                    </a>
+                    <a href="https://www.huxiu.com" class="card" target="_blank">
+                        <div class="card-icon">🦊</div>
+                        <div class="card-title">虎嗅</div>
+                        <div class="card-desc">商业科技资讯</div>
+                        <span class="card-tag">商业</span>
+                    </a>
+                    <a href="https://techcrunch.com" class="card" target="_blank">
+                        <div class="card-icon">💻</div>
+                        <div class="card-title">TechCrunch</div>
+                        <div class="card-desc">国际科技新闻</div>
+                        <span class="card-tag">科技</span>
+                    </a>
+                    <a href="https://www.theverge.com" class="card" target="_blank">
+                        <div class="card-icon">📱</div>
+                        <div class="card-title">The Verge</div>
+                        <div class="card-desc">科技文化媒体</div>
+                        <span class="card-tag">科技</span>
+                    </a>
+                    <a href="https://news.ycombinator.com" class="card" target="_blank">
+                        <div class="card-icon">🔶</div>
+                        <div class="card-title">Hacker News</div>
+                        <div class="card-desc">黑客和创业者新闻</div>
+                        <span class="card-tag">科技</span>
+                    </a>
+                    <a href="https://www.bbc.com" class="card" target="_blank">
+                        <div class="card-icon">📻</div>
+                        <div class="card-title">BBC</div>
+                        <div class="card-desc">英国广播公司</div>
+                        <span class="card-tag">新闻</span>
+                    </a>
+                    <a href="https://www.nytimes.com" class="card" target="_blank">
+                        <div class="card-icon">📰</div>
+                        <div class="card-title">New York Times</div>
+                        <div class="card-desc">纽约时报</div>
+                        <span class="card-tag">新闻</span>
+                    </a>
+                    <a href="https://www.reuters.com" class="card" target="_blank">
+                        <div class="card-icon">🌐</div>
+                        <div class="card-title">Reuters</div>
+                        <div class="card-desc">路透社</div>
+                        <span class="card-tag">新闻</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 在线购物 -->
+            <div class="category" id="shopping">
+                <div class="category-header">
+                    <span class="category-icon">🛍️</span>
+                    <h2 class="category-title">在线购物</h2>
+                    <span class="category-desc">买遍全球，尽享便利</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.taobao.com" class="card" target="_blank">
+                        <div class="card-icon">🛒</div>
+                        <div class="card-title">淘宝</div>
+                        <div class="card-desc">国内最大的C2C购物平台</div>
+                        <span class="card-tag">购物</span>
+                    </a>
+                    <a href="https://www.jd.com" class="card" target="_blank">
+                        <div class="card-icon">🐶</div>
+                        <div class="card-title">京东</div>
+                        <div class="card-desc">自营电商平台</div>
+                        <span class="card-tag">购物</span>
+                    </a>
+                    <a href="https://www.amazon.com" class="card" target="_blank">
+                        <div class="card-icon">📦</div>
+                        <div class="card-title">Amazon</div>
+                        <div class="card-desc">全球最大的电商平台</div>
+                        <span class="card-tag">国际</span>
+                    </a>
+                    <a href="https://www.ebay.com" class="card" target="_blank">
+                        <div class="card-icon">🏷️</div>
+                        <div class="card-title">eBay</div>
+                        <div class="card-desc">在线拍卖及购物网站</div>
+                        <span class="card-tag">拍卖</span>
+                    </a>
+                    <a href="https://www.aliexpress.com" class="card" target="_blank">
+                        <div class="card-icon">🌍</div>
+                        <div class="card-title">AliExpress</div>
+                        <div class="card-desc">全球速卖通</div>
+                        <span class="card-tag">国际</span>
+                    </a>
+                    <a href="https://www.tmall.com" class="card" target="_blank">
+                        <div class="card-icon">😺</div>
+                        <div class="card-title">天猫</div>
+                        <div class="card-desc">品质购物平台</div>
+                        <span class="card-tag">品牌</span>
+                    </a>
+                    <a href="https://www.pinduoduo.com" class="card" target="_blank">
+                        <div class="card-icon">🍊</div>
+                        <div class="card-title">拼多多</div>
+                        <div class="card-desc">社交电商平台</div>
+                        <span class="card-tag">拼团</span>
+                    </a>
+                    <a href="https://www.shopify.com" class="card" target="_blank">
+                        <div class="card-icon">🛍️</div>
+                        <div class="card-title">Shopify</div>
+                        <div class="card-desc">独立站电商平台</div>
+                        <span class="card-tag">建站</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 音乐影音 -->
+            <div class="category" id="music">
+                <div class="category-header">
+                    <span class="category-icon">🎵</span>
+                    <h2 class="category-title">音乐影音</h2>
+                    <span class="category-desc">享受音乐，感受生活</span>
+                </div>
+                <div class="cards">
+                    <a href="https://music.163.com" class="card" target="_blank">
+                        <div class="card-icon">🎶</div>
+                        <div class="card-title">网易云音乐</div>
+                        <div class="card-desc">音乐分享与发现平台</div>
+                        <span class="card-tag">音乐</span>
+                    </a>
+                    <a href="https://www.spotify.com" class="card" target="_blank">
+                        <div class="card-icon">🎧</div>
+                        <div class="card-title">Spotify</div>
+                        <div class="card-desc">全球最大的流媒体音乐平台</div>
+                        <span class="card-tag">音乐</span>
+                    </a>
+                    <a href="https://music.apple.com" class="card" target="_blank">
+                        <div class="card-icon">🍎</div>
+                        <div class="card-title">Apple Music</div>
+                        <div class="card-desc">苹果音乐服务</div>
+                        <span class="card-tag">音乐</span>
+                    </a>
+                    <a href="https://soundcloud.com" class="card" target="_blank">
+                        <div class="card-icon">☁️</div>
+                        <div class="card-title">SoundCloud</div>
+                        <div class="card-desc">独立音乐人分享平台</div>
+                        <span class="card-tag">独立</span>
+                    </a>
+                    <a href="https://www.qq.com/music" class="card" target="_blank">
+                        <div class="card-icon">🎵</div>
+                        <div class="card-title">QQ音乐</div>
+                        <div class="card-desc">腾讯音乐平台</div>
+                        <span class="card-tag">音乐</span>
+                    </a>
+                    <a href="https://www.pandora.com" class="card" target="_blank">
+                        <div class="card-icon">📻</div>
+                        <div class="card-title">Pandora</div>
+                        <div class="card-desc">个性化音乐电台</div>
+                        <span class="card-tag">电台</span>
+                    </a>
+                    <a href="https://www.tidal.com" class="card" target="_blank">
+                        <div class="card-icon">🌊</div>
+                        <div class="card-title">Tidal</div>
+                        <div class="card-desc">高音质音乐平台</div>
+                        <span class="card-tag">HiFi</span>
+                    </a>
+                    <a href="https://www.last.fm" class="card" target="_blank">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title">Last.fm</div>
+                        <div class="card-desc">音乐推荐与统计</div>
+                        <span class="card-tag">推荐</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 办公协作 -->
+            <div class="category" id="office">
+                <div class="category-header">
+                    <span class="category-icon">📊</span>
+                    <h2 class="category-title">办公协作</h2>
+                    <span class="category-desc">高效协作，提升生产力</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.microsoft.com/microsoft-365" class="card" target="_blank">
+                        <div class="card-icon">📝</div>
+                        <div class="card-title">Microsoft 365</div>
+                        <div class="card-desc">微软办公套件</div>
+                        <span class="card-tag">办公</span>
+                    </a>
+                    <a href="https://workspace.google.com" class="card" target="_blank">
+                        <div class="card-icon">📄</div>
+                        <div class="card-title">Google Workspace</div>
+                        <div class="card-desc">谷歌办公套件</div>
+                        <span class="card-tag">协作</span>
+                    </a>
+                    <a href="https://www.slack.com" class="card" target="_blank">
+                        <div class="card-icon">💬</div>
+                        <div class="card-title">Slack</div>
+                        <div class="card-desc">团队沟通协作工具</div>
+                        <span class="card-tag">沟通</span>
+                    </a>
+                    <a href="https://trello.com" class="card" target="_blank">
+                        <div class="card-icon">📋</div>
+                        <div class="card-title">Trello</div>
+                        <div class="card-desc">看板式项目管理工具</div>
+                        <span class="card-tag">管理</span>
+                    </a>
+                    <a href="https://www.asana.com" class="card" target="_blank">
+                        <div class="card-icon">✅</div>
+                        <div class="card-title">Asana</div>
+                        <div class="card-desc">团队任务管理平台</div>
+                        <span class="card-tag">任务</span>
+                    </a>
+                    <a href="https://monday.com" class="card" target="_blank">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title">Monday</div>
+                        <div class="card-desc">工作操作系统</div>
+                        <span class="card-tag">项目</span>
+                    </a>
+                    <a href="https://www.airtable.com" class="card" target="_blank">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title">Airtable</div>
+                        <div class="card-desc">在线数据库和协作平台</div>
+                        <span class="card-tag">数据</span>
+                    </a>
+                    <a href="https://miro.com" class="card" target="_blank">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-title">Miro</div>
+                        <div class="card-desc">在线白板协作工具</div>
+                        <span class="card-tag">白板</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 云存储 -->
+            <div class="category" id="cloud">
+                <div class="category-header">
+                    <span class="category-icon">☁️</span>
+                    <h2 class="category-title">云存储</h2>
+                    <span class="category-desc">安全存储，随时随地访问</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.dropbox.com" class="card" target="_blank">
+                        <div class="card-icon">📦</div>
+                        <div class="card-title">Dropbox</div>
+                        <div class="card-desc">老牌云存储服务</div>
+                        <span class="card-tag">存储</span>
+                    </a>
+                    <a href="https://drive.google.com" class="card" target="_blank">
+                        <div class="card-icon">💾</div>
+                        <div class="card-title">Google Drive</div>
+                        <div class="card-desc">谷歌云端硬盘</div>
+                        <span class="card-tag">存储</span>
+                    </a>
+                    <a href="https://onedrive.live.com" class="card" target="_blank">
+                        <div class="card-icon">☁️</div>
+                        <div class="card-title">OneDrive</div>
+                        <div class="card-desc">微软云存储</div>
+                        <span class="card-tag">存储</span>
+                    </a>
+                    <a href="https://www.icloud.com" class="card" target="_blank">
+                        <div class="card-icon">☁️</div>
+                        <div class="card-title">iCloud</div>
+                        <div class="card-desc">苹果云服务</div>
+                        <span class="card-tag">Apple</span>
+                    </a>
+                    <a href="https://pan.baidu.com" class="card" target="_blank">
+                        <div class="card-icon">☁️</div>
+                        <div class="card-title">百度网盘</div>
+                        <div class="card-desc">国内主流云存储</div>
+                        <span class="card-tag">存储</span>
+                    </a>
+                    <a href="https://www.aliyundrive.com" class="card" target="_blank">
+                        <div class="card-icon">☁️</div>
+                        <div class="card-title">阿里云盘</div>
+                        <div class="card-desc">不限速的云存储</div>
+                        <span class="card-tag">存储</span>
+                    </a>
+                    <a href="https://www.box.com" class="card" target="_blank">
+                        <div class="card-icon">📦</div>
+                        <div class="card-title">Box</div>
+                        <div class="card-desc">企业级云存储</div>
+                        <span class="card-tag">企业</span>
+                    </a>
+                    <a href="https://mega.nz" class="card" target="_blank">
+                        <div class="card-icon">🔒</div>
+                        <div class="card-title">MEGA</div>
+                        <div class="card-desc">加密云存储</div>
+                        <span class="card-tag">安全</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 图片视频 -->
+            <div class="category" id="photo">
+                <div class="category-header">
+                    <span class="category-icon">📷</span>
+                    <h2 class="category-title">图片视频</h2>
+                    <span class="category-desc">记录美好，分享精彩</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.pexels.com" class="card" target="_blank">
+                        <div class="card-icon">📸</div>
+                        <div class="card-title">Pexels</div>
+                        <div class="card-desc">免费高质量图片和视频</div>
+                        <span class="card-tag">素材</span>
+                    </a>
+                    <a href="https://pixabay.com" class="card" target="_blank">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-title">Pixabay</div>
+                        <div class="card-desc">免费图片和视频素材</div>
+                        <span class="card-tag">素材</span>
+                    </a>
+                    <a href="https://www.shutterstock.com" class="card" target="_blank">
+                        <div class="card-icon">📷</div>
+                        <div class="card-title">Shutterstock</div>
+                        <div class="card-desc">专业图片视频素材库</div>
+                        <span class="card-tag">付费</span>
+                    </a>
+                    <a href="https://www.vimeo.com" class="card" target="_blank">
+                        <div class="card-icon">🎥</div>
+                        <div class="card-title">Vimeo</div>
+                        <div class="card-desc">高质量视频分享平台</div>
+                        <span class="card-tag">视频</span>
+                    </a>
+                    <a href="https://www.flickr.com" class="card" target="_blank">
+                        <div class="card-icon">📸</div>
+                        <div class="card-title">Flickr</div>
+                        <div class="card-desc">图片存储和分享社区</div>
+                        <span class="card-tag">社区</span>
+                    </a>
+                    <a href="https://www.500px.com" class="card" target="_blank">
+                        <div class="card-icon">📷</div>
+                        <div class="card-title">500px</div>
+                        <div class="card-desc">摄影师作品展示平台</div>
+                        <span class="card-tag">摄影</span>
+                    </a>
+                    <a href="https://giphy.com" class="card" target="_blank">
+                        <div class="card-icon">🎬</div>
+                        <div class="card-title">GIPHY</div>
+                        <div class="card-desc">GIF 动图搜索引擎</div>
+                        <span class="card-tag">GIF</span>
+                    </a>
+                    <a href="https://imgur.com" class="card" target="_blank">
+                        <div class="card-icon">🖼️</div>
+                        <div class="card-title">Imgur</div>
+                        <div class="card-desc">图片分享社区</div>
+                        <span class="card-tag">分享</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 趣味网站 -->
+            <div class="category" id="fun">
+                <div class="category-header">
+                    <span class="category-icon">🎲</span>
+                    <h2 class="category-title">趣味网站</h2>
+                    <span class="category-desc">探索有趣，发现惊喜</span>
+                </div>
+                <div class="cards">
+                    <a href="https://neal.fun" class="card" target="_blank">
+                        <div class="card-icon">🎪</div>
+                        <div class="card-title">Neal.fun</div>
+                        <div class="card-desc">各种创意互动网页集合</div>
+                        <span class="card-tag">创意</span>
+                    </a>
+                    <a href="https://www.geoguessr.com" class="card" target="_blank">
+                        <div class="card-icon">🗺️</div>
+                        <div class="card-title">GeoGuessr</div>
+                        <div class="card-desc">根据街景图猜地点的游戏</div>
+                        <span class="card-tag">游戏</span>
+                    </a>
+                    <a href="https://www.incredibox.com" class="card" target="_blank">
+                        <div class="card-icon">🎵</div>
+                        <div class="card-title">Incredibox</div>
+                        <div class="card-desc">互动音乐创作游戏</div>
+                        <span class="card-tag">音乐</span>
+                    </a>
+                    <a href="https://www.thewikigame.com" class="card" target="_blank">
+                        <div class="card-icon">🏁</div>
+                        <div class="card-title">The Wiki Game</div>
+                        <div class="card-desc">在维基百科页面间导航的趣味游戏</div>
+                        <span class="card-tag">游戏</span>
+                    </a>
+                    <a href="https://www.typeracer.com" class="card" target="_blank">
+                        <div class="card-icon">⌨️</div>
+                        <div class="card-title">TypeRacer</div>
+                        <div class="card-desc">打字速度竞赛游戏</div>
+                        <span class="card-tag">打字</span>
+                    </a>
+                    <a href="https://www.chessgames.com" class="card" target="_blank">
+                        <div class="card-icon">♟️</div>
+                        <div class="card-title">Chess</div>
+                        <div class="card-desc">在线国际象棋</div>
+                        <span class="card-tag">棋类</span>
+                    </a>
+                    <a href="https://www.isitchristmas.com" class="card" target="_blank">
+                        <div class="card-icon">🎄</div>
+                        <div class="card-title">Is It Christmas?</div>
+                        <div class="card-desc">今天是圣诞节吗？</div>
+                        <span class="card-tag">趣味</span>
+                    </a>
+                    <a href="https://www.koalastothemax.com" class="card" target="_blank">
+                        <div class="card-icon">🐨</div>
+                        <div class="card-title">Koalas to the Max</div>
+                        <div class="card-desc">互动圆圈艺术</div>
+                        <span class="card-tag">互动</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 金融理财 -->
+            <div class="category" id="finance">
+                <div class="category-header">
+                    <span class="category-icon">💰</span>
+                    <h2 class="category-title">金融理财</h2>
+                    <span class="category-desc">财富管理，投资理财</span>
+                </div>
+                <div class="cards">
+                    <a href="https://www.bloomberg.com" class="card" target="_blank">
+                        <div class="card-icon">📈</div>
+                        <div class="card-title">Bloomberg</div>
+                        <div class="card-desc">彭博财经新闻</div>
+                        <span class="card-tag">财经</span>
+                    </a>
+                    <a href="https://www.coinbase.com" class="card" target="_blank">
+                        <div class="card-icon">₿</div>
+                        <div class="card-title">Coinbase</div>
+                        <div class="card-desc">加密货币交易平台</div>
+                        <span class="card-tag">加密</span>
+                    </a>
+                    <a href="https://www.tradingview.com" class="card" target="_blank">
+                        <div class="card-icon">📊</div>
+                        <div class="card-title">TradingView</div>
+                        <div class="card-desc">专业金融图表和分析</div>
+                        <span class="card-tag">交易</span>
+                    </a>
+                    <a href="https://www.investing.com" class="card" target="_blank">
+                        <div class="card-icon">💹</div>
+                        <div class="card-title">Investing</div>
+                        <div class="card-desc">全球金融市场资讯</div>
+                        <span class="card-tag">市场</span>
+                    </a>
+                    <a href="https://www.binance.com" class="card" target="_blank">
+                        <div class="card-icon">🪙</div>
+                        <div class="card-title">Binance</div>
+                        <div class="card-desc">全球最大的加密货币交易所</div>
+                        <span class="card-tag">加密</span>
+                    </a>
+                    <a href="https://finance.yahoo.com" class="card" target="_blank">
+                        <div class="card-icon">💵</div>
+                        <div class="card-title">Yahoo Finance</div>
+                        <div class="card-desc">雅虎财经</div>
+                        <span class="card-tag">财经</span>
+                    </a>
+                    <a href="https://www.marketwatch.com" class="card" target="_blank">
+                        <div class="card-icon">📰</div>
+                        <div class="card-title">MarketWatch</div>
+                        <div class="card-desc">市场观察财经新闻</div>
+                        <span class="card-tag">新闻</span>
+                    </a>
+                    <a href="https://www.xe.com" class="card" target="_blank">
+                        <div class="card-icon">💱</div>
+                        <div class="card-title">XE</div>
+                        <div class="card-desc">汇率换算工具</div>
+                        <span class="card-tag">工具</span>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // 搜索功能
+        const searchInput = document.getElementById('searchInput');
+        const categories = document.querySelectorAll('.category');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            categories.forEach(category => {
+                let hasVisibleCards = false;
+                const cards = category.querySelectorAll('.card');
+
+                cards.forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+                    const tag = card.querySelector('.card-tag')?.textContent.toLowerCase() || '';
+
+                    if (title.includes(searchTerm) || desc.includes(searchTerm) || tag.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        hasVisibleCards = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                category.style.display = hasVisibleCards || searchTerm === '' ? 'block' : 'none';
+            });
+        });
+
+        // 侧边栏导航高亮
+        const menuLinks = document.querySelectorAll('.sidebar-menu a');
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                menuLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+                // 移动端点击后关闭侧边栏
+                if (window.innerWidth <= 1024) {
+                    document.getElementById('sidebar').classList.remove('mobile-show');
+                }
+            });
+        });
+
+        // 滚动监听
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    // 返回顶部按钮显示/隐藏
+                    const backToTop = document.getElementById('backToTop');
+                    if (window.pageYOffset > 300) {
+                        backToTop.classList.add('show');
+                    } else {
+                        backToTop.classList.remove('show');
+                    }
+
+                    // 更新侧边栏导航高亮
+                    updateActiveMenuItem();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // 更新活动菜单项
+        function updateActiveMenuItem() {
+            const scrollPos = window.pageYOffset + 150;
+
+            categories.forEach(category => {
+                const top = category.offsetTop;
+                const bottom = top + category.offsetHeight;
+                const id = category.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < bottom) {
+                    menuLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // 返回顶部
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 移动端侧边栏切换
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('mobile-show');
+        }
+
+        // 统计网站数量
+        window.addEventListener('load', () => {
+            const totalCards = document.querySelectorAll('.card').length;
+            document.getElementById('totalSites').textContent = totalCards + '+';
+        });
+    </script>
+</body>
+</html>
