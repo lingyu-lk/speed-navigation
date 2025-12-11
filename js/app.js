@@ -249,6 +249,7 @@ class SearchManager {
         this.searchBtn = document.getElementById('searchBtn');
         this.searchEngineSelector = document.getElementById('searchEngineSelector');
         this.currentEngineEl = document.getElementById('currentEngine');
+        this.currentEngineIconEl = document.getElementById('currentEngineIcon');
         this.searchDropdown = document.getElementById('searchDropdown');
         this.currentEngine = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_ENGINE) || 'local';
         this.engineNames = {
@@ -257,6 +258,13 @@ class SearchManager {
             bing: 'Bing',
             baidu: '百度',
             duckduckgo: 'DuckDuckGo'
+        };
+        this.engineIcons = {
+            local: '🔍',
+            google: '🌐',
+            bing: '🔷',
+            baidu: '🔵',
+            duckduckgo: '🦆'
         };
         this.init();
     }
@@ -314,6 +322,10 @@ class SearchManager {
     updateUI() {
         if (this.currentEngineEl) {
             this.currentEngineEl.textContent = this.engineNames[this.currentEngine];
+        }
+
+        if (this.currentEngineIconEl) {
+            this.currentEngineIconEl.textContent = this.engineIcons[this.currentEngine];
         }
 
         const options = this.searchDropdown?.querySelectorAll('.search-option');
