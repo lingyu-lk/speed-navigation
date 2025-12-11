@@ -6,7 +6,8 @@ const CONFIG = {
         HISTORY: 'nav-history',
         CUSTOM_SITES: 'nav-custom-sites',
         SEARCH_MODE: 'nav-search-mode',
-        SEARCH_ENGINE: 'nav-search-engine'
+        SEARCH_ENGINE: 'nav-search-engine',
+        QUICK_ACCESS: 'nav-quick-access'
     },
     MAX_HISTORY: 50,
     DEBOUNCE_DELAY: 300,
@@ -172,6 +173,46 @@ class ThemeManager {
         if (button) {
             button.addEventListener('click', () => this.toggle());
         }
+    }
+}
+
+// ==================== Quick Access Manager ====================
+class QuickAccessManager {
+    constructor() {
+        this.quickAccessSites = StorageManager.get(CONFIG.STORAGE_KEYS.QUICK_ACCESS) || [];
+        this.allSites = []; // Will be populated when sites data loads
+    }
+
+    setAllSites(sites) {
+        this.allSites = sites;
+    }
+
+    getAll() {
+        return this.quickAccessSites;
+    }
+
+    add(site) {
+        // Check if already exists
+        if (!this.quickAccessSites.find(s => s.url === site.url)) {
+            this.quickAccessSites.push({
+                name: site.name,
+                url: site.url,
+                icon: site.icon,
+                description: site.description
+            });
+            StorageManager.set(CONFIG.STORAGE_KEYS.QUICK_ACCESS, this.quickAccessSites);
+            return true;
+        }
+        return false;
+    }
+
+    remove(url) {
+        this.quickAccessSites = this.quickAccessSites.filter(s => s.url !== url);
+        StorageManager.set(CONFIG.STORAGE_KEYS.QUICK_ACCESS, this.quickAccessSites);
+    }
+
+    isInQuickAccess(url) {
+        return this.quickAccessSites.some(s => s.url === url);
     }
 }
 
@@ -502,9 +543,10 @@ class NavigationManager {
 
 // ==================== Site Renderer ====================
 class SiteRenderer {
-    constructor(favoritesManager, historyManager) {
+    constructor(favoritesManager, historyManager, quickAccessManager) {
         this.favoritesManager = favoritesManager;
         this.historyManager = historyManager;
+        this.quickAccessManager = quickAccessManager;
     }
 
     async loadSites() {
@@ -552,24 +594,19 @@ class SiteRenderer {
 
         if (!quickAccessContainer || !quickAccessItems) return;
 
-        // Get top 10 most visited sites from history
-        const history = this.historyManager.getAll();
+        // Get quick access sites
+        const quickSites = this.quickAccessManager.getAll();
 
-        if (history.length === 0) {
+        if (quickSites.length === 0) {
             quickAccessContainer.classList.add('empty');
             return;
         }
-
-        // Sort by visits (descending) and take top 10
-        const topSites = history
-            .sort((a, b) => b.visits - a.visits)
-            .slice(0, 10);
 
         // Clear existing items
         quickAccessItems.innerHTML = '';
 
         // Render quick access items
-        topSites.forEach(site => {
+        quickSites.forEach(site => {
             const quickItem = this.createQuickAccessItem(site);
             quickAccessItems.appendChild(quickItem);
         });
@@ -578,11 +615,8 @@ class SiteRenderer {
     }
 
     createQuickAccessItem(site) {
-        const item = document.createElement('a');
-        item.href = site.url;
+        const item = document.createElement('div');
         item.className = 'quick-item';
-        item.target = '_blank';
-        item.rel = 'noopener noreferrer';
 
         // Extract domain for favicon
         let domain = '';
@@ -596,11 +630,23 @@ class SiteRenderer {
         const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
         item.innerHTML = `
-            <div class="quick-item-icon">
-                <img src="${faviconUrl}" alt="${site.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${site.icon || '🌐'}</text></svg>'">
-            </div>
-            <div class="quick-item-name">${Utils.sanitizeHTML(site.name)}</div>
+            <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="quick-item-link">
+                <div class="quick-item-icon">
+                    <img src="${faviconUrl}" alt="${site.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${site.icon || '🌐'}</text></svg>'">
+                </div>
+                <div class="quick-item-name">${Utils.sanitizeHTML(site.name)}</div>
+            </a>
+            <button class="quick-item-remove" data-url="${site.url}" title="移除">×</button>
         `;
+
+        // Add remove button handler
+        const removeBtn = item.querySelector('.quick-item-remove');
+        removeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.quickAccessManager.remove(site.url);
+            this.renderQuickAccess();
+        });
 
         return item;
     }
@@ -693,8 +739,28 @@ class SiteRenderer {
                 <div class="card-title">${Utils.sanitizeHTML(site.name)}</div>
                 <div class="card-desc">${Utils.sanitizeHTML(site.description)}</div>
             </div>
+            <button class="card-quick-access-btn" title="${this.quickAccessManager.isInQuickAccess(site.url) ? '从快捷访问移除' : '添加到快捷访问'}">
+                ${this.quickAccessManager.isInQuickAccess(site.url) ? '★' : '☆'}
+            </button>
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
         `;
+
+        // Add quick access toggle handler
+        const quickAccessBtn = card.querySelector('.card-quick-access-btn');
+        quickAccessBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (this.quickAccessManager.isInQuickAccess(site.url)) {
+                this.quickAccessManager.remove(site.url);
+                quickAccessBtn.textContent = '☆';
+                quickAccessBtn.title = '添加到快捷访问';
+            } else {
+                this.quickAccessManager.add(site);
+                quickAccessBtn.textContent = '★';
+                quickAccessBtn.title = '从快捷访问移除';
+            }
+            this.renderQuickAccess();
+        });
 
         // Add click handler for history
         card.addEventListener('click', (e) => {
@@ -813,7 +879,8 @@ class App {
         this.themeManager = new ThemeManager();
         this.favoritesManager = new FavoritesManager();
         this.historyManager = new HistoryManager();
-        this.siteRenderer = new SiteRenderer(this.favoritesManager, this.historyManager);
+        this.quickAccessManager = new QuickAccessManager();
+        this.siteRenderer = new SiteRenderer(this.favoritesManager, this.historyManager, this.quickAccessManager);
         this.searchManager = new SearchManager();
         this.navigationManager = new NavigationManager();
         this.mobileMenuManager = new MobileMenuManager();
