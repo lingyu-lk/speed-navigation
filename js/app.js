@@ -597,21 +597,29 @@ class SiteRenderer {
         // Get quick access sites
         const quickSites = this.quickAccessManager.getAll();
 
-        if (quickSites.length === 0) {
-            quickAccessContainer.classList.add('empty');
-            return;
-        }
+        // Always remove empty class to show the section
+        quickAccessContainer.classList.remove('empty');
 
         // Clear existing items
         quickAccessItems.innerHTML = '';
+
+        if (quickSites.length === 0) {
+            // Show empty state with hint
+            quickAccessItems.innerHTML = `
+                <div class="quick-access-empty">
+                    <div class="empty-icon">📌</div>
+                    <div class="empty-text">暂无快捷访问</div>
+                    <div class="empty-hint">点击网站卡片右上角的 ☆ 添加常用网站</div>
+                </div>
+            `;
+            return;
+        }
 
         // Render quick access items
         quickSites.forEach(site => {
             const quickItem = this.createQuickAccessItem(site);
             quickAccessItems.appendChild(quickItem);
         });
-
-        quickAccessContainer.classList.remove('empty');
     }
 
     createQuickAccessItem(site) {
