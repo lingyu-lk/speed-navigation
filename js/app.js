@@ -90,42 +90,6 @@ class Utils {
         return '刚刚';
     }
 
-    /**
-     * Check if URL is from overseas website
-     */
-    static isOverseasWebsite(url) {
-        try {
-            const urlObj = new URL(url);
-            const hostname = urlObj.hostname.toLowerCase();
-
-            // 国内域名后缀列表
-            const domesticDomains = [
-                '.cn', '.com.cn', '.net.cn', '.org.cn', '.gov.cn', '.edu.cn',
-                'baidu.com', 'qq.com', 'taobao.com', 'tmall.com', 'jd.com',
-                'weibo.com', 'zhihu.com', 'bilibili.com', 'douyu.com',
-                'iqiyi.com', 'youku.com', 'tencent.com', 'aliyun.com',
-                'alibaba.com', 'sina.com', 'sohu.com', '163.com', '126.com',
-                'csdn.net', 'jianshu.com', 'oschina.net', 'gitee.com',
-                'huawei.com', 'xiaomi.com', 'oppo.com', 'vivo.com',
-                'pinduoduo.com', 'meituan.com', 'dianping.com', 'ele.me',
-                '12306.cn', 'ctrip.com', 'qunar.com', 'fliggy.com',
-                'douban.com', 'zhaopin.com', '51job.com', 'lagou.com',
-                'iplaysoft.com', 'appinn.com', 'ali213.net', '3dmgame.com',
-                'msdn.itellyou.cn', 'sspai.com', 'dgtle.com'
-            ];
-
-            // 检查是否匹配国内域名
-            for (const domain of domesticDomains) {
-                if (hostname.endsWith(domain) || hostname === domain.replace(/^\./, '')) {
-                    return false;
-                }
-            }
-
-            return true; // 不在国内列表中，视为国外网站
-        } catch (e) {
-            return false;
-        }
-    }
 }
 
 // ==================== Storage Manager ====================
@@ -712,15 +676,6 @@ class SiteRenderer {
         const visits = this.historyManager.getVisitCount(site.url);
         const visitBadge = visits > 0 ? `<span class="visit-count" title="访问${visits}次">${visits}</span>` : '';
 
-        // Add has-visits class for overseas badge positioning
-        if (visits > 0) {
-            card.classList.add('has-visits');
-        }
-
-        // Check if it's an overseas website
-        const isOverseas = Utils.isOverseasWebsite(site.url);
-        const overseasBadge = isOverseas ? '<div class="overseas-badge"></div>' : '';
-
         // Extract domain for favicon
         let domain = '';
         try {
@@ -734,7 +689,6 @@ class SiteRenderer {
         const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
         card.innerHTML = `
-            ${overseasBadge}
             <div class="card-icon-wrapper">
                 <img class="card-favicon" src="${faviconUrl}" alt="${site.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="card-icon-fallback" style="display:none;">${site.icon}</div>
