@@ -597,23 +597,17 @@ class SiteRenderer {
         // Get quick access sites
         const quickSites = this.quickAccessManager.getAll();
 
-        // Always remove empty class to show the section
-        quickAccessContainer.classList.remove('empty');
-
         // Clear existing items
         quickAccessItems.innerHTML = '';
 
         if (quickSites.length === 0) {
-            // Show empty state with hint
-            quickAccessItems.innerHTML = `
-                <div class="quick-access-empty">
-                    <div class="empty-icon">📌</div>
-                    <div class="empty-text">暂无快捷访问</div>
-                    <div class="empty-hint">点击网站卡片右上角的 ☆ 添加常用网站</div>
-                </div>
-            `;
+            // Remove has-items class, hide content area
+            quickAccessContainer.classList.remove('has-items');
             return;
         }
+
+        // Add has-items class to show content area
+        quickAccessContainer.classList.add('has-items');
 
         // Render quick access items
         quickSites.forEach(site => {
