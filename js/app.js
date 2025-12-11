@@ -260,11 +260,11 @@ class SearchManager {
             duckduckgo: 'DuckDuckGo'
         };
         this.engineIcons = {
-            local: '🔍',
-            google: '🌐',
-            bing: '🔷',
-            baidu: '🔵',
-            duckduckgo: '🦆'
+            local: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>',
+            google: '<img src="https://www.google.com/favicon.ico" alt="Google" width="16" height="16">',
+            bing: '<img src="https://www.bing.com/favicon.ico" alt="Bing" width="16" height="16">',
+            baidu: '<img src="https://www.baidu.com/favicon.ico" alt="百度" width="16" height="16">',
+            duckduckgo: '<img src="https://duckduckgo.com/favicon.ico" alt="DuckDuckGo" width="16" height="16">'
         };
         this.init();
     }
@@ -325,7 +325,7 @@ class SearchManager {
         }
 
         if (this.currentEngineIconEl) {
-            this.currentEngineIconEl.textContent = this.engineIcons[this.currentEngine];
+            this.currentEngineIconEl.innerHTML = this.engineIcons[this.currentEngine];
         }
 
         const options = this.searchDropdown?.querySelectorAll('.search-option');
