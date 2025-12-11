@@ -617,8 +617,18 @@ class SiteRenderer {
         existingCategories.forEach(cat => cat.remove());
 
         categories.forEach(category => {
-            const categoryEl = this.createCategoryElement(category);
-            content.appendChild(categoryEl);
+            // Check if this is a two-level category structure
+            if (category.subcategories) {
+                // Render each subcategory
+                category.subcategories.forEach(subcategory => {
+                    const subCategoryEl = this.createCategoryElement(subcategory);
+                    content.appendChild(subCategoryEl);
+                });
+            } else {
+                // Fallback: single-level category (backward compatibility)
+                const categoryEl = this.createCategoryElement(category);
+                content.appendChild(categoryEl);
+            }
         });
     }
 
@@ -708,19 +718,29 @@ class SiteRenderer {
     }
 
     updateStats(categories) {
-        const totalSites = categories.reduce((sum, cat) => sum + cat.sites.length, 0);
-        const totalCategories = categories.length;
+        let totalSites = 0;
+        let totalSubcategories = 0;
+
+        categories.forEach(cat => {
+            if (cat.subcategories) {
+                // Two-level structure
+                totalSubcategories += cat.subcategories.length;
+                cat.subcategories.forEach(subcat => {
+                    totalSites += subcat.sites.length;
+                });
+            } else {
+                // Single-level structure (backward compatibility)
+                totalSites += cat.sites.length;
+                totalSubcategories++;
+            }
+        });
 
         const totalSitesEl = document.getElementById('totalSites');
         if (totalSitesEl) {
             totalSitesEl.textContent = totalSites + '+';
         }
 
-        // Update category count in stats
-        const statItems = document.querySelectorAll('.stat-item');
-        if (statItems[1]) {
-            statItems[1].querySelector('.stat-number').textContent = totalCategories;
-        }
+        // Update category count in stats (will be handled separately in HTML)
     }
 
     showError() {

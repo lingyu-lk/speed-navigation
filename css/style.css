@@ -440,14 +440,48 @@ body {
     margin: 5px 0;
 }
 
+/* 大类样式 */
+.menu-category {
+    margin-bottom: 20px;
+}
+
+.category-label {
+    padding: 12px 25px;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95em;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, var(--accent-hover-strong) 0%, transparent 100%);
+    cursor: default;
+}
+
+.category-label .category-icon {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* 子菜单样式 */
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu li {
+    margin: 0;
+}
+
 .sidebar-menu a {
     display: flex;
     align-items: center;
-    padding: 12px 25px;
+    padding: 10px 25px 10px 50px;
     text-decoration: none;
     color: var(--text-secondary);
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
+    font-size: 0.9em;
 }
 
 .sidebar-menu a:hover {

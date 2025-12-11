@@ -8,7 +8,7 @@
     <!-- Primary Meta Tags -->
     <title>极速导航 - 发现有趣的网站 | 个人导航页</title>
     <meta name="title" content="极速导航 - 发现有趣的网站">
-    <meta name="description" content="精心整理的网站导航，包含娱乐、工具、学习、开发、AI、软件下载、单机游戏等18个分类，165+优质网站。支持夜间模式、收藏功能和智能搜索。">
+    <meta name="description" content="精心整理的网站导航，5大主分类，17个子分类，165+优质网站。包含娱乐休闲、工具效率、学习成长、科技资源、生活服务。支持夜间模式、收藏功能和智能搜索。">
     <meta name="keywords" content="网站导航,个人导航,书签管理,在线工具,AI工具,开发工具,学习网站,娱乐网站,软件下载,单机游戏">
     <meta name="author" content="极速导航">
     <meta name="robots" content="index, follow">
@@ -17,14 +17,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yoursite.com/">
     <meta property="og:title" content="极速导航 - 发现有趣的网站">
-    <meta property="og:description" content="精心整理的网站导航，包含娱乐、工具、学习、开发、AI、软件下载、单机游戏等18个分类，165+优质网站。">
+    <meta property="og:description" content="精心整理的网站导航，5大主分类，17个子分类，165+优质网站。包含娱乐休闲、工具效率、学习成长、科技资源、生活服务。">
     <meta property="og:image" content="https://yoursite.com/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://yoursite.com/">
     <meta property="twitter:title" content="极速导航 - 发现有趣的网站">
-    <meta property="twitter:description" content="精心整理的网站导航，包含娱乐、工具、学习、开发、AI、软件下载、单机游戏等18个分类，165+优质网站。">
+    <meta property="twitter:description" content="精心整理的网站导航，5大主分类，17个子分类，165+优质网站。包含娱乐休闲、工具效率、学习成长、科技资源、生活服务。">
     <meta property="twitter:image" content="https://yoursite.com/og-image.png">
 
     <!-- Favicon -->
@@ -51,7 +51,7 @@
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "极速导航",
-        "description": "精心整理的网站导航，包含娱乐、工具、学习、开发、AI、软件下载、单机游戏等18个分类",
+        "description": "精心整理的网站导航，5大主分类，17个子分类，165+优质网站",
         "url": "https://yoursite.com",
         "potentialAction": {
             "@type": "SearchAction",
@@ -159,113 +159,139 @@
             <div class="sidebar-title">📚 分类导航</div>
             <nav>
                 <ul class="sidebar-menu" role="menu">
-                    <li role="none">
-                        <a href="#entertainment" class="active" role="menuitem" aria-label="娱乐休闲分类">
-                            <span class="menu-icon" aria-hidden="true">🎮</span>
+                    <!-- 娱乐休闲 -->
+                    <li class="menu-category" role="none">
+                        <div class="category-label">
+                            <span class="category-icon" aria-hidden="true">🎬</span>
                             <span>娱乐休闲</span>
-                        </a>
+                        </div>
+                        <ul class="submenu">
+                            <li role="none">
+                                <a href="#entertainment-video" class="active" role="menuitem" aria-label="视频影音分类">
+                                    <span>├─ 视频影音</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#entertainment-social" role="menuitem" aria-label="社交媒体分类">
+                                    <span>├─ 社交媒体</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#entertainment-games" role="menuitem" aria-label="单机游戏分类">
+                                    <span>├─ 单机游戏</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#entertainment-fun" role="menuitem" aria-label="趣味网站分类">
+                                    <span>├─ 趣味网站</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#entertainment-procrastination" role="menuitem" aria-label="摸鱼专区分类">
+                                    <span>└─ 摸鱼专区</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li role="none">
-                        <a href="#tools" role="menuitem" aria-label="实用工具分类">
-                            <span class="menu-icon" aria-hidden="true">🛠️</span>
-                            <span>实用工具</span>
-                        </a>
+
+                    <!-- 工具效率 -->
+                    <li class="menu-category" role="none">
+                        <div class="category-label">
+                            <span class="category-icon" aria-hidden="true">🛠️</span>
+                            <span>工具效率</span>
+                        </div>
+                        <ul class="submenu">
+                            <li role="none">
+                                <a href="#tools-utilities" role="menuitem" aria-label="实用工具分类">
+                                    <span>├─ 实用工具</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#tools-office" role="menuitem" aria-label="办公协作分类">
+                                    <span>├─ 办公协作</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#tools-media" role="menuitem" aria-label="图片视频分类">
+                                    <span>├─ 图片视频</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#tools-cloud" role="menuitem" aria-label="云存储分类">
+                                    <span>└─ 云存储</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li role="none">
-                        <a href="#learning" role="menuitem" aria-label="学习成长分类">
-                            <span class="menu-icon" aria-hidden="true">📚</span>
+
+                    <!-- 学习成长 -->
+                    <li class="menu-category" role="none">
+                        <div class="category-label">
+                            <span class="category-icon" aria-hidden="true">📚</span>
                             <span>学习成长</span>
-                        </a>
+                        </div>
+                        <ul class="submenu">
+                            <li role="none">
+                                <a href="#learning-platform" role="menuitem" aria-label="学习平台分类">
+                                    <span>├─ 学习平台</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#learning-development" role="menuitem" aria-label="编程开发分类">
+                                    <span>├─ 编程开发</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#learning-creative" role="menuitem" aria-label="创意灵感分类">
+                                    <span>└─ 创意灵感</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li role="none">
-                        <a href="#creative" role="menuitem" aria-label="创意灵感分类">
-                            <span class="menu-icon" aria-hidden="true">🎨</span>
-                            <span>创意灵感</span>
-                        </a>
+
+                    <!-- 科技资源 -->
+                    <li class="menu-category" role="none">
+                        <div class="category-label">
+                            <span class="category-icon" aria-hidden="true">💻</span>
+                            <span>科技资源</span>
+                        </div>
+                        <ul class="submenu">
+                            <li role="none">
+                                <a href="#tech-ai" role="menuitem" aria-label="AI科技分类">
+                                    <span>├─ AI 科技</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#tech-software" role="menuitem" aria-label="软件下载分类">
+                                    <span>├─ 软件下载</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#tech-news" role="menuitem" aria-label="新闻资讯分类">
+                                    <span>└─ 新闻资讯</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li role="none">
-                        <a href="#development" role="menuitem" aria-label="编程开发分类">
-                            <span class="menu-icon" aria-hidden="true">💻</span>
-                            <span>编程开发</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#ai" role="menuitem" aria-label="AI科技分类">
-                            <span class="menu-icon" aria-hidden="true">🤖</span>
-                            <span>AI 科技</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#social" role="menuitem" aria-label="社交媒体分类">
-                            <span class="menu-icon" aria-hidden="true">💬</span>
-                            <span>社交媒体</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#news" role="menuitem" aria-label="新闻资讯分类">
-                            <span class="menu-icon" aria-hidden="true">📰</span>
-                            <span>新闻资讯</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#shopping" role="menuitem" aria-label="在线购物分类">
-                            <span class="menu-icon" aria-hidden="true">🛍️</span>
-                            <span>在线购物</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#music" role="menuitem" aria-label="音乐影音分类">
-                            <span class="menu-icon" aria-hidden="true">🎵</span>
-                            <span>音乐影音</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#office" role="menuitem" aria-label="办公协作分类">
-                            <span class="menu-icon" aria-hidden="true">📊</span>
-                            <span>办公协作</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#cloud" role="menuitem" aria-label="云存储分类">
-                            <span class="menu-icon" aria-hidden="true">☁️</span>
-                            <span>云存储</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#photo" role="menuitem" aria-label="图片视频分类">
-                            <span class="menu-icon" aria-hidden="true">📷</span>
-                            <span>图片视频</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#fun" role="menuitem" aria-label="趣味网站分类">
-                            <span class="menu-icon" aria-hidden="true">🎲</span>
-                            <span>趣味网站</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#finance" role="menuitem" aria-label="金融理财分类">
-                            <span class="menu-icon" aria-hidden="true">💰</span>
-                            <span>金融理财</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#software" role="menuitem" aria-label="软件下载分类">
-                            <span class="menu-icon" aria-hidden="true">💿</span>
-                            <span>软件下载</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#games" role="menuitem" aria-label="单机游戏分类">
-                            <span class="menu-icon" aria-hidden="true">🎮</span>
-                            <span>单机游戏</span>
-                        </a>
-                    </li>
-                    <li role="none">
-                        <a href="#procrastination" role="menuitem" aria-label="摸鱼专区分类">
-                            <span class="menu-icon" aria-hidden="true">😎</span>
-                            <span>摸鱼专区</span>
-                        </a>
+
+                    <!-- 生活服务 -->
+                    <li class="menu-category" role="none">
+                        <div class="category-label">
+                            <span class="category-icon" aria-hidden="true">🏠</span>
+                            <span>生活服务</span>
+                        </div>
+                        <ul class="submenu">
+                            <li role="none">
+                                <a href="#life-shopping" role="menuitem" aria-label="在线购物分类">
+                                    <span>├─ 在线购物</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#life-finance" role="menuitem" aria-label="金融理财分类">
+                                    <span>└─ 金融理财</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
@@ -280,12 +306,12 @@
                     <div class="stat-label">网站总数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" aria-label="分类数量">18</div>
-                    <div class="stat-label">分类数量</div>
+                    <div class="stat-number" aria-label="主分类">5</div>
+                    <div class="stat-label">主分类</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" aria-label="探索可能">∞</div>
-                    <div class="stat-label">探索可能</div>
+                    <div class="stat-number" aria-label="子分类">17</div>
+                    <div class="stat-label">子分类</div>
                 </div>
             </section>
 
