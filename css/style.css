@@ -578,29 +578,29 @@ body {
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
 }
 
-/* For large screens (1920px), show 4 columns */
+/* For large screens (1920px), show 5 columns */
 @media (min-width: 1600px) {
     .cards {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 }
 
 /* For extra large screens */
 @media (min-width: 2000px) {
     .cards {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
     }
 }
 
 .card {
     background: var(--bg-white);
     border: 2px solid var(--border-color);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 10px;
+    padding: 15px;
     text-decoration: none;
     color: var(--text-primary);
     transition: all 0.3s ease;
@@ -637,15 +637,15 @@ body {
 }
 
 .card-icon-wrapper {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 12px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--border-color);
-    border-radius: 12px;
-    padding: 8px;
+    border-radius: 10px;
+    padding: 6px;
     transition: transform 0.3s ease;
 }
 
@@ -654,13 +654,13 @@ body {
 }
 
 .card-favicon {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
 }
 
 .card-icon-fallback {
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 .visit-count {
@@ -676,26 +676,26 @@ body {
 }
 
 .card-title {
-    font-size: 1.15em;
+    font-size: 1em;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     color: var(--text-primary);
 }
 
 .card-desc {
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .card-tag {
     display: inline-block;
-    padding: 3px 10px;
+    padding: 2px 8px;
     background: var(--border-color);
-    border-radius: 12px;
-    font-size: 0.75em;
+    border-radius: 10px;
+    font-size: 0.7em;
     color: var(--text-tertiary);
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 /* Favorite indicator */
