@@ -71,6 +71,9 @@
             <div class="logo" role="heading" aria-level="1">🚀 极速导航</div>
             <div class="search-box">
                 <label for="searchInput" class="sr-only">搜索网站</label>
+                <div class="search-mode-toggle" id="searchModeToggle" title="切换搜索模式">
+                    <span class="search-mode-icon">🔍</span>
+                </div>
                 <input
                     type="search"
                     placeholder="🔍 搜索你想要的网站... (Ctrl+K)"
@@ -79,6 +82,12 @@
                     autocomplete="off"
                     spellcheck="false"
                 >
+                <select class="search-engine-select" id="searchEngineSelect" aria-label="选择搜索引擎">
+                    <option value="google">Google</option>
+                    <option value="bing">Bing</option>
+                    <option value="baidu">百度</option>
+                    <option value="duckduckgo">DuckDuckGo</option>
+                </select>
             </div>
             <button
                 class="mobile-menu-btn"

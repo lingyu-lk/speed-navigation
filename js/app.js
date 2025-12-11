@@ -4,10 +4,30 @@ const CONFIG = {
         THEME: 'nav-theme',
         FAVORITES: 'nav-favorites',
         HISTORY: 'nav-history',
-        CUSTOM_SITES: 'nav-custom-sites'
+        CUSTOM_SITES: 'nav-custom-sites',
+        SEARCH_MODE: 'nav-search-mode',
+        SEARCH_ENGINE: 'nav-search-engine'
     },
     MAX_HISTORY: 50,
-    DEBOUNCE_DELAY: 300
+    DEBOUNCE_DELAY: 300,
+    SEARCH_ENGINES: {
+        google: {
+            name: 'Google',
+            url: 'https://www.google.com/search?q='
+        },
+        bing: {
+            name: 'Bing',
+            url: 'https://www.bing.com/search?q='
+        },
+        baidu: {
+            name: '百度',
+            url: 'https://www.baidu.com/s?wd='
+        },
+        duckduckgo: {
+            name: 'DuckDuckGo',
+            url: 'https://duckduckgo.com/?q='
+        }
+    }
 };
 
 // ==================== Utility Functions ====================
@@ -226,6 +246,11 @@ class HistoryManager {
 class SearchManager {
     constructor() {
         this.searchInput = document.getElementById('searchInput');
+        this.searchModeToggle = document.getElementById('searchModeToggle');
+        this.searchEngineSelect = document.getElementById('searchEngineSelect');
+        this.searchBox = document.querySelector('.search-box');
+        this.mode = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_MODE) || 'local';
+        this.engine = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_ENGINE) || 'google';
         this.init();
     }
 
@@ -233,10 +258,59 @@ class SearchManager {
         if (this.searchInput) {
             const debouncedSearch = Utils.debounce((e) => this.search(e.target.value), CONFIG.DEBOUNCE_DELAY);
             this.searchInput.addEventListener('input', debouncedSearch);
+            this.searchInput.addEventListener('keydown', (e) => this.handleKeydown(e));
+        }
+
+        if (this.searchModeToggle) {
+            this.searchModeToggle.addEventListener('click', () => this.toggleMode());
+        }
+
+        if (this.searchEngineSelect) {
+            this.searchEngineSelect.value = this.engine;
+            this.searchEngineSelect.addEventListener('change', (e) => this.setEngine(e.target.value));
+        }
+
+        this.updateUI();
+    }
+
+    toggleMode() {
+        this.mode = this.mode === 'local' ? 'engine' : 'local';
+        StorageManager.set(CONFIG.STORAGE_KEYS.SEARCH_MODE, this.mode);
+        this.updateUI();
+    }
+
+    setEngine(engine) {
+        this.engine = engine;
+        StorageManager.set(CONFIG.STORAGE_KEYS.SEARCH_ENGINE, engine);
+    }
+
+    updateUI() {
+        if (this.mode === 'engine') {
+            this.searchBox?.classList.add('engine-mode');
+            this.searchModeToggle?.classList.add('engine-mode');
+            this.searchInput.placeholder = `🌐 使用 ${CONFIG.SEARCH_ENGINES[this.engine].name} 搜索... (Enter)`;
+        } else {
+            this.searchBox?.classList.remove('engine-mode');
+            this.searchModeToggle?.classList.remove('engine-mode');
+            this.searchInput.placeholder = '🔍 搜索你想要的网站... (Ctrl+K)';
+        }
+    }
+
+    handleKeydown(e) {
+        if (e.key === 'Enter' && this.mode === 'engine') {
+            e.preventDefault();
+            const query = this.searchInput.value.trim();
+            if (query) {
+                const engineUrl = CONFIG.SEARCH_ENGINES[this.engine].url;
+                window.open(engineUrl + encodeURIComponent(query), '_blank');
+            }
         }
     }
 
     search(term) {
+        // Only perform local search in local mode
+        if (this.mode !== 'local') return;
+
         const searchTerm = term.toLowerCase();
         const searchPinyin = Utils.toPinyin(term.toLowerCase());
 
