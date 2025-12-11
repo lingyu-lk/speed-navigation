@@ -693,8 +693,10 @@ class SiteRenderer {
                 <img class="card-favicon" src="${faviconUrl}" alt="${site.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="card-icon-fallback" style="display:none;">${site.icon}</div>
             </div>
-            <div class="card-title">${Utils.sanitizeHTML(site.name)}</div>
-            <div class="card-desc">${Utils.sanitizeHTML(site.description)}</div>
+            <div class="card-content">
+                <div class="card-title">${Utils.sanitizeHTML(site.name)}</div>
+                <div class="card-desc">${Utils.sanitizeHTML(site.description)}</div>
+            </div>
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
             ${visitBadge}
         `;
