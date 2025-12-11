@@ -600,7 +600,6 @@ class SiteRenderer {
                 <img src="${faviconUrl}" alt="${site.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${site.icon || '🌐'}</text></svg>'">
             </div>
             <div class="quick-item-name">${Utils.sanitizeHTML(site.name)}</div>
-            <span class="quick-item-badge">${site.visits}</span>
         `;
 
         return item;
@@ -673,9 +672,6 @@ class SiteRenderer {
             card.classList.add('favorited');
         }
 
-        const visits = this.historyManager.getVisitCount(site.url);
-        const visitBadge = visits > 0 ? `<span class="visit-count" title="访问${visits}次">${visits}</span>` : '';
-
         // Extract domain for favicon
         let domain = '';
         try {
@@ -698,7 +694,6 @@ class SiteRenderer {
                 <div class="card-desc">${Utils.sanitizeHTML(site.description)}</div>
             </div>
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
-            ${visitBadge}
         `;
 
         // Add click handler for history
