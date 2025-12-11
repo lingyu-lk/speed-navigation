@@ -842,6 +842,18 @@ body {
     color: var(--text-primary);
     transition: all 0.3s ease;
     position: relative;
+    cursor: move;
+}
+
+.quick-item.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.quick-item.drag-over {
+    border-color: var(--accent-color);
+    background: var(--accent-hover);
+    transform: scale(1.05);
 }
 
 .quick-item:hover {
@@ -886,6 +898,23 @@ body {
 
 .quick-item-remove:hover {
     transform: scale(1.2);
+}
+
+.quick-item-drag-handle {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: var(--text-light);
+    font-size: 12px;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    letter-spacing: -2px;
+}
+
+.quick-item:hover .quick-item-drag-handle {
+    opacity: 0.5;
 }
 
 .quick-item-icon {

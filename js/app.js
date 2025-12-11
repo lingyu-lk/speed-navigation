@@ -619,6 +619,8 @@ class SiteRenderer {
     createQuickAccessItem(site) {
         const item = document.createElement('div');
         item.className = 'quick-item';
+        item.setAttribute('draggable', 'true');
+        item.setAttribute('data-url', site.url);
 
         // Extract domain for favicon
         let domain = '';
@@ -639,7 +641,16 @@ class SiteRenderer {
                 <div class="quick-item-name">${Utils.sanitizeHTML(site.name)}</div>
             </a>
             <button class="quick-item-remove" data-url="${site.url}" title="移除">×</button>
+            <div class="quick-item-drag-handle" title="拖拽排序">⋮⋮</div>
         `;
+
+        // Add drag and drop handlers
+        item.addEventListener('dragstart', (e) => this.handleDragStart(e));
+        item.addEventListener('dragenter', (e) => this.handleDragEnter(e));
+        item.addEventListener('dragover', (e) => this.handleDragOver(e));
+        item.addEventListener('dragleave', (e) => this.handleDragLeave(e));
+        item.addEventListener('drop', (e) => this.handleDrop(e));
+        item.addEventListener('dragend', (e) => this.handleDragEnd(e));
 
         // Add remove button handler
         const removeBtn = item.querySelector('.quick-item-remove');
@@ -653,6 +664,77 @@ class SiteRenderer {
         });
 
         return item;
+    }
+
+    handleDragStart(e) {
+        this.draggedElement = e.target.closest('.quick-item');
+        this.draggedElement.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.draggedElement.innerHTML);
+    }
+
+    handleDragEnter(e) {
+        const item = e.target.closest('.quick-item');
+        if (item && item !== this.draggedElement) {
+            item.classList.add('drag-over');
+        }
+    }
+
+    handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        return false;
+    }
+
+    handleDragLeave(e) {
+        const item = e.target.closest('.quick-item');
+        if (item) {
+            item.classList.remove('drag-over');
+        }
+    }
+
+    handleDrop(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        e.preventDefault();
+
+        const dropTarget = e.target.closest('.quick-item');
+
+        if (dropTarget && this.draggedElement && dropTarget !== this.draggedElement) {
+            // Get all quick access items
+            const quickSites = this.quickAccessManager.getAll();
+
+            // Find indices
+            const draggedUrl = this.draggedElement.getAttribute('data-url');
+            const targetUrl = dropTarget.getAttribute('data-url');
+
+            const draggedIndex = quickSites.findIndex(s => s.url === draggedUrl);
+            const targetIndex = quickSites.findIndex(s => s.url === targetUrl);
+
+            // Reorder array
+            const [removed] = quickSites.splice(draggedIndex, 1);
+            quickSites.splice(targetIndex, 0, removed);
+
+            // Save new order
+            this.quickAccessManager.quickAccessSites = quickSites;
+            StorageManager.set(CONFIG.STORAGE_KEYS.QUICK_ACCESS, quickSites);
+
+            // Re-render
+            this.renderQuickAccess();
+        }
+
+        return false;
+    }
+
+    handleDragEnd(e) {
+        // Remove all drag classes
+        document.querySelectorAll('.quick-item').forEach(item => {
+            item.classList.remove('dragging', 'drag-over');
+        });
+        this.draggedElement = null;
     }
 
     updateCardQuickAccessButtons(url, isInQuickAccess) {
