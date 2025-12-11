@@ -454,7 +454,13 @@ body {
     display: flex;
     align-items: center;
     background: linear-gradient(90deg, var(--accent-hover-strong) 0%, transparent 100%);
-    cursor: default;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.category-label:hover {
+    background: linear-gradient(90deg, rgba(102, 126, 234, 0.15) 0%, transparent 100%);
 }
 
 .category-label .category-icon {
@@ -462,11 +468,35 @@ body {
     font-size: 1.2em;
 }
 
+.category-label .expand-icon {
+    margin-left: auto;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+
+.category-label.collapsed .expand-icon {
+    transform: rotate(-90deg);
+}
+
 /* 子菜单样式 */
 .submenu {
     list-style: none;
     padding: 0;
     margin: 0;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.submenu.expanded {
+    max-height: 500px;
+    opacity: 1;
+}
+
+.submenu.collapsed {
+    max-height: 0;
+    opacity: 0;
 }
 
 .submenu li {

@@ -851,3 +851,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Make scrollToTop available globally
 window.scrollToTop = scrollToTop;
+
+// ==================== Category Toggle Function ====================
+function toggleCategory(labelElement) {
+    const submenu = labelElement.nextElementSibling;
+
+    // Toggle collapsed class on label
+    labelElement.classList.toggle('collapsed');
+
+    // Toggle expanded/collapsed class on submenu
+    if (submenu.classList.contains('expanded')) {
+        submenu.classList.remove('expanded');
+        submenu.classList.add('collapsed');
+    } else {
+        submenu.classList.remove('collapsed');
+        submenu.classList.add('expanded');
+    }
+}
+
+// Make toggleCategory available globally
+window.toggleCategory = toggleCategory;
