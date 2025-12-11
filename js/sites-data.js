@@ -963,6 +963,98 @@ const SITES_DATA =
       ]
     },
     {
+      "id": "software",
+      "icon": "💿",
+      "name": "软件下载",
+      "description": "优质软件资源平台",
+      "sites": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com",
+          "icon": "🐙",
+          "description": "全球最大的开源软件托管平台",
+          "tag": "开源"
+        },
+        {
+          "name": "SourceForge",
+          "url": "https://sourceforge.net",
+          "icon": "🔧",
+          "description": "老牌开源软件下载站",
+          "tag": "开源"
+        },
+        {
+          "name": "MSDN我告诉你",
+          "url": "https://msdn.itellyou.cn",
+          "icon": "💻",
+          "description": "原版Windows和Office镜像下载",
+          "tag": "系统"
+        },
+        {
+          "name": "异次元软件世界",
+          "url": "https://www.iplaysoft.com",
+          "icon": "🌟",
+          "description": "优质软件推荐和下载",
+          "tag": "推荐"
+        },
+        {
+          "name": "小众软件",
+          "url": "https://www.appinn.com",
+          "icon": "📦",
+          "description": "发现免费好用的小软件",
+          "tag": "推荐"
+        },
+        {
+          "name": "AlternativeTo",
+          "url": "https://alternativeto.net",
+          "icon": "🔄",
+          "description": "寻找软件的最佳替代品",
+          "tag": "工具"
+        },
+        {
+          "name": "Softpedia",
+          "url": "https://www.softpedia.com",
+          "icon": "📥",
+          "description": "国际知名软件下载网站",
+          "tag": "下载"
+        },
+        {
+          "name": "FileHippo",
+          "url": "https://filehippo.com",
+          "icon": "🦛",
+          "description": "安全的软件下载平台",
+          "tag": "下载"
+        },
+        {
+          "name": "Ninite",
+          "url": "https://ninite.com",
+          "icon": "⚡",
+          "description": "一键批量安装常用软件",
+          "tag": "安装"
+        },
+        {
+          "name": "Chocolatey",
+          "url": "https://chocolatey.org",
+          "icon": "🍫",
+          "description": "Windows包管理器",
+          "tag": "包管理"
+        },
+        {
+          "name": "Homebrew",
+          "url": "https://brew.sh",
+          "icon": "🍺",
+          "description": "macOS和Linux包管理器",
+          "tag": "包管理"
+        },
+        {
+          "name": "腾讯软件中心",
+          "url": "https://pc.qq.com",
+          "icon": "🐧",
+          "description": "腾讯官方软件下载平台",
+          "tag": "下载"
+        }
+      ]
+    },
+    {
       "id": "procrastination",
       "icon": "😎",
       "name": "摸鱼专区",
