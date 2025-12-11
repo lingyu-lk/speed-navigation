@@ -412,13 +412,17 @@ class SearchManager {
 class NavigationManager {
     constructor() {
         this.menuLinks = document.querySelectorAll('.sidebar-menu a');
-        this.categories = document.querySelectorAll('.category');
         this.init();
     }
 
     init() {
         this.setupMenuClicks();
         this.setupScrollSpy();
+    }
+
+    // Refresh categories after they're loaded
+    refreshCategories() {
+        this.categories = document.querySelectorAll('.category');
     }
 
     setupMenuClicks() {
@@ -460,6 +464,11 @@ class NavigationManager {
     }
 
     updateActiveMenuItem() {
+        // Refresh categories in case they were loaded dynamically
+        if (!this.categories || this.categories.length === 0) {
+            this.refreshCategories();
+        }
+
         const scrollPos = window.pageYOffset + 150;
 
         this.categories.forEach(category => {
@@ -517,6 +526,11 @@ class SiteRenderer {
 
             // Hide skeleton after loading
             this.hideSkeleton();
+
+            // Notify that categories are loaded
+            if (window.app && window.app.navigationManager) {
+                window.app.navigationManager.refreshCategories();
+            }
         } catch (error) {
             console.error('Error loading sites:', error);
             this.showError();
@@ -790,6 +804,8 @@ class App {
 
     async init() {
         try {
+            // Make app available globally before loading sites
+            window.app = this;
             await this.siteRenderer.loadSites();
             this.setupServiceWorker();
         } catch (error) {
