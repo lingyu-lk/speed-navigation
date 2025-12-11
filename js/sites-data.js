@@ -359,6 +359,209 @@ const SITES_DATA =
               "icon": "🐨",
               "description": "互动圆圈艺术",
               "tag": "互动"
+            },
+            {
+              "name": "QWOP",
+              "url": "http://www.foddy.net/Athletics.html",
+              "icon": "🏃",
+              "description": "魔性的跑步游戏，超级搞笑",
+              "tag": "游戏"
+            },
+            {
+              "name": "Akinator",
+              "url": "https://akinator.com",
+              "icon": "🧞",
+              "description": "读心精灵，猜你想的角色",
+              "tag": "AI游戏"
+            },
+            {
+              "name": "Silk",
+              "url": "http://weavesilk.com",
+              "icon": "🎨",
+              "description": "创造美丽的对称艺术图案",
+              "tag": "艺术"
+            },
+            {
+              "name": "The Scale of Universe",
+              "url": "https://htwins.net/scale2",
+              "icon": "🌌",
+              "description": "探索宇宙万物的尺度",
+              "tag": "科普"
+            },
+            {
+              "name": "Patatap",
+              "url": "https://patatap.com",
+              "icon": "🎹",
+              "description": "按键盘创作动画和音乐",
+              "tag": "音乐"
+            },
+            {
+              "name": "Scribblenauts",
+              "url": "https://www.crazygames.com/game/scribblenauts-unlimited",
+              "icon": "✏️",
+              "description": "写出任何东西让它出现",
+              "tag": "创意"
+            },
+            {
+              "name": "Bongo Cat",
+              "url": "https://bongo.cat",
+              "icon": "🐱",
+              "description": "敲键盘就能看到猫咪打鼓",
+              "tag": "治愈"
+            },
+            {
+              "name": "Quick Draw",
+              "url": "https://quickdraw.withgoogle.com",
+              "icon": "✍️",
+              "description": "Google AI 识别你的涂鸦",
+              "tag": "AI"
+            },
+            {
+              "name": "Maze Generator",
+              "url": "https://www.mazegenerator.net",
+              "icon": "🌀",
+              "description": "生成和解决迷宫",
+              "tag": "益智"
+            },
+            {
+              "name": "Slime Simulator",
+              "url": "https://slime-simulator.web.app",
+              "icon": "💧",
+              "description": "超解压的史莱姆模拟器",
+              "tag": "解压"
+            },
+            {
+              "name": "Pointer Pointer",
+              "url": "https://pointerpointer.com",
+              "icon": "👈",
+              "description": "找到指向你鼠标的图片",
+              "tag": "创意"
+            },
+            {
+              "name": "The Restart Page",
+              "url": "http://www.therestartpage.com",
+              "icon": "💾",
+              "description": "怀旧的各种操作系统启动画面",
+              "tag": "怀旧"
+            },
+            {
+              "name": "Windows 93",
+              "url": "https://www.windows93.net",
+              "icon": "🪟",
+              "description": "模拟的复古操作系统",
+              "tag": "怀旧"
+            },
+            {
+              "name": "Emoji Kitchen",
+              "url": "https://emojikitchen.dev",
+              "icon": "😋",
+              "description": "混合两个表情创造新表情",
+              "tag": "创意"
+            },
+            {
+              "name": "Falling Falling",
+              "url": "https://www.fallingfalling.com",
+              "icon": "🪂",
+              "description": "无限下落的3D空间",
+              "tag": "视觉"
+            },
+            {
+              "name": "Optical Illusions",
+              "url": "https://www.moillusions.com",
+              "icon": "👁️",
+              "description": "各种视觉错觉集合",
+              "tag": "视觉"
+            },
+            {
+              "name": "Dinosaur Game",
+              "url": "https://chromedino.com",
+              "icon": "🦖",
+              "description": "Chrome 断网小恐龙游戏",
+              "tag": "游戏"
+            },
+            {
+              "name": "Cookie Clicker",
+              "url": "https://orteil.dashnet.org/cookieclicker",
+              "icon": "🍪",
+              "description": "点击饼干的放置类游戏",
+              "tag": "放置"
+            },
+            {
+              "name": "Staggering Beauty",
+              "url": "http://www.staggeringbeauty.com",
+              "icon": "🪱",
+              "description": "摇动你的鼠标（癫痫警告）",
+              "tag": "互动"
+            },
+            {
+              "name": "The Quiet Place",
+              "url": "http://thequietplaceproject.xyz",
+              "icon": "🤫",
+              "description": "需要安静环境的互动体验",
+              "tag": "互动"
+            },
+            {
+              "name": "Do Nothing for 2 Minutes",
+              "url": "http://www.donothingfor2minutes.com",
+              "icon": "⏱️",
+              "description": "强制自己放松2分钟",
+              "tag": "放松"
+            },
+            {
+              "name": "Cat Bounce",
+              "url": "https://cat-bounce.com",
+              "icon": "🐈",
+              "description": "会弹跳的猫咪们",
+              "tag": "治愈"
+            },
+            {
+              "name": "Ninja Flex",
+              "url": "http://ninjaflex.com",
+              "icon": "🥷",
+              "description": "测试你的反应速度",
+              "tag": "游戏"
+            },
+            {
+              "name": "Geek Typer Tron",
+              "url": "http://geektyper.com/tron",
+              "icon": "⚡",
+              "description": "创战纪风格的黑客屏幕",
+              "tag": "视觉"
+            },
+            {
+              "name": "Weave Silk Interactive",
+              "url": "http://weavesilk.com",
+              "icon": "✨",
+              "description": "创作迷幻对称图案",
+              "tag": "艺术"
+            },
+            {
+              "name": "Find the Invisible Cow",
+              "url": "https://findtheinvisiblecow.com",
+              "icon": "🐄",
+              "description": "找到看不见的牛",
+              "tag": "游戏"
+            },
+            {
+              "name": "Pac-Man",
+              "url": "https://www.google.com/logos/2010/pacman10-i.html",
+              "icon": "👻",
+              "description": "Google版吃豆人游戏",
+              "tag": "游戏"
+            },
+            {
+              "name": "Gravity Points",
+              "url": "https://codepen.io/akm2/full/rHIsa",
+              "icon": "⚫",
+              "description": "创造引力粒子效果",
+              "tag": "视觉"
+            },
+            {
+              "name": "RGB Color Challenge",
+              "url": "https://www.rgbcolorcode.com/game",
+              "icon": "🎨",
+              "description": "测试你的色彩识别能力",
+              "tag": "游戏"
             }
           ]
         },
