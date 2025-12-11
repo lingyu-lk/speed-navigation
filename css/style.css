@@ -962,6 +962,11 @@ input:focus {
     outline-offset: 2px;
 }
 
+/* Remove outline for search input */
+.search-wrapper input:focus {
+    outline: none;
+}
+
 /* ==================== Print Styles ==================== */
 @media print {
     .top-nav,
