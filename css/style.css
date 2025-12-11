@@ -172,7 +172,7 @@ body {
 
 .search-container {
     flex: 1;
-    max-width: 600px;
+    max-width: 580px;
     margin: 0 30px;
     position: relative;
 }
@@ -181,44 +181,49 @@ body {
     display: flex;
     align-items: center;
     background: var(--bg-white);
-    border: 2px solid var(--border-input);
-    border-radius: 50px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    height: 44px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.search-wrapper:hover {
+    box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+    border-color: rgba(223,225,229,0);
 }
 
 .search-wrapper:focus-within {
-    border-color: var(--accent-color);
-    box-shadow: 0 4px 12px var(--accent-hover), 0 0 0 3px var(--accent-hover);
+    box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+    border-color: rgba(223,225,229,0);
 }
 
 .search-engine-selector {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 0 16px;
+    gap: 4px;
+    padding: 0 4px 0 14px;
     cursor: pointer;
     user-select: none;
-    transition: all 0.2s ease;
-    border-right: 1px solid var(--border-color);
-    min-width: 90px;
+    transition: background 0.1s ease;
+    border-radius: 24px 0 0 24px;
+    height: 100%;
 }
 
 .search-engine-selector:hover {
-    background: var(--accent-hover);
+    background: rgba(0,0,0,0.04);
 }
 
 .current-engine {
-    font-size: 0.9em;
-    font-weight: 500;
-    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 400;
+    color: #5f6368;
     white-space: nowrap;
 }
 
 .dropdown-icon {
-    color: var(--text-muted);
+    color: #5f6368;
     transition: transform 0.2s ease;
+    opacity: 0.8;
 }
 
 .search-engine-selector.active .dropdown-icon {
@@ -227,55 +232,59 @@ body {
 
 .search-divider {
     width: 1px;
-    height: 24px;
-    background: var(--border-color);
+    height: 28px;
+    background: #dadce0;
+    margin: 0 8px;
 }
 
 .search-wrapper input {
     flex: 1;
-    padding: 14px 16px;
+    padding: 0 14px;
     border: none;
     background: transparent;
-    font-size: 0.95em;
+    font-size: 16px;
     outline: none;
-    color: var(--text-primary);
+    color: #202124;
+    font-family: arial, sans-serif;
 }
 
 .search-wrapper input::placeholder {
-    color: var(--text-muted);
+    color: #9aa0a6;
 }
 
 .search-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 16px;
+    width: 40px;
+    height: 40px;
     background: transparent;
     border: none;
-    color: var(--text-muted);
+    color: #5f6368;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.1s ease;
+    border-radius: 50%;
+    margin-right: 4px;
 }
 
 .search-btn:hover {
-    color: var(--accent-color);
-    background: var(--accent-hover);
+    background: rgba(0,0,0,0.04);
 }
 
 .search-dropdown {
     position: absolute;
-    top: calc(100% + 8px);
+    top: calc(100% + 4px);
     left: 0;
     right: 0;
     background: var(--bg-white);
-    border: 2px solid var(--border-input);
-    border-radius: 16px;
-    box-shadow: 0 8px 24px var(--shadow-light);
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+    transform: translateY(-4px);
+    transition: all 0.15s ease;
     z-index: 1000;
 }
 
@@ -289,29 +298,35 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 16px;
+    padding: 10px 14px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.1s ease;
+    font-size: 14px;
 }
 
 .search-option:hover {
-    background: var(--accent-hover);
+    background: #f1f3f4;
 }
 
 .search-option.selected {
-    background: var(--accent-hover-strong);
-    color: var(--accent-color);
-    font-weight: 500;
+    background: #e8f0fe;
+    color: #1a73e8;
 }
 
 .option-icon {
-    font-size: 1.2em;
-    width: 24px;
+    font-size: 18px;
+    width: 20px;
     text-align: center;
 }
 
 .option-name {
-    font-size: 0.95em;
+    font-size: 14px;
+    color: #202124;
+}
+
+.search-option.selected .option-name {
+    color: #1a73e8;
+    font-weight: 500;
 }
 
 .theme-toggle {
