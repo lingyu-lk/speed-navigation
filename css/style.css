@@ -214,14 +214,18 @@ body {
 }
 
 .current-engine-icon {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1;
-    display: flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .current-engine {
@@ -313,6 +317,7 @@ body {
     cursor: pointer;
     transition: background 0.1s ease;
     font-size: 14px;
+    min-height: 40px;
 }
 
 .search-option:hover {
@@ -325,14 +330,18 @@ body {
 }
 
 .option-icon {
-    font-size: 18px;
-    width: 24px;
-    height: 24px;
-    display: flex;
+    font-size: 20px;
+    width: 28px;
+    height: 28px;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     line-height: 1;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .option-name {
