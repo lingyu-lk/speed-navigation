@@ -1055,6 +1055,112 @@ const SITES_DATA =
       ]
     },
     {
+      "id": "games",
+      "icon": "🎮",
+      "name": "单机游戏",
+      "description": "优质游戏资源下载",
+      "sites": [
+        {
+          "name": "Steam",
+          "url": "https://store.steampowered.com",
+          "icon": "🎯",
+          "description": "全球最大的PC游戏平台",
+          "tag": "正版"
+        },
+        {
+          "name": "Epic Games",
+          "url": "https://www.epicgames.com/store",
+          "icon": "🎪",
+          "description": "Epic游戏商店，经常有免费游戏",
+          "tag": "正版"
+        },
+        {
+          "name": "GOG",
+          "url": "https://www.gog.com",
+          "icon": "🎲",
+          "description": "无DRM的游戏平台，经典老游戏",
+          "tag": "正版"
+        },
+        {
+          "name": "Humble Bundle",
+          "url": "https://www.humblebundle.com",
+          "icon": "🎁",
+          "description": "游戏慈善包，超值优惠",
+          "tag": "正版"
+        },
+        {
+          "name": "Itch.io",
+          "url": "https://itch.io",
+          "icon": "🕹️",
+          "description": "独立游戏开发者平台",
+          "tag": "独立"
+        },
+        {
+          "name": "GameJolt",
+          "url": "https://gamejolt.com",
+          "icon": "⚡",
+          "description": "免费独立游戏社区",
+          "tag": "独立"
+        },
+        {
+          "name": "ModDB",
+          "url": "https://www.moddb.com",
+          "icon": "🔧",
+          "description": "游戏MOD和独立游戏下载",
+          "tag": "MOD"
+        },
+        {
+          "name": "IndieDB",
+          "url": "https://www.indiedb.com",
+          "icon": "🎨",
+          "description": "独立游戏资讯和下载",
+          "tag": "独立"
+        },
+        {
+          "name": "Origin",
+          "url": "https://www.origin.com",
+          "icon": "🌟",
+          "description": "EA游戏平台",
+          "tag": "正版"
+        },
+        {
+          "name": "Ubisoft Connect",
+          "url": "https://ubisoftconnect.com",
+          "icon": "🎮",
+          "description": "育碧游戏平台",
+          "tag": "正版"
+        },
+        {
+          "name": "Xbox",
+          "url": "https://www.xbox.com/games/store",
+          "icon": "🎯",
+          "description": "Xbox PC游戏商店",
+          "tag": "正版"
+        },
+        {
+          "name": "游侠网",
+          "url": "https://www.ali213.net",
+          "icon": "⚔️",
+          "description": "国内知名游戏资讯和下载站",
+          "tag": "资讯"
+        },
+        {
+          "name": "3DMGAME",
+          "url": "https://www.3dmgame.com",
+          "icon": "🎲",
+          "description": "3DM游戏网，游戏资讯和攻略",
+          "tag": "资讯"
+        },
+        {
+          "name": "SteamDB",
+          "url": "https://steamdb.info",
+          "icon": "📊",
+          "description": "Steam数据库，价格历史查询",
+          "tag": "工具"
+        }
+      ]
+    },
+    {
       "id": "procrastination",
       "icon": "😎",
       "name": "摸鱼专区",
