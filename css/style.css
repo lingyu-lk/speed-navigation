@@ -216,6 +216,12 @@ body {
 .current-engine-icon {
     font-size: 16px;
     line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 .current-engine {
@@ -320,8 +326,13 @@ body {
 
 .option-icon {
     font-size: 18px;
-    width: 20px;
-    text-align: center;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
 }
 
 .option-name {
