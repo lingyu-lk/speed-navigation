@@ -648,9 +648,23 @@ class SiteRenderer {
             e.stopPropagation();
             this.quickAccessManager.remove(site.url);
             this.renderQuickAccess();
+            // Update all card buttons with this URL
+            this.updateCardQuickAccessButtons(site.url, false);
         });
 
         return item;
+    }
+
+    updateCardQuickAccessButtons(url, isInQuickAccess) {
+        // Find all cards with this URL and update their quick access buttons
+        const cards = document.querySelectorAll(`.card[data-url="${url}"]`);
+        cards.forEach(card => {
+            const btn = card.querySelector('.card-quick-access-btn');
+            if (btn) {
+                btn.textContent = isInQuickAccess ? '★' : '☆';
+                btn.title = isInQuickAccess ? '从快捷访问移除' : '添加到快捷访问';
+            }
+        });
     }
 
     renderCategories(categories) {
