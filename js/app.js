@@ -246,11 +246,18 @@ class HistoryManager {
 class SearchManager {
     constructor() {
         this.searchInput = document.getElementById('searchInput');
-        this.searchModeToggle = document.getElementById('searchModeToggle');
-        this.searchEngineSelect = document.getElementById('searchEngineSelect');
-        this.searchBox = document.querySelector('.search-box');
-        this.mode = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_MODE) || 'local';
-        this.engine = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_ENGINE) || 'google';
+        this.searchBtn = document.getElementById('searchBtn');
+        this.searchEngineSelector = document.getElementById('searchEngineSelector');
+        this.currentEngineEl = document.getElementById('currentEngine');
+        this.searchDropdown = document.getElementById('searchDropdown');
+        this.currentEngine = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_ENGINE) || 'local';
+        this.engineNames = {
+            local: '站内',
+            google: 'Google',
+            bing: 'Bing',
+            baidu: '百度',
+            duckduckgo: 'DuckDuckGo'
+        };
         this.init();
     }
 
@@ -261,55 +268,86 @@ class SearchManager {
             this.searchInput.addEventListener('keydown', (e) => this.handleKeydown(e));
         }
 
-        if (this.searchModeToggle) {
-            this.searchModeToggle.addEventListener('click', () => this.toggleMode());
+        if (this.searchEngineSelector) {
+            this.searchEngineSelector.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.toggleDropdown();
+            });
         }
 
-        if (this.searchEngineSelect) {
-            this.searchEngineSelect.value = this.engine;
-            this.searchEngineSelect.addEventListener('change', (e) => this.setEngine(e.target.value));
+        if (this.searchBtn) {
+            this.searchBtn.addEventListener('click', () => this.executeSearch());
         }
+
+        if (this.searchDropdown) {
+            const options = this.searchDropdown.querySelectorAll('.search-option');
+            options.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const engine = option.dataset.engine;
+                    this.setEngine(engine);
+                    this.closeDropdown();
+                });
+            });
+        }
+
+        document.addEventListener('click', () => this.closeDropdown());
 
         this.updateUI();
     }
 
-    toggleMode() {
-        this.mode = this.mode === 'local' ? 'engine' : 'local';
-        StorageManager.set(CONFIG.STORAGE_KEYS.SEARCH_MODE, this.mode);
-        this.updateUI();
+    toggleDropdown() {
+        this.searchDropdown?.classList.toggle('active');
+        this.searchEngineSelector?.classList.toggle('active');
+    }
+
+    closeDropdown() {
+        this.searchDropdown?.classList.remove('active');
+        this.searchEngineSelector?.classList.remove('active');
     }
 
     setEngine(engine) {
-        this.engine = engine;
+        this.currentEngine = engine;
         StorageManager.set(CONFIG.STORAGE_KEYS.SEARCH_ENGINE, engine);
+        this.updateUI();
     }
 
     updateUI() {
-        if (this.mode === 'engine') {
-            this.searchBox?.classList.add('engine-mode');
-            this.searchModeToggle?.classList.add('engine-mode');
-            this.searchInput.placeholder = `🌐 使用 ${CONFIG.SEARCH_ENGINES[this.engine].name} 搜索... (Enter)`;
-        } else {
-            this.searchBox?.classList.remove('engine-mode');
-            this.searchModeToggle?.classList.remove('engine-mode');
-            this.searchInput.placeholder = '🔍 搜索你想要的网站... (Ctrl+K)';
+        if (this.currentEngineEl) {
+            this.currentEngineEl.textContent = this.engineNames[this.currentEngine];
         }
+
+        const options = this.searchDropdown?.querySelectorAll('.search-option');
+        options?.forEach(option => {
+            if (option.dataset.engine === this.currentEngine) {
+                option.classList.add('selected');
+            } else {
+                option.classList.remove('selected');
+            }
+        });
     }
 
     handleKeydown(e) {
-        if (e.key === 'Enter' && this.mode === 'engine') {
+        if (e.key === 'Enter') {
             e.preventDefault();
-            const query = this.searchInput.value.trim();
-            if (query) {
-                const engineUrl = CONFIG.SEARCH_ENGINES[this.engine].url;
-                window.open(engineUrl + encodeURIComponent(query), '_blank');
-            }
+            this.executeSearch();
+        }
+    }
+
+    executeSearch() {
+        const query = this.searchInput.value.trim();
+        if (!query) return;
+
+        if (this.currentEngine === 'local') {
+            this.search(query);
+        } else {
+            const engineUrl = CONFIG.SEARCH_ENGINES[this.currentEngine].url;
+            window.open(engineUrl + encodeURIComponent(query), '_blank');
         }
     }
 
     search(term) {
-        // Only perform local search in local mode
-        if (this.mode !== 'local') return;
+        // Only perform local search when in local mode
+        if (this.currentEngine !== 'local') return;
 
         const searchTerm = term.toLowerCase();
         const searchPinyin = Utils.toPinyin(term.toLowerCase());

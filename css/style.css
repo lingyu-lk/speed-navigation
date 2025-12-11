@@ -170,91 +170,148 @@ body {
     cursor: pointer;
 }
 
-.search-box {
+.search-container {
     flex: 1;
     max-width: 600px;
     margin: 0 30px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
     position: relative;
 }
 
-.search-mode-toggle {
+.search-wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
     background: var(--bg-white);
     border: 2px solid var(--border-input);
-    border-radius: 50%;
-    cursor: pointer;
+    border-radius: 50px;
+    overflow: hidden;
     transition: all 0.3s ease;
-    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.search-mode-toggle:hover {
+.search-wrapper:focus-within {
     border-color: var(--accent-color);
+    box-shadow: 0 4px 12px var(--accent-hover), 0 0 0 3px var(--accent-hover);
+}
+
+.search-engine-selector {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    border-right: 1px solid var(--border-color);
+    min-width: 90px;
+}
+
+.search-engine-selector:hover {
     background: var(--accent-hover);
 }
 
-.search-mode-toggle.engine-mode {
-    background: var(--accent-gradient);
-    border-color: var(--accent-color);
+.current-engine {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
 }
 
-.search-mode-toggle.engine-mode .search-mode-icon {
-    filter: brightness(0) invert(1);
+.dropdown-icon {
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
 }
 
-.search-mode-icon {
-    font-size: 1.2em;
-    transition: transform 0.3s ease;
+.search-engine-selector.active .dropdown-icon {
+    transform: rotate(180deg);
 }
 
-.search-box input {
+.search-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border-color);
+}
+
+.search-wrapper input {
     flex: 1;
-    padding: 12px 20px;
-    border: 2px solid var(--border-input);
-    border-radius: 25px;
+    padding: 14px 16px;
+    border: none;
+    background: transparent;
     font-size: 0.95em;
     outline: none;
-    transition: all 0.3s ease;
-    background: var(--bg-white);
     color: var(--text-primary);
 }
 
-.search-box input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px var(--accent-hover);
+.search-wrapper input::placeholder {
+    color: var(--text-muted);
 }
 
-.search-engine-select {
-    padding: 8px 12px;
+.search-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-btn:hover {
+    color: var(--accent-color);
+    background: var(--accent-hover);
+}
+
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
     background: var(--bg-white);
     border: 2px solid var(--border-input);
-    border-radius: 20px;
-    font-size: 0.9em;
-    color: var(--text-primary);
-    cursor: pointer;
-    outline: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow-light);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
     transition: all 0.3s ease;
-    flex-shrink: 0;
-    display: none;
+    z-index: 1000;
 }
 
-.search-engine-select:hover {
-    border-color: var(--accent-color);
+.search-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
-.search-engine-select:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px var(--accent-hover);
+.search-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.search-box.engine-mode .search-engine-select {
-    display: block;
+.search-option:hover {
+    background: var(--accent-hover);
+}
+
+.search-option.selected {
+    background: var(--accent-hover-strong);
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.option-icon {
+    font-size: 1.2em;
+    width: 24px;
+    text-align: center;
+}
+
+.option-name {
+    font-size: 0.95em;
 }
 
 .theme-toggle {
@@ -810,7 +867,7 @@ body {
         flex-wrap: wrap;
     }
 
-    .search-box {
+    .search-container {
         order: 3;
         flex: 1 1 100%;
         margin: 15px 0 0 0;

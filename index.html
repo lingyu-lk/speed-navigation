@@ -69,25 +69,52 @@
     <nav class="top-nav" role="navigation" aria-label="主导航">
         <div class="top-nav-content">
             <div class="logo" role="heading" aria-level="1">🚀 极速导航</div>
-            <div class="search-box">
-                <label for="searchInput" class="sr-only">搜索网站</label>
-                <div class="search-mode-toggle" id="searchModeToggle" title="切换搜索模式">
-                    <span class="search-mode-icon">🔍</span>
+            <div class="search-container">
+                <label for="searchInput" class="sr-only">搜索</label>
+                <div class="search-wrapper">
+                    <div class="search-engine-selector" id="searchEngineSelector">
+                        <span class="current-engine" id="currentEngine">站内</span>
+                        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                            <path d="M6 8L2 4h8z"/>
+                        </svg>
+                    </div>
+                    <div class="search-divider"></div>
+                    <input
+                        type="search"
+                        placeholder="搜索网站或使用搜索引擎..."
+                        id="searchInput"
+                        aria-label="搜索"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button class="search-btn" id="searchBtn" aria-label="搜索">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"/>
+                        </svg>
+                    </button>
                 </div>
-                <input
-                    type="search"
-                    placeholder="🔍 搜索你想要的网站... (Ctrl+K)"
-                    id="searchInput"
-                    aria-label="搜索网站"
-                    autocomplete="off"
-                    spellcheck="false"
-                >
-                <select class="search-engine-select" id="searchEngineSelect" aria-label="选择搜索引擎">
-                    <option value="google">Google</option>
-                    <option value="bing">Bing</option>
-                    <option value="baidu">百度</option>
-                    <option value="duckduckgo">DuckDuckGo</option>
-                </select>
+                <div class="search-dropdown" id="searchDropdown">
+                    <div class="search-option" data-engine="local">
+                        <span class="option-icon">🔍</span>
+                        <span class="option-name">站内搜索</span>
+                    </div>
+                    <div class="search-option" data-engine="google">
+                        <span class="option-icon">🌐</span>
+                        <span class="option-name">Google</span>
+                    </div>
+                    <div class="search-option" data-engine="bing">
+                        <span class="option-icon">🔷</span>
+                        <span class="option-name">Bing</span>
+                    </div>
+                    <div class="search-option" data-engine="baidu">
+                        <span class="option-icon">🔵</span>
+                        <span class="option-name">百度</span>
+                    </div>
+                    <div class="search-option" data-engine="duckduckgo">
+                        <span class="option-icon">🦆</span>
+                        <span class="option-name">DuckDuckGo</span>
+                    </div>
+                </div>
             </div>
             <button
                 class="mobile-menu-btn"
