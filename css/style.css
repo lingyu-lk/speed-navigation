@@ -823,27 +823,26 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 20px;
     text-align: center;
 }
 
 .empty-icon {
-    font-size: 3em;
-    margin-bottom: 15px;
-    opacity: 0.5;
+    font-size: 1.5em;
+    margin-bottom: 8px;
+    opacity: 0.4;
 }
 
 .empty-text {
-    font-size: 1.1em;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
 }
 
 .empty-hint {
-    font-size: 0.9em;
-    color: var(--text-muted);
-    max-width: 400px;
+    font-size: 0.8em;
+    color: var(--text-light);
+    max-width: 300px;
 }
 
 .quick-item {
