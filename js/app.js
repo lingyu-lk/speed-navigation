@@ -163,16 +163,41 @@ class ThemeManager {
     updateToggleButton() {
         const button = document.querySelector('.theme-toggle');
         if (button) {
-            button.textContent = this.themeNames[this.theme];
+            const buttonText = button.querySelector('.theme-toggle-text');
+            if (buttonText) {
+                buttonText.textContent = this.themeNames[this.theme];
+            }
             button.setAttribute('aria-label', `当前主题: ${this.themeNames[this.theme]}`);
         }
     }
 
     setupToggle() {
         const button = document.querySelector('.theme-toggle');
-        if (button) {
-            button.addEventListener('click', () => this.toggle());
-        }
+        const dropdown = document.querySelector('.theme-dropdown');
+
+        if (!button || !dropdown) return;
+
+        // 点击按钮切换下拉菜单
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.classList.toggle('show');
+        });
+
+        // 点击主题选项
+        dropdown.querySelectorAll('.theme-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const theme = e.currentTarget.dataset.theme;
+                this.applyTheme(theme);
+                dropdown.classList.remove('show');
+            });
+        });
+
+        // 点击外部关闭下拉菜单
+        document.addEventListener('click', (e) => {
+            if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
     }
 }
 

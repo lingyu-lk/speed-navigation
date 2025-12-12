@@ -144,12 +144,43 @@
             >
                 ☰
             </button>
-            <button
-                class="theme-toggle"
-                aria-label="切换主题"
-            >
-                🌙 夜间模式
-            </button>
+            <div class="theme-selector">
+                <button
+                    class="theme-toggle"
+                    aria-label="选择主题"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                >
+                    <span class="theme-toggle-text">🌙 夜间模式</span>
+                    <span class="dropdown-arrow">▼</span>
+                </button>
+                <div class="theme-dropdown">
+                    <div class="theme-option" data-theme="light">
+                        <span class="theme-icon">☀️</span>
+                        <span class="theme-name">明亮</span>
+                    </div>
+                    <div class="theme-option" data-theme="dark">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-name">暗黑</span>
+                    </div>
+                    <div class="theme-option" data-theme="cherry">
+                        <span class="theme-icon">🌸</span>
+                        <span class="theme-name">樱花</span>
+                    </div>
+                    <div class="theme-option" data-theme="ocean">
+                        <span class="theme-icon">🌊</span>
+                        <span class="theme-name">海洋</span>
+                    </div>
+                    <div class="theme-option" data-theme="forest">
+                        <span class="theme-icon">🌲</span>
+                        <span class="theme-name">森林</span>
+                    </div>
+                    <div class="theme-option" data-theme="sunset">
+                        <span class="theme-icon">🌅</span>
+                        <span class="theme-name">日落</span>
+                    </div>
+                </div>
+            </div>
             <div class="online-users-badge" title="当前在线人数">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
