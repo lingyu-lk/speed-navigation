@@ -295,6 +295,13 @@ const SITES_DATA =
               "icon": "📊",
               "description": "Steam数据库，价格历史查询",
               "tag": "工具"
+            },
+            {
+              "name": "520Switch",
+              "url": "https://www.520switch.com/",
+              "icon": "🎮",
+              "description": "Switch游戏资源下载站",
+              "tag": "资源"
             }
           ]
         },
