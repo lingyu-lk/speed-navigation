@@ -1,12 +1,12 @@
 {
-  "name": "极速导航",
-  "short_name": "导航",
-  "description": "精心整理的网站导航，包含娱乐、工具、学习、开发、AI等15个分类",
+  "name": "青柠导航",
+  "short_name": "LimeNav",
+  "description": "青柠导航 - 清新简约的网站导航，包含娱乐、工具、学习、开发、AI等15个分类",
   "start_url": "./index.html",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#1e3c72",
-  "theme_color": "#667eea",
+  "background_color": "#f0fff0",
+  "theme_color": "#32CD32",
   "orientation": "any",
   "icons": [
     {

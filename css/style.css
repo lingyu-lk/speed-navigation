@@ -163,11 +163,50 @@ body {
 .logo {
     font-size: 1.8em;
     font-weight: bold;
-    background: var(--accent-gradient);
+    background: linear-gradient(135deg, #32CD32 0%, #7FFF00 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(50, 205, 50, 0.3));
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.logo-text {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo:hover .logo-icon {
+    animation: logoSpin 0.6s ease-in-out;
+}
+
+@keyframes logoSpin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
 }
 
 /* Online Users Badge */
