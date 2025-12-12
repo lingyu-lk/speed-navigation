@@ -29,6 +29,13 @@ class OnlineUsersTracker {
     }
 
     async init() {
+        console.log('🔍 在线人数统计初始化中...');
+        console.log('配置状态:', {
+            enabled: this.isEnabled,
+            url: SUPABASE_CONFIG.url,
+            hasKey: SUPABASE_CONFIG.anonKey.length > 20
+        });
+
         // 如果未配置或未启用，显示提示信息
         if (!this.isEnabled) {
             console.log('💡 在线人数统计未启用。请访问 https://supabase.com 获取配置信息');
@@ -37,23 +44,30 @@ class OnlineUsersTracker {
         }
 
         try {
+            console.log('📡 正在加载 Supabase 客户端...');
             // 加载 Supabase 客户端
             await this.loadSupabaseClient();
+            console.log('✅ Supabase 客户端加载成功');
 
             // 生成唯一用户ID
             this.userId = this.generateUserId();
+            console.log('👤 用户ID:', this.userId);
 
             // 创建用户在线状态表（如果不存在）
             await this.setupTable();
+            console.log('✅ 数据表检查完成');
 
             // 连接到 Realtime Channel
             await this.connectToChannel();
+            console.log('✅ Realtime 频道连接成功');
 
             // 添加当前用户
             await this.addUser();
+            console.log('✅ 用户已添加到在线列表');
 
             // 启动心跳
             this.startHeartbeat();
+            console.log('💓 心跳启动');
 
             // 页面关闭时清理
             window.addEventListener('beforeunload', () => this.cleanup());
