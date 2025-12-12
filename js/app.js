@@ -293,7 +293,14 @@ class SearchManager {
         this.currentEngineEl = document.getElementById('currentEngine');
         this.currentEngineIconEl = document.getElementById('currentEngineIcon');
         this.searchDropdown = document.getElementById('searchDropdown');
+
+        // Force default to local search for all users
+        const storedEngine = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_ENGINE);
+        if (!storedEngine) {
+            StorageManager.set(CONFIG.STORAGE_KEYS.SEARCH_ENGINE, 'local');
+        }
         this.currentEngine = StorageManager.get(CONFIG.STORAGE_KEYS.SEARCH_ENGINE) || 'local';
+
         this.engineNames = {
             local: '站内',
             google: 'Google',
