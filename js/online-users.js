@@ -116,13 +116,13 @@ class OnlineUsersTracker {
     }
 
     async setupTable() {
-        // 清理超过 30 秒未更新的用户
+        // 清理超过 20 秒未更新的用户（更快清理）
         try {
-            const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
+            const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
             const { error } = await this.supabase
                 .from('online_users')
                 .delete()
-                .lt('last_seen', thirtySecondsAgo);
+                .lt('last_seen', twentySecondsAgo);
 
             if (error) {
                 console.warn('清理过期用户时出错（可忽略）:', error.message);
@@ -198,13 +198,13 @@ class OnlineUsersTracker {
     async updateOnlineCount() {
         // 获取当前在线人数
         try {
-            const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
+            const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
 
             // 先获取实际数据用于调试
             const { data: allUsers, error: debugError } = await this.supabase
                 .from('online_users')
                 .select('user_id, last_seen')
-                .gte('last_seen', thirtySecondsAgo);
+                .gte('last_seen', twentySecondsAgo);
 
             if (debugError) {
                 console.error('获取在线人数失败:', debugError);
@@ -262,10 +262,22 @@ class OnlineUsersTracker {
     }
 
     generateUserId() {
-        // 生成唯一用户ID
-        return 'user_' + Math.random().toString(36).substring(2, 15) +
-               Math.random().toString(36).substring(2, 15) +
-               '_' + Date.now();
+        // 生成或获取持久化的用户ID
+        // 使用 sessionStorage 确保同一标签页刷新时保持相同ID
+        // 使用 localStorage 的随机数确保不同标签页有不同ID
+        let tabId = sessionStorage.getItem('online_user_tab_id');
+        if (!tabId) {
+            // 为这个标签页生成唯一ID
+            const browserId = localStorage.getItem('online_user_browser_id') ||
+                             'browser_' + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('online_user_browser_id', browserId);
+
+            tabId = browserId + '_tab_' +
+                    Math.random().toString(36).substring(2, 15) +
+                    '_' + Date.now();
+            sessionStorage.setItem('online_user_tab_id', tabId);
+        }
+        return tabId;
     }
 
     updateUI() {
