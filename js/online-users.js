@@ -202,19 +202,20 @@ class OnlineUsersTracker {
         try {
             const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
 
-            // 使用distinct选项获取唯一用户数
-            const { data: uniqueUsers, error: debugError } = await this.supabase
+            // 获取所有用户记录，然后在客户端去重
+            const { data: allUsers, error: debugError } = await this.supabase
                 .from('online_users')
                 .select('user_id')
-                .gte('last_seen', twentySecondsAgo)
-                .distinct();
+                .gte('last_seen', twentySecondsAgo);
 
             if (debugError) {
                 console.error('获取在线人数失败:', debugError);
                 return;
             }
 
-            this.onlineCount = uniqueUsers ? uniqueUsers.length : 0;
+            // 在客户端去重
+            const uniqueUserIds = allUsers ? [...new Set(allUsers.map(user => user.user_id))] : [];
+            this.onlineCount = uniqueUserIds.length;
             console.log('📊 当前在线人数:', this.onlineCount);
             
             // 获取详细数据用于调试
