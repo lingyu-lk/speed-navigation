@@ -319,6 +319,14 @@ const SITES_DATA =
               "iconUrl": "https://www.ovagames.com/favicon.ico",
               "description": "PC游戏免费下载站",
               "tag": "资源"
+            },
+            {
+              "name": "Romspedia",
+              "url": "https://www.romspedia.com/",
+              "icon": "🕹️",
+              "iconUrl": "https://www.romspedia.com/favicon.ico",
+              "description": "游戏ROM资源下载站",
+              "tag": "资源"
             }
           ]
         },
