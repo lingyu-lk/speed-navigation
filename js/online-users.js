@@ -119,13 +119,14 @@ class OnlineUsersTracker {
         // 清理超过 20 秒未更新的用户（更快清理）
         try {
             const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
-            const { error } = await this.supabase
+            const { error, count } = await this.supabase
                 .from('online_users')
                 .delete()
-                .lt('last_seen', twentySecondsAgo);
+                .lt('last_seen', twentySecondsAgo)
+                .select('*', { count: 'exact', head: true });
 
-            if (error) {
-                console.warn('清理过期用户时出错（可忽略）:', error.message);
+            if (!error && count > 0) {
+                console.log(`🧹 清理了 ${count} 个过期用户`);
             }
         } catch (error) {
             console.warn('setupTable 出错（可忽略）:', error);
@@ -156,19 +157,22 @@ class OnlineUsersTracker {
     }
 
     async addUser() {
-        // 添加当前用户到在线列表（使用 upsert 避免 unique 冲突）
+        // 添加当前用户到在线列表
         const { data, error } = await this.supabase
             .from('online_users')
-            .upsert({
+            .insert({
                 user_id: this.userId,
                 last_seen: new Date().toISOString()
-            }, {
-                onConflict: 'user_id'
             })
             .select();
 
         if (error) {
             console.error('添加用户失败:', error);
+            // 如果是重复 key 错误，尝试更新
+            if (error.code === '23505') {
+                console.log('检测到重复ID，尝试更新...');
+                return await this.updateUser();
+            }
             return false;
         }
         console.log('✅ 用户添加成功:', this.userId.substring(0, 20) + '...');
@@ -262,22 +266,16 @@ class OnlineUsersTracker {
     }
 
     generateUserId() {
-        // 生成或获取持久化的用户ID
-        // 使用 sessionStorage 确保同一标签页刷新时保持相同ID
-        // 使用 localStorage 的随机数确保不同标签页有不同ID
-        let tabId = sessionStorage.getItem('online_user_tab_id');
-        if (!tabId) {
-            // 为这个标签页生成唯一ID
-            const browserId = localStorage.getItem('online_user_browser_id') ||
-                             'browser_' + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('online_user_browser_id', browserId);
+        // 为每个标签页生成完全唯一的ID
+        // 使用多重随机源确保唯一性
+        const timestamp = Date.now();
+        const random1 = Math.random().toString(36).substring(2, 15);
+        const random2 = Math.random().toString(36).substring(2, 15);
+        const random3 = Math.random().toString(36).substring(2, 15);
+        const performance = typeof window.performance !== 'undefined' ?
+                          window.performance.now().toString(36).replace('.', '') : '';
 
-            tabId = browserId + '_tab_' +
-                    Math.random().toString(36).substring(2, 15) +
-                    '_' + Date.now();
-            sessionStorage.setItem('online_user_tab_id', tabId);
-        }
-        return tabId;
+        return `user_${timestamp}_${random1}${random2}${random3}${performance}`;
     }
 
     updateUI() {
