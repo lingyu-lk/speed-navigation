@@ -18,6 +18,12 @@
     --accent-hover: rgba(102, 126, 234, 0.1);
     --accent-hover-strong: rgba(102, 126, 234, 0.15);
     --stat-bg: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+
+    /* Logo colors - 柔和的紫蓝色 */
+    --logo-color-1: #667eea;
+    --logo-color-2: #764ba2;
+    --logo-icon-main: #667eea;
+    --logo-icon-light: #9aa5f5;
 }
 
 /* Dark mode colors */
@@ -39,6 +45,12 @@
     --accent-hover: rgba(124, 58, 237, 0.15);
     --accent-hover-strong: rgba(124, 58, 237, 0.25);
     --stat-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(168, 85, 247, 0.15));
+
+    /* Logo colors - 柔和的紫色 */
+    --logo-color-1: #8b7beb;
+    --logo-color-2: #b68ff7;
+    --logo-icon-main: #8b7beb;
+    --logo-icon-light: #c4b5fd;
 }
 
 /* Cherry Blossom - 樱花粉 */
@@ -60,6 +72,12 @@
     --accent-hover: rgba(255, 105, 180, 0.1);
     --accent-hover-strong: rgba(255, 105, 180, 0.15);
     --stat-bg: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(255, 20, 147, 0.1));
+
+    /* Logo colors - 柔和的粉色 */
+    --logo-color-1: #ff8fc7;
+    --logo-color-2: #ffa8d8;
+    --logo-icon-main: #ff8fc7;
+    --logo-icon-light: #ffc4e8;
 }
 
 /* Ocean Blue - 海洋蓝 */
@@ -81,6 +99,12 @@
     --accent-hover: rgba(14, 165, 233, 0.1);
     --accent-hover-strong: rgba(14, 165, 233, 0.15);
     --stat-bg: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(6, 182, 212, 0.1));
+
+    /* Logo colors - 柔和的蓝色 */
+    --logo-color-1: #3b9ff6;
+    --logo-color-2: #14b8d4;
+    --logo-icon-main: #3b9ff6;
+    --logo-icon-light: #7cc5fa;
 }
 
 /* Forest Green - 森林绿 */
@@ -102,6 +126,12 @@
     --accent-hover: rgba(16, 185, 129, 0.1);
     --accent-hover-strong: rgba(16, 185, 129, 0.15);
     --stat-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+
+    /* Logo colors - 柔和的绿色（比亮绿色柔和） */
+    --logo-color-1: #4ade80;
+    --logo-color-2: #22c55e;
+    --logo-icon-main: #4ade80;
+    --logo-icon-light: #86efac;
 }
 
 /* Sunset Orange - 日落橙 */
@@ -123,6 +153,12 @@
     --accent-hover: rgba(245, 158, 11, 0.1);
     --accent-hover-strong: rgba(245, 158, 11, 0.15);
     --stat-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+
+    /* Logo colors - 柔和的橙红色 */
+    --logo-color-1: #fb923c;
+    --logo-color-2: #f87171;
+    --logo-icon-main: #fb923c;
+    --logo-icon-light: #fdba74;
 }
 
 /* ==================== Base Styles ==================== */
@@ -163,7 +199,7 @@ body {
 .logo {
     font-size: 1.8em;
     font-weight: bold;
-    background: linear-gradient(135deg, #32CD32 0%, #7FFF00 100%);
+    background: linear-gradient(135deg, var(--logo-color-1) 0%, var(--logo-color-2) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -175,8 +211,17 @@ body {
 
 .logo-icon {
     flex-shrink: 0;
-    filter: drop-shadow(0 2px 4px rgba(50, 205, 50, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.3));
     animation: logoFloat 3s ease-in-out infinite;
+}
+
+/* SVG Logo颜色控制 */
+.logo-circle-outer {
+    fill: var(--logo-icon-main);
+}
+
+.logo-circle-middle {
+    fill: var(--logo-icon-light);
 }
 
 @keyframes logoFloat {
