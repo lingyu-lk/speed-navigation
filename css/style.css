@@ -174,33 +174,47 @@ body {
 .online-users-badge {
     display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: var(--bg-primary);
-    border-radius: 20px;
-    font-size: 0.85em;
-    color: var(--text-secondary);
+    gap: 4px;
+    padding: 4px 8px;
+    background: transparent;
+    border-radius: 12px;
+    font-size: 0.75em;
+    color: var(--text-muted);
     transition: all 0.3s ease;
     cursor: help;
+    opacity: 0.6;
     border: 1px solid var(--border-color);
 }
 
 .online-users-badge svg {
-    color: var(--accent-color);
+    color: var(--text-muted);
     stroke-width: 2;
+    opacity: 0.7;
 }
 
 .online-users-badge:hover {
-    background: var(--bg-white);
+    background: var(--bg-primary);
+    opacity: 1;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px var(--shadow-light);
 }
 
-#onlineUsersCount {
-    font-weight: 600;
+.online-users-badge:hover svg {
     color: var(--accent-color);
-    min-width: 20px;
+    opacity: 1;
+}
+
+#onlineUsersCount {
+    font-weight: 500;
+    color: var(--text-secondary);
+    min-width: 16px;
     text-align: center;
+    font-size: 0.9em;
+}
+
+.online-users-badge:hover #onlineUsersCount {
+    color: var(--accent-color);
+    font-weight: 600;
 }
 
 #onlineUsersCount[data-count="0"],
