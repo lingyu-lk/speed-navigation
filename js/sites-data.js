@@ -311,6 +311,14 @@ const SITES_DATA =
               "iconUrl": "https://byrutgame.org/favicon.ico",
               "description": "游戏资源下载站",
               "tag": "资源"
+            },
+            {
+              "name": "Ova Games",
+              "url": "https://www.ovagames.com/",
+              "icon": "🎮",
+              "iconUrl": "https://www.ovagames.com/favicon.ico",
+              "description": "PC游戏免费下载站",
+              "tag": "资源"
             }
           ]
         },
