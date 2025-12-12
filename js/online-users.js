@@ -110,20 +110,20 @@ class OnlineUsersTracker {
     }
 
     async setupTable() {
-        // 注意：需要在 Supabase Dashboard 中手动创建表
-        // 表名: online_users
-        // 列:
-        //   - id (uuid, primary key)
-        //   - user_id (text)
-        //   - last_seen (timestamp)
-        //   - created_at (timestamp)
-
         // 清理超过 30 秒未更新的用户
-        const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
-        await this.supabase
-            .from('online_users')
-            .delete()
-            .lt('last_seen', thirtySecondsAgo);
+        try {
+            const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
+            const { error } = await this.supabase
+                .from('online_users')
+                .delete()
+                .lt('last_seen', thirtySecondsAgo);
+
+            if (error) {
+                console.warn('清理过期用户时出错（可忽略）:', error.message);
+            }
+        } catch (error) {
+            console.warn('setupTable 出错（可忽略）:', error);
+        }
     }
 
     async connectToChannel() {
@@ -185,15 +185,23 @@ class OnlineUsersTracker {
 
     async updateOnlineCount() {
         // 获取当前在线人数
-        const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
-        const { data, error } = await this.supabase
-            .from('online_users')
-            .select('user_id', { count: 'exact', head: true })
-            .gte('last_seen', thirtySecondsAgo);
+        try {
+            const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
+            const { count, error } = await this.supabase
+                .from('online_users')
+                .select('*', { count: 'exact', head: true })
+                .gte('last_seen', thirtySecondsAgo);
 
-        if (!error && data !== null) {
-            this.onlineCount = data.length || 0;
+            if (error) {
+                console.error('获取在线人数失败:', error);
+                return;
+            }
+
+            this.onlineCount = count || 0;
+            console.log('📊 当前在线人数:', this.onlineCount);
             this.updateUI();
+        } catch (error) {
+            console.error('updateOnlineCount 出错:', error);
         }
     }
 
