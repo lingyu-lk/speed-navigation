@@ -156,17 +156,23 @@ class OnlineUsersTracker {
     }
 
     async addUser() {
-        // 添加当前用户到在线列表
-        const { error } = await this.supabase
+        // 添加当前用户到在线列表（使用 upsert 避免 unique 冲突）
+        const { data, error } = await this.supabase
             .from('online_users')
-            .insert({
+            .upsert({
                 user_id: this.userId,
                 last_seen: new Date().toISOString()
-            });
+            }, {
+                onConflict: 'user_id'
+            })
+            .select();
 
         if (error) {
             console.error('添加用户失败:', error);
+            return false;
         }
+        console.log('✅ 用户添加成功:', this.userId.substring(0, 20) + '...');
+        return true;
     }
 
     async updateUser() {
@@ -193,18 +199,25 @@ class OnlineUsersTracker {
         // 获取当前在线人数
         try {
             const thirtySecondsAgo = new Date(Date.now() - 30000).toISOString();
-            const { count, error } = await this.supabase
+
+            // 先获取实际数据用于调试
+            const { data: allUsers, error: debugError } = await this.supabase
                 .from('online_users')
-                .select('*', { count: 'exact', head: true })
+                .select('user_id, last_seen')
                 .gte('last_seen', thirtySecondsAgo);
 
-            if (error) {
-                console.error('获取在线人数失败:', error);
+            if (debugError) {
+                console.error('获取在线人数失败:', debugError);
                 return;
             }
 
-            this.onlineCount = count || 0;
+            this.onlineCount = allUsers ? allUsers.length : 0;
             console.log('📊 当前在线人数:', this.onlineCount);
+            console.log('在线用户列表:', allUsers.map(u => ({
+                id: u.user_id.substring(0, 15) + '...',
+                lastSeen: new Date(u.last_seen).toLocaleTimeString()
+            })));
+
             this.updateUI();
         } catch (error) {
             console.error('updateOnlineCount 出错:', error);
