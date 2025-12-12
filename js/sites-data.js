@@ -303,6 +303,14 @@ const SITES_DATA =
               "iconUrl": "https://www.520switch.com/favicon.ico",
               "description": "Switch游戏资源下载站",
               "tag": "资源"
+            },
+            {
+              "name": "Byrut Game",
+              "url": "https://byrutgame.org/",
+              "icon": "🎯",
+              "iconUrl": "https://byrutgame.org/favicon.ico",
+              "description": "游戏资源下载站",
+              "tag": "资源"
             }
           ]
         },
