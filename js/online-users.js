@@ -8,13 +8,11 @@
 // 4. 在下方填入你的配置信息
 
 const SUPABASE_CONFIG = {
-    // 在这里填入你的 Supabase 项目配置
-    // 示例: url: 'https://your-project.supabase.co'
-    url: 'YOUR_SUPABASE_URL',
-    // 示例: anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
-    anonKey: 'YOUR_SUPABASE_ANON_KEY',
-    // 是否启用在线人数统计（配置好后改为 true）
-    enabled: false
+    // Supabase 项目配置
+    url: 'https://ilvvrtpjrqiekstgmflz.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsdnZydHBqcnFpZWtzdGdtZmx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0OTA1OTYsImV4cCI6MjA4MTA2NjU5Nn0.BG77EvCGSDZ1NjIMSXCf6bfi6aup_Ude72sz21jQunQ',
+    // 启用在线人数统计
+    enabled: true
 };
 
 class OnlineUsersTracker {
