@@ -202,11 +202,12 @@ class OnlineUsersTracker {
         try {
             const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
 
-            // 使用distinct获取唯一用户数
+            // 使用distinct选项获取唯一用户数
             const { data: uniqueUsers, error: debugError } = await this.supabase
                 .from('online_users')
-                .select('distinct(user_id)')
-                .gte('last_seen', twentySecondsAgo);
+                .select('user_id')
+                .gte('last_seen', twentySecondsAgo)
+                .distinct();
 
             if (debugError) {
                 console.error('获取在线人数失败:', debugError);
