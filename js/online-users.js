@@ -57,6 +57,9 @@ class OnlineUsersTracker {
             await this.setupTable();
             console.log('✅ 数据表检查完成');
 
+            // 先获取一次在线人数（立即显示）
+            await this.updateOnlineCount();
+
             // 连接到 Realtime Channel
             await this.connectToChannel();
             console.log('✅ Realtime 频道连接成功');
@@ -64,6 +67,9 @@ class OnlineUsersTracker {
             // 添加当前用户
             await this.addUser();
             console.log('✅ 用户已添加到在线列表');
+
+            // 添加用户后立即更新一次
+            await this.updateOnlineCount();
 
             // 启动心跳
             this.startHeartbeat();
@@ -144,7 +150,7 @@ class OnlineUsersTracker {
             .subscribe((status) => {
                 if (status === 'SUBSCRIBED') {
                     console.log('✅ 已连接到实时频道');
-                    this.updateOnlineCount();
+                    // 不需要在这里再次更新，因为外部已经更新过了
                 }
             });
     }
