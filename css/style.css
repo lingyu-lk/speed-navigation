@@ -1386,3 +1386,33 @@ body.effects-enabled .card {
         opacity: 0;
     }
 }
+
+/* ==================== Accessibility - Reduced Motion Support ==================== */
+/* 尊重用户的动画偏好设置，为运动敏感用户提供更好的体验 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* 完全禁用装饰性动画 */
+    .decoration-item {
+        display: none !important;
+    }
+
+    .mouse-particle {
+        display: none !important;
+    }
+
+    /* 保留基本的hover效果，但去除动画 */
+    .card:hover,
+    .theme-toggle:hover,
+    .back-to-top:hover,
+    .online-users-badge:hover {
+        transform: none !important;
+    }
+}

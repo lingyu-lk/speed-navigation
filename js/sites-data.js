@@ -177,13 +177,6 @@ const SITES_DATA =
               "tag": "通讯"
             },
             {
-              "name": "Steam",
-              "url": "https://www.steam.com",
-              "icon": "🎯",
-              "description": "全球最大的PC游戏平台",
-              "tag": "游戏"
-            },
-            {
               "name": "Reddit",
               "url": "https://www.reddit.com",
               "icon": "🔥",
@@ -651,13 +644,6 @@ const SITES_DATA =
               "icon": "🔢",
               "description": "经典2048游戏，烧脑又休闲",
               "tag": "益智"
-            },
-            {
-              "name": "Quick, Draw!",
-              "url": "https://quickdraw.withgoogle.com",
-              "icon": "🎨",
-              "description": "Google AI 猜画小游戏",
-              "tag": "AI游戏"
             },
             {
               "name": "A Soft Murmur",
@@ -1287,13 +1273,6 @@ const SITES_DATA =
           "name": "软件下载",
           "description": "优质软件资源平台",
           "sites": [
-            {
-              "name": "GitHub",
-              "url": "https://github.com",
-              "icon": "🐙",
-              "description": "全球最大的开源软件托管平台",
-              "tag": "开源"
-            },
             {
               "name": "SourceForge",
               "url": "https://sourceforge.net",
