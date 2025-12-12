@@ -109,17 +109,11 @@ class PixelBunny {
             return;
         }
 
-        // 计算目标角度（弧度转角度）
-        this.targetRotation = Math.atan2(dy, dx) * (180 / Math.PI);
-
-        // 平滑旋转
-        let rotationDiff = this.targetRotation - this.currentRotation;
-
-        // 处理角度环绕问题（-180到180）
-        if (rotationDiff > 180) rotationDiff -= 360;
-        if (rotationDiff < -180) rotationDiff += 360;
-
-        this.currentRotation += rotationDiff * this.config.rotationSpeed;
+        // 判断方向（左右翻转而不是旋转）
+        // dx > 0 表示鼠标在右边，兔子应该朝右（不翻转）
+        // dx < 0 表示鼠标在左边，兔子应该朝左（翻转）
+        const shouldFlip = dx < 0;
+        this.bunny.classList.toggle('flip', shouldFlip);
 
         // 根据角度和速度移动兔子
         const moveDistance = Math.min(distance, distance * this.config.speed);
@@ -146,11 +140,8 @@ class PixelBunny {
     updateBunnyPosition() {
         if (!this.bunny) return;
 
-        // 更新位置和旋转
-        this.bunny.style.transform = `
-            translate(${this.bunnyX}px, ${this.bunnyY}px)
-            rotate(${this.currentRotation}deg)
-        `;
+        // 只更新位置，不旋转
+        this.bunny.style.transform = `translate(${this.bunnyX}px, ${this.bunnyY}px)`;
     }
 
     // 销毁方法（如果需要移除兔子）

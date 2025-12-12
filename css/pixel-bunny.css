@@ -13,11 +13,17 @@
     transition: none; /* 不使用transition，用JS控制平滑移动 */
 }
 
+/* 左右翻转（朝向鼠标方向）*/
+.pixel-bunny.flip .bunny-body {
+    transform: scaleX(-1);
+}
+
 .bunny-body {
     width: 100%;
     height: 100%;
     position: relative;
     transform-origin: center center;
+    transition: transform 0.2s ease;
 }
 
 .bunny-sprite {
@@ -38,27 +44,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 36px;
 }
 
 .bunny-sprite.running::before {
     content: '🐰';
-    animation: bunnyRun 0.4s steps(2) infinite;
+    display: block;
+}
+
+/* 移动时的跑动动画 - 更明显的效果 */
+.pixel-bunny.moving .bunny-sprite.running::before {
+    animation: bunnyRun 0.3s ease-in-out infinite;
 }
 
 /* 坐下状态的兔子 */
 .pixel-bunny.sitting .bunny-sprite.running::before {
     content: '🐇';
-    animation: bunnySit 0.6s ease-in-out;
+    animation: bunnySit 0.5s ease-in-out;
 }
 
-/* 跑动动画 */
+/* 增强的跑动动画 - 上下跳跃更明显 */
 @keyframes bunnyRun {
-    0%, 100% {
+    0% {
         transform: translateY(0) scale(1, 1);
     }
+    25% {
+        transform: translateY(-8px) scale(1.1, 0.9);
+    }
     50% {
-        transform: translateY(-3px) scale(1.05, 0.95);
+        transform: translateY(0) scale(0.9, 1.1);
+    }
+    75% {
+        transform: translateY(-8px) scale(1.1, 0.9);
+    }
+    100% {
+        transform: translateY(0) scale(1, 1);
     }
 }
 
@@ -67,8 +87,14 @@
     0% {
         transform: translateY(0) scale(1, 1);
     }
+    30% {
+        transform: translateY(-5px) scale(1.05, 0.95);
+    }
     50% {
-        transform: translateY(2px) scale(1.1, 0.9);
+        transform: translateY(3px) scale(1.15, 0.85);
+    }
+    70% {
+        transform: translateY(-2px) scale(1.05, 0.95);
     }
     100% {
         transform: translateY(0) scale(1, 1);
