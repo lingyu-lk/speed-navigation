@@ -116,7 +116,7 @@ class OnlineUsersTracker {
     }
 
     async setupTable() {
-        // 清理超过 20 秒未更新的用户（更快清理）
+        // 清理超过 20 秒未更新的用户
         try {
             const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
             const { error, count } = await this.supabase
@@ -158,21 +158,15 @@ class OnlineUsersTracker {
 
     async addUser() {
         // 添加当前用户到在线列表
-        const { data, error } = await this.supabase
+        const { error } = await this.supabase
             .from('online_users')
             .insert({
                 user_id: this.userId,
                 last_seen: new Date().toISOString()
-            })
-            .select();
+            });
 
         if (error) {
             console.error('添加用户失败:', error);
-            // 如果是重复 key 错误，尝试更新
-            if (error.code === '23505') {
-                console.log('检测到重复ID，尝试更新...');
-                return await this.updateUser();
-            }
             return false;
         }
         console.log('✅ 用户添加成功:', this.userId.substring(0, 20) + '...');
@@ -180,7 +174,7 @@ class OnlineUsersTracker {
     }
 
     async updateUser() {
-        // 更新用户最后活跃时间
+        // 更新用户最后活跃时间（更新所有匹配的记录）
         const { error } = await this.supabase
             .from('online_users')
             .update({ last_seen: new Date().toISOString() })
@@ -192,22 +186,26 @@ class OnlineUsersTracker {
     }
 
     async removeUser() {
-        // 移除用户
-        await this.supabase
+        // 移除所有匹配的用户记录
+        const { error } = await this.supabase
             .from('online_users')
             .delete()
             .eq('user_id', this.userId);
+        
+        if (error) {
+            console.error('移除用户失败:', error);
+        }
     }
 
     async updateOnlineCount() {
-        // 获取当前在线人数
+        // 获取当前在线人数（去重计数，一个用户可能有多个记录）
         try {
             const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
 
-            // 先获取实际数据用于调试
-            const { data: allUsers, error: debugError } = await this.supabase
+            // 使用distinct获取唯一用户数
+            const { data: uniqueUsers, error: debugError } = await this.supabase
                 .from('online_users')
-                .select('user_id, last_seen')
+                .select('distinct(user_id)')
                 .gte('last_seen', twentySecondsAgo);
 
             if (debugError) {
@@ -215,12 +213,23 @@ class OnlineUsersTracker {
                 return;
             }
 
-            this.onlineCount = allUsers ? allUsers.length : 0;
+            this.onlineCount = uniqueUsers ? uniqueUsers.length : 0;
             console.log('📊 当前在线人数:', this.onlineCount);
-            console.log('在线用户列表:', allUsers.map(u => ({
-                id: u.user_id.substring(0, 15) + '...',
-                lastSeen: new Date(u.last_seen).toLocaleTimeString()
-            })));
+            
+            // 获取详细数据用于调试
+            const { data: allUsers } = await this.supabase
+                .from('online_users')
+                .select('user_id, last_seen')
+                .gte('last_seen', twentySecondsAgo)
+                .order('last_seen', { ascending: false });
+            
+            if (allUsers && allUsers.length > 0) {
+                console.log('在线用户记录数:', allUsers.length);
+                console.log('最新在线记录:', allUsers.slice(0, 5).map(u => ({
+                    id: u.user_id.substring(0, 15) + '...',
+                    lastSeen: new Date(u.last_seen).toLocaleTimeString()
+                })));
+            }
 
             this.updateUI();
         } catch (error) {
@@ -259,7 +268,28 @@ class OnlineUsersTracker {
     cleanup() {
         // 清理资源
         this.pauseHeartbeat();
-        this.removeUser();
+        
+        // 使用navigator.sendBeacon确保在页面关闭时能发送删除请求
+        if (navigator.sendBeacon) {
+            const url = `${SUPABASE_CONFIG.url}/rest/v1/online_users?user_id=eq.${encodeURIComponent(this.userId)}`;
+            const headers = { 
+                'apikey': SUPABASE_CONFIG.anonKey,
+                'Authorization': `Bearer ${SUPABASE_CONFIG.anonKey}`,
+                'Content-Type': 'application/json'
+            };
+            
+            // 创建一个简单的delete请求体
+            const deleteRequest = new Request(url, {
+                method: 'DELETE',
+                headers: headers
+            });
+            
+            navigator.sendBeacon(url, JSON.stringify(headers));
+        } else {
+            // 回退方案
+            this.removeUser();
+        }
+        
         if (this.channel) {
             this.supabase.removeChannel(this.channel);
         }
