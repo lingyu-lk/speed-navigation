@@ -428,7 +428,7 @@ class SearchManager {
                                descPinyin.includes(searchPinyin);
 
                 if (matches) {
-                    card.style.display = 'block';
+                    card.style.display = 'flex';
                     hasVisibleCards = true;
                 } else {
                     card.style.display = 'none';
@@ -445,7 +445,7 @@ class SearchManager {
     updateSearchCount(searchTerm) {
         if (!searchTerm) return;
 
-        const visibleCards = document.querySelectorAll('.card[style="display: block;"]').length;
+        const visibleCards = document.querySelectorAll('.card[style*="display: flex"]').length;
         console.log(`找到 ${visibleCards} 个相关网站`);
     }
 }
