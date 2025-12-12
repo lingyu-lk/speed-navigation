@@ -826,7 +826,7 @@ class SiteRenderer {
         }
 
         // Use real favicon with fallback to emoji
-        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+        const faviconUrl = site.iconUrl || `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
         card.innerHTML = `
             <div class="card-icon-wrapper">

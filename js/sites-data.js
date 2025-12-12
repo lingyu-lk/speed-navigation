@@ -300,6 +300,7 @@ const SITES_DATA =
               "name": "520Switch",
               "url": "https://www.520switch.com/",
               "icon": "🎮",
+              "iconUrl": "https://www.520switch.com/favicon.ico",
               "description": "Switch游戏资源下载站",
               "tag": "资源"
             }
