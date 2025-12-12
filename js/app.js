@@ -931,13 +931,65 @@ class SiteRenderer {
 class MobileMenuManager {
     constructor() {
         this.sidebar = document.getElementById('sidebar');
+        this.backdrop = null;
+        this.touchStartX = 0;
+        this.setupBackdrop();
         this.setupToggle();
+        this.setupSwipeClose();
+    }
+
+    setupBackdrop() {
+        // 创建遮罩层
+        this.backdrop = document.createElement('div');
+        this.backdrop.className = 'sidebar-backdrop';
+        document.body.appendChild(this.backdrop);
+
+        // 点击遮罩层关闭侧边栏
+        this.backdrop.addEventListener('click', () => {
+            this.closeSidebar();
+        });
     }
 
     setupToggle() {
         window.toggleSidebar = () => {
-            this.sidebar?.classList.toggle('mobile-show');
+            const isShowing = this.sidebar?.classList.contains('mobile-show');
+            if (isShowing) {
+                this.closeSidebar();
+            } else {
+                this.openSidebar();
+            }
         };
+    }
+
+    setupSwipeClose() {
+        // 支持向左滑动关闭侧边栏
+        if (!this.sidebar) return;
+
+        this.sidebar.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.touches[0].clientX;
+        });
+
+        this.sidebar.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = this.touchStartX - touchEndX;
+
+            // 向左滑动超过50px则关闭
+            if (diff > 50) {
+                this.closeSidebar();
+            }
+        });
+    }
+
+    openSidebar() {
+        this.sidebar?.classList.add('mobile-show');
+        this.backdrop?.classList.add('visible');
+        document.body.style.overflow = 'hidden'; // 防止背景滚动
+    }
+
+    closeSidebar() {
+        this.sidebar?.classList.remove('mobile-show');
+        this.backdrop?.classList.remove('visible');
+        document.body.style.overflow = ''; // 恢复滚动
     }
 }
 
