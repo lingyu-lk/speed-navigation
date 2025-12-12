@@ -202,29 +202,23 @@ class OnlineUsersTracker {
         try {
             const twentySecondsAgo = new Date(Date.now() - 20000).toISOString();
 
-            // 获取所有用户记录，然后在客户端去重
+            // 获取所有在线用户，然后在客户端去重
             const { data: allUsers, error: debugError } = await this.supabase
                 .from('online_users')
-                .select('user_id')
-                .gte('last_seen', twentySecondsAgo);
+                .select('user_id, last_seen')
+                .gte('last_seen', twentySecondsAgo)
+                .order('last_seen', { ascending: false });
 
             if (debugError) {
                 console.error('获取在线人数失败:', debugError);
                 return;
             }
 
-            // 在客户端去重
-            const uniqueUserIds = allUsers ? [...new Set(allUsers.map(user => user.user_id))] : [];
-            this.onlineCount = uniqueUserIds.length;
+            // 客户端去重：使用 Set 统计唯一用户数
+            const uniqueUserIds = new Set(allUsers?.map(u => u.user_id) || []);
+            this.onlineCount = uniqueUserIds.size;
             console.log('📊 当前在线人数:', this.onlineCount);
-            
-            // 获取详细数据用于调试
-            const { data: allUsers } = await this.supabase
-                .from('online_users')
-                .select('user_id, last_seen')
-                .gte('last_seen', twentySecondsAgo)
-                .order('last_seen', { ascending: false });
-            
+
             if (allUsers && allUsers.length > 0) {
                 console.log('在线用户记录数:', allUsers.length);
                 console.log('最新在线记录:', allUsers.slice(0, 5).map(u => ({
@@ -270,28 +264,21 @@ class OnlineUsersTracker {
     cleanup() {
         // 清理资源
         this.pauseHeartbeat();
-        
-        // 使用navigator.sendBeacon确保在页面关闭时能发送删除请求
-        if (navigator.sendBeacon) {
+
+        // 使用同步请求确保在页面关闭时删除用户记录
+        try {
             const url = `${SUPABASE_CONFIG.url}/rest/v1/online_users?user_id=eq.${encodeURIComponent(this.userId)}`;
-            const headers = { 
-                'apikey': SUPABASE_CONFIG.anonKey,
-                'Authorization': `Bearer ${SUPABASE_CONFIG.anonKey}`,
-                'Content-Type': 'application/json'
-            };
-            
-            // 创建一个简单的delete请求体
-            const deleteRequest = new Request(url, {
-                method: 'DELETE',
-                headers: headers
-            });
-            
-            navigator.sendBeacon(url, JSON.stringify(headers));
-        } else {
-            // 回退方案
-            this.removeUser();
+            const xhr = new XMLHttpRequest();
+            xhr.open('DELETE', url, false);  // false = 同步请求
+            xhr.setRequestHeader('apikey', SUPABASE_CONFIG.anonKey);
+            xhr.setRequestHeader('Authorization', `Bearer ${SUPABASE_CONFIG.anonKey}`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send();
+            console.log('✅ 用户已从在线列表移除');
+        } catch (error) {
+            console.error('清理用户失败:', error);
         }
-        
+
         if (this.channel) {
             this.supabase.removeChannel(this.channel);
         }
