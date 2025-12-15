@@ -441,19 +441,36 @@ class SearchManager {
         // Get categories dynamically each time
         const categories = document.querySelectorAll('.category');
 
+        let totalVisible = 0;
+
         categories.forEach(category => {
             let hasVisibleCards = false;
             const cards = category.querySelectorAll('.card');
 
             cards.forEach(card => {
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const desc = card.querySelector('.card-desc').textContent.toLowerCase();
-                const tag = card.querySelector('.card-tag')?.textContent.toLowerCase() || '';
+                const titleEl = card.querySelector('.card-title');
+                const descEl = card.querySelector('.card-desc');
+                const tagEl = card.querySelector('.card-tag');
+
+                // Get original text (remove any existing highlights)
+                const titleOriginal = titleEl.getAttribute('data-original') || titleEl.textContent;
+                const descOriginal = descEl.getAttribute('data-original') || descEl.textContent;
+                const tagOriginal = tagEl ? (tagEl.getAttribute('data-original') || tagEl.textContent) : '';
+
+                // Store original text
+                titleEl.setAttribute('data-original', titleOriginal);
+                descEl.setAttribute('data-original', descOriginal);
+                if (tagEl) tagEl.setAttribute('data-original', tagOriginal);
+
+                const title = titleOriginal.toLowerCase();
+                const desc = descOriginal.toLowerCase();
+                const tag = tagOriginal.toLowerCase();
 
                 const titlePinyin = Utils.toPinyin(title);
                 const descPinyin = Utils.toPinyin(desc);
 
-                const matches = title.includes(searchTerm) ||
+                const matches = searchTerm === '' ||
+                               title.includes(searchTerm) ||
                                desc.includes(searchTerm) ||
                                tag.includes(searchTerm) ||
                                titlePinyin.includes(searchPinyin) ||
@@ -462,23 +479,118 @@ class SearchManager {
                 if (matches) {
                     card.style.display = 'flex';
                     hasVisibleCards = true;
+                    totalVisible++;
+
+                    // Apply highlighting if there's a search term
+                    if (searchTerm) {
+                        titleEl.innerHTML = this.highlightText(titleOriginal, searchTerm);
+                        descEl.innerHTML = this.highlightText(descOriginal, searchTerm);
+                        if (tagEl) tagEl.innerHTML = this.highlightText(tagOriginal, searchTerm);
+                    } else {
+                        // Clear highlighting
+                        titleEl.textContent = titleOriginal;
+                        descEl.textContent = descOriginal;
+                        if (tagEl) tagEl.textContent = tagOriginal;
+                    }
                 } else {
                     card.style.display = 'none';
                 }
             });
 
-            category.style.display = hasVisibleCards || searchTerm === '' ? 'block' : 'none';
+            category.style.display = hasVisibleCards ? 'block' : 'none';
         });
 
-        // Update search results count
-        this.updateSearchCount(searchTerm);
+        // Update search results count and show empty state if needed
+        this.updateSearchCount(searchTerm, totalVisible);
     }
 
-    updateSearchCount(searchTerm) {
+    /**
+     * Highlight matching text
+     */
+    highlightText(text, searchTerm) {
+        if (!searchTerm || !text) return Utils.sanitizeHTML(text);
+
+        const searchTermLower = searchTerm.toLowerCase();
+        const textLower = text.toLowerCase();
+
+        // Find the index of the search term
+        const index = textLower.indexOf(searchTermLower);
+
+        if (index === -1) {
+            // Try pinyin match
+            const textPinyin = Utils.toPinyin(textLower);
+            const searchPinyin = Utils.toPinyin(searchTermLower);
+            const pinyinIndex = textPinyin.indexOf(searchPinyin);
+
+            if (pinyinIndex !== -1) {
+                // Calculate approximate character position
+                // This is a simple approximation - might not be perfect for all cases
+                const beforePinyin = textPinyin.substring(0, pinyinIndex);
+                const charIndex = beforePinyin.replace(/[a-z]/g, '').length;
+                const matchLength = searchTerm.length;
+
+                const before = Utils.sanitizeHTML(text.substring(0, charIndex));
+                const match = Utils.sanitizeHTML(text.substring(charIndex, charIndex + matchLength));
+                const after = Utils.sanitizeHTML(text.substring(charIndex + matchLength));
+
+                return `${before}<mark class="search-highlight">${match}</mark>${after}`;
+            }
+
+            return Utils.sanitizeHTML(text);
+        }
+
+        // Exact match found
+        const before = Utils.sanitizeHTML(text.substring(0, index));
+        const match = Utils.sanitizeHTML(text.substring(index, index + searchTerm.length));
+        const after = Utils.sanitizeHTML(text.substring(index + searchTerm.length));
+
+        return `${before}<mark class="search-highlight">${match}</mark>${after}`;
+    }
+
+    updateSearchCount(searchTerm, count) {
+        // Remove any existing empty state
+        const existingEmptyState = document.querySelector('.search-empty-state');
+        if (existingEmptyState) {
+            existingEmptyState.remove();
+        }
+
         if (!searchTerm) return;
 
-        const visibleCards = document.querySelectorAll('.card[style*="display: flex"]').length;
-        console.log(`找到 ${visibleCards} 个相关网站`);
+        // Show empty state if no results
+        if (count === 0) {
+            this.showEmptyState(searchTerm);
+        }
+
+        console.log(`找到 ${count} 个相关网站`);
+    }
+
+    showEmptyState(searchTerm) {
+        const content = document.querySelector('.content');
+        if (!content) return;
+
+        // Find the position after quick access
+        const quickAccess = document.getElementById('quickAccess');
+        const insertPosition = quickAccess ? quickAccess.nextSibling : content.firstChild;
+
+        const emptyState = document.createElement('div');
+        emptyState.className = 'search-empty-state';
+        emptyState.innerHTML = `
+            <div class="empty-state-icon">🔍</div>
+            <div class="empty-state-title">未找到匹配的网站</div>
+            <div class="empty-state-desc">
+                没有找到与 "<strong>${Utils.sanitizeHTML(searchTerm)}</strong>" 相关的网站
+            </div>
+            <div class="empty-state-tips">
+                <p>💡 搜索小贴士：</p>
+                <ul>
+                    <li>尝试使用其他关键词</li>
+                    <li>支持拼音搜索，如输入 "blbl" 可以找到哔哩哔哩</li>
+                    <li>可以切换到 Google、Bing 等搜索引擎进行网络搜索</li>
+                </ul>
+            </div>
+        `;
+
+        content.insertBefore(emptyState, insertPosition);
     }
 }
 
@@ -598,6 +710,7 @@ class SiteRenderer {
             this.renderCategories(data.categories);
             this.updateStats(data.categories);
             this.renderQuickAccess(data.categories);
+            this.renderRecentVisits();
 
             // Hide skeleton after loading
             this.hideSkeleton();
@@ -646,6 +759,88 @@ class SiteRenderer {
             const quickItem = this.createQuickAccessItem(site);
             quickAccessItems.appendChild(quickItem);
         });
+    }
+
+    renderRecentVisits() {
+        const recentVisitsContainer = document.getElementById('recentVisits');
+        const recentVisitsItems = document.getElementById('recentVisitsItems');
+        const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+        if (!recentVisitsContainer || !recentVisitsItems) return;
+
+        // Get recent visits (limit to 10)
+        const recentVisits = this.historyManager.getAll().slice(0, 10);
+
+        // Clear existing items
+        recentVisitsItems.innerHTML = '';
+
+        if (recentVisits.length === 0) {
+            // Remove has-items class, hide content area
+            recentVisitsContainer.classList.remove('has-items');
+            return;
+        }
+
+        // Add has-items class to show content area
+        recentVisitsContainer.classList.add('has-items');
+
+        // Setup clear history button
+        if (clearHistoryBtn) {
+            // Remove old event listeners by cloning
+            const newClearBtn = clearHistoryBtn.cloneNode(true);
+            clearHistoryBtn.parentNode.replaceChild(newClearBtn, clearHistoryBtn);
+
+            newClearBtn.addEventListener('click', () => {
+                if (confirm('确定要清空所有访问历史吗？')) {
+                    this.historyManager.clear();
+                    this.renderRecentVisits();
+                }
+            });
+        }
+
+        // Render recent visit items
+        recentVisits.forEach(site => {
+            const recentItem = this.createRecentVisitItem(site);
+            recentVisitsItems.appendChild(recentItem);
+        });
+    }
+
+    createRecentVisitItem(site) {
+        const item = document.createElement('div');
+        item.className = 'recent-visit-item';
+
+        // Extract domain for favicon
+        let domain = '';
+        try {
+            const url = new URL(site.url);
+            domain = url.hostname;
+        } catch (e) {
+            domain = site.url;
+        }
+
+        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+        // Calculate time ago
+        const timeAgo = site.timestamp ? Utils.formatDate(new Date(site.timestamp)) : '最近';
+
+        item.innerHTML = `
+            <a href="${site.url}" target="_blank" rel="noopener noreferrer" class="recent-visit-item-link">
+                <div class="recent-visit-item-icon">
+                    <img src="${faviconUrl}" alt="${site.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${site.icon || '🌐'}</text></svg>'">
+                </div>
+                <div class="recent-visit-item-name">${Utils.sanitizeHTML(site.name)}</div>
+                <div class="recent-visit-item-meta">
+                    <span class="visit-count" title="访问次数">
+                        👁️ ${site.visits || 1}
+                    </span>
+                    <span>·</span>
+                    <span class="visit-time" title="最后访问时间">
+                        ${timeAgo}
+                    </span>
+                </div>
+            </a>
+        `;
+
+        return item;
     }
 
     createQuickAccessItem(site) {
@@ -843,6 +1038,11 @@ class SiteRenderer {
         card.rel = 'noopener noreferrer';
         card.setAttribute('data-url', site.url);
 
+        // Add fade-in animation class
+        setTimeout(() => {
+            card.classList.add('fade-in');
+        }, 10);
+
         // Add favorite class if needed
         if (this.favoritesManager.isFavorite(site.url)) {
             card.classList.add('favorited');
@@ -895,6 +1095,8 @@ class SiteRenderer {
         // Add click handler for history
         card.addEventListener('click', (e) => {
             this.historyManager.add(site);
+            // Update recent visits display
+            this.renderRecentVisits();
         });
 
         // Add context menu for favorite toggle
