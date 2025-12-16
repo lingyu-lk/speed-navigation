@@ -1,0 +1,8 @@
+name = "limenav"
+compatibility_date = "2025-12-16"
+
+[site]
+bucket = "./"
+
+# 静态资产配置
+# Cloudflare Pages 会自动托管根目录下的所有文件
