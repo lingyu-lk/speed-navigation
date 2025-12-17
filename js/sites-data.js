@@ -320,6 +320,13 @@ const SITES_DATA =
               "iconUrl": "https://www.romspedia.com/favicon.ico",
               "description": "游戏ROM资源下载站",
               "tag": "资源"
+            },
+            {
+              "name": "FLY SHEEP",
+              "url": "https://www.flysheep6.com/",
+              "icon": "🐑",
+              "description": "PC单机游戏资源下载站",
+              "tag": "资源"
             }
           ]
         },
