@@ -1023,39 +1023,11 @@ const SITES_DATA =
               "tag": "BT"
             },
             {
-              "name": "RARBG",
-              "url": "https://rarbg.to/",
-              "icon": "💎",
-              "description": "高质量种子资源",
-              "tag": "BT"
-            },
-            {
               "name": "Nyaa",
               "url": "https://nyaa.si/",
               "icon": "🐱",
               "description": "动漫资源专用站",
               "tag": "动漫"
-            },
-            {
-              "name": "磁力猫",
-              "url": "https://cilimao.me/",
-              "icon": "🐱",
-              "description": "中文磁力搜索引擎",
-              "tag": "磁力"
-            },
-            {
-              "name": "磁力狗",
-              "url": "https://www.ciligo.cn/",
-              "icon": "🐶",
-              "description": "磁力链接搜索",
-              "tag": "磁力"
-            },
-            {
-              "name": "BT之家",
-              "url": "https://www.btbtt.me/",
-              "icon": "🏠",
-              "description": "影视资源下载",
-              "tag": "影视"
             },
             {
               "name": "不太灵",
