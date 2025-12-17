@@ -44,6 +44,13 @@ desktop.ini
 *.bak
 *~
 *.old
+*.backup
+*-backup.*
+*-old-backup.*
 
-# Don't ignore these
-!index-old-backup.html
+# Test files
+*-test.html
+*-test.js
+test-*.html
+test-*.js
+

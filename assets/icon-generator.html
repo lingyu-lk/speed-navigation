@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青柠导航 - 图标生成器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #32CD32;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .preview-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+        #preview {
+            background: linear-gradient(135deg, #f0fff0 0%, #e0ffe0 100%);
+            padding: 40px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        .icons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .icon-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .icon-item canvas {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .icon-label {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            background: linear-gradient(135deg, #32CD32 0%, #228B22 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .success-message {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍋 青柠导航图标生成器</h1>
+        <p class="subtitle">一键生成所有PWA所需的图标文件</p>
+
+        <div class="info-box">
+            <strong>📌 说明：</strong> 点击下方按钮，将自动生成并下载所有尺寸的图标文件。生成的图标会保存到您的下载文件夹，然后您需要将它们移动到 <code>assets/icons/</code> 目录。
+        </div>
+
+        <div class="preview-section">
+            <h3>预览</h3>
+            <div id="preview">
+                <svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- 外圈 - 主色 -->
+                    <circle cx="50" cy="50" r="45" fill="#32CD32"/>
+                    <!-- 中间层 - 浅色 -->
+                    <circle cx="50" cy="50" r="35" fill="#9AFF9A" opacity="0.5"/>
+                    <!-- 内圈 - 白色高光 -->
+                    <circle cx="50" cy="50" r="25" fill="#fff" opacity="0.3"/>
+                    <!-- 青柠切片纹理 -->
+                    <g opacity="0.4">
+                        <line x1="50" y1="20" x2="50" y2="80" stroke="#fff" stroke-width="2"/>
+                        <line x1="20" y1="50" x2="80" y2="50" stroke="#fff" stroke-width="2"/>
+                        <line x1="30" y1="30" x2="70" y2="70" stroke="#fff" stroke-width="1.5"/>
+                        <line x1="70" y1="30" x2="30" y2="70" stroke="#fff" stroke-width="1.5"/>
+                    </g>
+                    <!-- 青柠籽 -->
+                    <circle cx="40" cy="35" r="3" fill="#fff" opacity="0.6"/>
+                    <circle cx="60" cy="40" r="2.5" fill="#fff" opacity="0.6"/>
+                    <circle cx="45" cy="60" r="2" fill="#fff" opacity="0.6"/>
+                    <circle cx="58" cy="58" r="2.5" fill="#fff" opacity="0.6"/>
+                    <!-- 高光 -->
+                    <circle cx="38" cy="32" r="8" fill="#fff" opacity="0.2"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="icons-grid" id="iconsGrid"></div>
+
+        <div class="button-group">
+            <button onclick="generateAllIcons()">🎨 生成所有图标</button>
+            <button onclick="generateOGImage()">🖼️ 生成社交分享图</button>
+            <button onclick="generateAppleIcon()">🍎 生成Apple图标</button>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            ✅ 图标生成成功！请查看您的下载文件夹，然后将图标文件移动到 <code>assets/icons/</code> 目录。
+        </div>
+    </div>
+
+    <script>
+        const iconSizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+        function createIconSVG(size) {
+            return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#32CD32"/>
+                <circle cx="50" cy="50" r="35" fill="#9AFF9A" opacity="0.5"/>
+                <circle cx="50" cy="50" r="25" fill="#fff" opacity="0.3"/>
+                <g opacity="0.4">
+                    <line x1="50" y1="20" x2="50" y2="80" stroke="#fff" stroke-width="2"/>
+                    <line x1="20" y1="50" x2="80" y2="50" stroke="#fff" stroke-width="2"/>
+                    <line x1="30" y1="30" x2="70" y2="70" stroke="#fff" stroke-width="1.5"/>
+                    <line x1="70" y1="30" x2="30" y2="70" stroke="#fff" stroke-width="1.5"/>
+                </g>
+                <circle cx="40" cy="35" r="3" fill="#fff" opacity="0.6"/>
+                <circle cx="60" cy="40" r="2.5" fill="#fff" opacity="0.6"/>
+                <circle cx="45" cy="60" r="2" fill="#fff" opacity="0.6"/>
+                <circle cx="58" cy="58" r="2.5" fill="#fff" opacity="0.6"/>
+                <circle cx="38" cy="32" r="8" fill="#fff" opacity="0.2"/>
+            </svg>`;
+        }
+
+        function svgToCanvas(svgString, size) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+
+                const img = new Image();
+                const blob = new Blob([svgString], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0, size, size);
+                    URL.revokeObjectURL(url);
+                    resolve(canvas);
+                };
+                img.src = url;
+            });
+        }
+
+        function downloadCanvas(canvas, filename) {
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        async function generateAllIcons() {
+            const grid = document.getElementById('iconsGrid');
+            grid.innerHTML = '';
+
+            for (const size of iconSizes) {
+                const svg = createIconSVG(size);
+                const canvas = await svgToCanvas(svg, size);
+
+                const item = document.createElement('div');
+                item.className = 'icon-item';
+
+                const previewCanvas = document.createElement('canvas');
+                previewCanvas.width = size;
+                previewCanvas.height = size;
+                const ctx = previewCanvas.getContext('2d');
+                ctx.drawImage(canvas, 0, 0);
+
+                const label = document.createElement('div');
+                label.className = 'icon-label';
+                label.textContent = `${size}x${size}`;
+
+                item.appendChild(previewCanvas);
+                item.appendChild(label);
+                grid.appendChild(item);
+
+                // 下载图标
+                setTimeout(() => {
+                    downloadCanvas(canvas, `icon-${size}x${size}.png`);
+                }, 100 * iconSizes.indexOf(size));
+            }
+
+            showSuccess();
+        }
+
+        async function generateOGImage() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 630;
+            const ctx = canvas.getContext('2d');
+
+            // 背景渐变
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#32CD32');
+            gradient.addColorStop(1, '#228B22');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 630);
+
+            // 绘制大图标
+            const svg = createIconSVG(300);
+            const iconCanvas = await svgToCanvas(svg, 300);
+            ctx.drawImage(iconCanvas, 150, 165);
+
+            // 文字
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 80px Arial, sans-serif';
+            ctx.fillText('青柠导航', 500, 280);
+
+            ctx.font = '40px Arial, sans-serif';
+            ctx.fillText('清新简约的网站导航', 500, 340);
+
+            ctx.font = '30px Arial, sans-serif';
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.fillText('165+ 精选网站 | 5大分类 | 17个子分类', 500, 400);
+
+            downloadCanvas(canvas, 'og-image.png');
+            showSuccess();
+        }
+
+        async function generateAppleIcon() {
+            const svg = createIconSVG(180);
+            const canvas = await svgToCanvas(svg, 180);
+            downloadCanvas(canvas, 'apple-touch-icon.png');
+            showSuccess();
+        }
+
+        function showSuccess() {
+            const msg = document.getElementById('successMessage');
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 5000);
+        }
+
+        // 页面加载时显示预览
+        window.onload = function() {
+            console.log('图标生成器已就绪');
+        };
+    </script>
+</body>
+</html>
