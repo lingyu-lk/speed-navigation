@@ -4,6 +4,7 @@ const CONFIG = {
         THEME: 'nav-theme',
         FAVORITES: 'nav-favorites',
         HISTORY: 'nav-history',
+        RATINGS: 'nav-ratings',
         CUSTOM_SITES: 'nav-custom-sites',
         SEARCH_MODE: 'nav-search-mode',
         SEARCH_ENGINE: 'nav-search-engine'
@@ -671,9 +672,11 @@ class NavigationManager {
 
 // ==================== Site Renderer ====================
 class SiteRenderer {
-    constructor(favoritesManager, historyManager) {
+    constructor(favoritesManager, historyManager, tagFilterManager, ratingManager) {
         this.favoritesManager = favoritesManager;
         this.historyManager = historyManager;
+        this.tagFilterManager = tagFilterManager;
+        this.ratingManager = ratingManager;
     }
 
     async loadSites() {
@@ -847,6 +850,17 @@ class SiteRenderer {
             </div>
         `;
 
+        categoryDiv.innerHTML = header;
+
+        // Add tag filter bar if there are multiple tags
+        if (this.tagFilterManager) {
+            const filterBar = this.tagFilterManager.createTagFilterBar(category.id, category.sites);
+            if (filterBar) {
+                categoryDiv.appendChild(filterBar);
+            }
+        }
+
+        // Create cards container
         const cardsDiv = document.createElement('div');
         cardsDiv.className = 'cards';
 
@@ -855,7 +869,6 @@ class SiteRenderer {
             cardsDiv.appendChild(card);
         });
 
-        categoryDiv.innerHTML = header;
         categoryDiv.appendChild(cardsDiv);
 
         return categoryDiv;
@@ -902,6 +915,8 @@ class SiteRenderer {
             </div>
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
         `;
+
+        // Rating widget removed to avoid covering site description
 
         // Add click handler for history
         card.addEventListener('click', (e) => {
@@ -961,6 +976,681 @@ class SiteRenderer {
                 </div>
             `;
         }
+    }
+}
+
+// ==================== Rating Manager ====================
+class RatingManager {
+    constructor() {
+        this.storageKey = CONFIG.STORAGE_KEYS.RATINGS;
+        this.userRatings = this.loadRatings();
+    }
+
+    /**
+     * Load user ratings from localStorage
+     */
+    loadRatings() {
+        try {
+            const data = localStorage.getItem(this.storageKey);
+            return data ? JSON.parse(data) : {};
+        } catch (error) {
+            console.error('Failed to load ratings:', error);
+            return {};
+        }
+    }
+
+    /**
+     * Save ratings to localStorage
+     */
+    saveRatings() {
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(this.userRatings));
+        } catch (error) {
+            console.error('Failed to save ratings:', error);
+        }
+    }
+
+    /**
+     * Get rating for a site (user rating or default)
+     */
+    getRating(url) {
+        return this.userRatings[url] || null;
+    }
+
+    /**
+     * Set user rating for a site
+     */
+    setRating(url, rating) {
+        this.userRatings[url] = {
+            rating: rating,
+            timestamp: Date.now()
+        };
+        this.saveRatings();
+    }
+
+    /**
+     * Calculate display rating (average of default + user rating if exists)
+     */
+    getDisplayRating(site) {
+        const userRating = this.userRatings[site.url];
+        const defaultRating = site.rating || 4.0;
+
+        if (userRating) {
+            // Average user rating with default rating
+            return ((defaultRating + userRating.rating) / 2).toFixed(1);
+        }
+
+        return defaultRating.toFixed(1);
+    }
+
+    /**
+     * Get rating count (default + 1 if user rated)
+     */
+    getRatingCount(site) {
+        const baseCount = site.ratingCount || 500;
+        const userRating = this.userRatings[site.url];
+
+        return userRating ? baseCount + 1 : baseCount;
+    }
+
+    /**
+     * Create star rating display
+     */
+    createStarDisplay(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+        let stars = '';
+
+        // Full stars
+        for (let i = 0; i < fullStars; i++) {
+            stars += '★';
+        }
+
+        // Half star
+        if (hasHalfStar) {
+            stars += '⭐';
+        }
+
+        // Empty stars
+        for (let i = 0; i < emptyStars; i++) {
+            stars += '☆';
+        }
+
+        return stars;
+    }
+
+    /**
+     * Create interactive rating widget
+     */
+    createRatingWidget(site, onRate) {
+        const container = document.createElement('div');
+        container.className = 'rating-widget';
+
+        const displayRating = this.getDisplayRating(site);
+        const ratingCount = this.getRatingCount(site);
+        const userRating = this.userRatings[site.url];
+
+        container.innerHTML = `
+            <div class="rating-display">
+                <span class="rating-stars">${this.createStarDisplay(parseFloat(displayRating))}</span>
+                <span class="rating-value">${displayRating}</span>
+                <span class="rating-count">(${ratingCount})</span>
+            </div>
+            <div class="rating-interactive" style="display: none;">
+                <span class="rate-label">评分：</span>
+                ${[1, 2, 3, 4, 5].map(star => `
+                    <span class="rate-star" data-rating="${star}">☆</span>
+                `).join('')}
+            </div>
+            ${userRating ? '<span class="user-rated-indicator">已评分</span>' : ''}
+        `;
+
+        // Add interactive rating functionality
+        const interactive = container.querySelector('.rating-interactive');
+        const rateStars = container.querySelectorAll('.rate-star');
+
+        // Show interactive rating on hover
+        container.addEventListener('mouseenter', () => {
+            interactive.style.display = 'flex';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            interactive.style.display = 'none';
+        });
+
+        // Handle star hover
+        rateStars.forEach((star, index) => {
+            star.addEventListener('mouseenter', () => {
+                this.highlightStars(rateStars, index + 1);
+            });
+
+            star.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const rating = parseInt(star.dataset.rating);
+                this.setRating(site.url, rating);
+                if (onRate) onRate(site);
+            });
+        });
+
+        interactive.addEventListener('mouseleave', () => {
+            this.resetStars(rateStars);
+        });
+
+        return container;
+    }
+
+    /**
+     * Highlight stars up to index
+     */
+    highlightStars(stars, count) {
+        stars.forEach((star, index) => {
+            star.textContent = index < count ? '★' : '☆';
+        });
+    }
+
+    /**
+     * Reset stars to empty
+     */
+    resetStars(stars) {
+        stars.forEach(star => {
+            star.textContent = '☆';
+        });
+    }
+}
+
+// Hot Search Widget removed
+
+// ==================== Lime Lab Manager ====================
+class LimeLab {
+    constructor(siteRenderer) {
+        this.siteRenderer = siteRenderer;
+        this.section = document.getElementById('limeLab');
+        this.aiToolsPanel = document.getElementById('aiToolsPanel');
+        this.creativeSitesPanel = document.getElementById('creativeSitesPanel');
+        this.aiToolsCards = document.getElementById('aiToolsCards');
+        this.creativeSitesCards = document.getElementById('creativeSitesCards');
+        this.tabs = document.querySelectorAll('.lime-lab-tab');
+        this.panels = document.querySelectorAll('.lime-lab-panel');
+        this.isLoaded = false;
+        this.observer = null;
+    }
+
+    init() {
+        if (!this.section) return;
+
+        this.setupTabs();
+        // Load content immediately instead of lazy loading
+        this.loadContent();
+    }
+
+    setupTabs() {
+        this.tabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                const targetTab = e.currentTarget.dataset.tab;
+                this.switchTab(targetTab);
+            });
+        });
+    }
+
+    switchTab(targetTab) {
+        // Update tab states
+        this.tabs.forEach(tab => {
+            const isActive = tab.dataset.tab === targetTab;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', isActive);
+        });
+
+        // Update panel states
+        this.panels.forEach(panel => {
+            const isActive = panel.dataset.panel === targetTab;
+            panel.classList.toggle('active', isActive);
+        });
+    }
+
+    setupLazyLoading() {
+        // Use Intersection Observer for lazy loading
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !this.isLoaded) {
+                    this.loadContent();
+                    this.isLoaded = true;
+                    this.observer.disconnect();
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '100px'
+        });
+
+        this.observer.observe(this.section);
+    }
+
+    loadContent() {
+        if (!window.SITES_DATA || !window.SITES_DATA.categories) {
+            console.warn('LimeLab: SITES_DATA not available');
+            return;
+        }
+
+        console.log('LimeLab: Starting content load');
+
+        const aiTools = [];
+        const creativeSites = [];
+
+        // Collect AI tools and creative sites from all categories
+        SITES_DATA.categories.forEach(category => {
+            if (category.subcategories) {
+                category.subcategories.forEach(subcategory => {
+                    if (subcategory.sites) {
+                        subcategory.sites.forEach(site => {
+                            // Check if site is AI-related
+                            if (this.isAITool(site, subcategory)) {
+                                aiTools.push({
+                                    ...site,
+                                    categoryName: category.name,
+                                    subcategoryName: subcategory.name
+                                });
+                            }
+                            // Check if site is creative/inspiring
+                            if (this.isCreativeSite(site, subcategory, category)) {
+                                creativeSites.push({
+                                    ...site,
+                                    categoryName: category.name,
+                                    subcategoryName: subcategory.name
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        console.log(`LimeLab: Found ${aiTools.length} AI tools and ${creativeSites.length} creative sites`);
+
+        // Update counts
+        this.updateCount('aiToolsCount', aiTools.length);
+        this.updateCount('creativeSitesCount', creativeSites.length);
+
+        // Render cards
+        this.renderCards(this.aiToolsCards, aiTools);
+        this.renderCards(this.creativeSitesCards, creativeSites);
+    }
+
+    isAITool(site, subcategory) {
+        // Check if site is in AI category or has AI-related keywords
+        const aiKeywords = ['ai', 'gpt', 'chatgpt', 'midjourney', 'stable', 'diffusion',
+                           'claude', 'gemini', 'copilot', '智能', '机器学习', '深度学习'];
+
+        const nameMatch = aiKeywords.some(keyword =>
+            site.name.toLowerCase().includes(keyword)
+        );
+
+        const descMatch = aiKeywords.some(keyword =>
+            site.description.toLowerCase().includes(keyword)
+        );
+
+        const categoryMatch = subcategory.id === 'tech-ai' ||
+                              subcategory.name.includes('AI');
+
+        return nameMatch || descMatch || categoryMatch;
+    }
+
+    isCreativeSite(site, subcategory, category) {
+        // Check if site is in creative/design categories or has creative keywords
+        const creativeKeywords = ['design', 'inspiration', 'creative', 'art', 'dribbble',
+                                 'behance', 'awwwards', 'codepen', '设计', '创意', '灵感'];
+
+        const nameMatch = creativeKeywords.some(keyword =>
+            site.name.toLowerCase().includes(keyword)
+        );
+
+        const descMatch = creativeKeywords.some(keyword =>
+            site.description.toLowerCase().includes(keyword)
+        );
+
+        const categoryMatch = category.name.includes('创意') ||
+                              category.name.includes('设计') ||
+                              subcategory.id === 'creative-inspiration' ||
+                              subcategory.id === 'creative-tools' ||
+                              subcategory.id === 'entertainment-fun';
+
+        return nameMatch || descMatch || categoryMatch;
+    }
+
+    updateCount(elementId, count) {
+        const countEl = document.getElementById(elementId);
+        if (countEl) {
+            countEl.textContent = count;
+        }
+    }
+
+    renderCards(container, sites) {
+        if (!container || sites.length === 0) return;
+
+        // Clear existing content
+        container.innerHTML = '';
+
+        // Render each site using SiteRenderer's card creation
+        sites.forEach((site, index) => {
+            const card = this.siteRenderer.createCardElement(site, site.categoryName);
+
+            // Add staggered animation delay
+            setTimeout(() => {
+                card.classList.add('fade-in');
+            }, index * 30);
+
+            container.appendChild(card);
+        });
+    }
+}
+
+// ==================== Daily Picks Carousel ====================
+class DailyPicksCarousel {
+    constructor(siteRenderer) {
+        this.siteRenderer = siteRenderer;
+        this.section = document.getElementById('dailyPicksCarousel');
+        this.track = document.getElementById('carouselTrack');
+        this.indicatorsContainer = document.getElementById('carouselIndicators');
+        this.dateDisplay = document.getElementById('carouselDate');
+
+        this.dailySites = [];
+        this.currentIndex = 0;
+        this.autoPlayInterval = null;
+        this.autoPlayDelay = 5000; // 5 seconds
+    }
+
+    init() {
+        if (!this.section) return;
+
+        this.updateDate();
+        this.selectDailySites();
+        this.renderCards();
+        this.startAutoPlay();
+    }
+
+    updateDate() {
+        if (!this.dateDisplay) return;
+
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+
+        this.dateDisplay.textContent = `${year}-${month}-${day}`;
+    }
+
+    // Generate date-based seed for consistent daily selections
+    getDateSeed() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1;
+        const day = today.getDate();
+
+        return year * 10000 + month * 100 + day;
+    }
+
+    // Seeded random number generator for consistent daily picks
+    seededRandom(seed) {
+        const x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
+    }
+
+    selectDailySites() {
+        if (!window.SITES_DATA || !window.SITES_DATA.categories) return;
+
+        // Collect all sites
+        const allSites = [];
+        SITES_DATA.categories.forEach(category => {
+            if (category.subcategories) {
+                category.subcategories.forEach(subcategory => {
+                    if (subcategory.sites) {
+                        subcategory.sites.forEach(site => {
+                            allSites.push({
+                                ...site,
+                                categoryName: category.name,
+                                subcategoryName: subcategory.name
+                            });
+                        });
+                    }
+                });
+            }
+        });
+
+        // Shuffle using seeded random
+        const seed = this.getDateSeed();
+        const shuffled = allSites.sort((a, b) => {
+            return this.seededRandom(seed + a.url.length) - 0.5;
+        });
+
+        // Select top 5
+        this.dailySites = shuffled.slice(0, 5);
+    }
+
+    renderCards() {
+        if (!this.track || this.dailySites.length === 0) return;
+
+        // Clear existing content
+        this.track.innerHTML = '';
+
+        // Render cards
+        this.dailySites.forEach((site, index) => {
+            const card = this.siteRenderer.createCardElement(site, site.categoryName);
+            card.classList.add('carousel-card', 'fade-in');
+            this.track.appendChild(card);
+        });
+
+        // Setup indicators
+        this.renderIndicators();
+        this.updateCarousel();
+    }
+
+    renderIndicators() {
+        if (!this.indicatorsContainer) return;
+
+        this.indicatorsContainer.innerHTML = '';
+
+        this.dailySites.forEach((_, index) => {
+            const indicator = document.createElement('button');
+            indicator.className = 'carousel-indicator';
+            if (index === 0) indicator.classList.add('active');
+            indicator.setAttribute('aria-label', `跳转到第${index + 1}个`);
+
+            indicator.addEventListener('click', () => {
+                this.goToSlide(index);
+            });
+
+            this.indicatorsContainer.appendChild(indicator);
+        });
+    }
+
+    goToSlide(index) {
+        this.currentIndex = index;
+        this.updateCarousel();
+        this.resetAutoPlay();
+    }
+
+    updateCarousel() {
+        if (!this.track) return;
+
+        // Get card width including gap
+        const card = this.track.querySelector('.carousel-card');
+        if (!card) return;
+
+        const cardWidth = card.offsetWidth;
+        const gap = 12; // Match CSS gap
+        const offset = -(this.currentIndex * (cardWidth + gap));
+
+        this.track.style.transform = `translateX(${offset}px)`;
+
+        // Update indicators
+        const indicators = this.indicatorsContainer?.querySelectorAll('.carousel-indicator');
+        indicators?.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === this.currentIndex);
+        });
+    }
+
+    next() {
+        if (this.currentIndex < this.dailySites.length - 1) {
+            this.currentIndex++;
+        } else {
+            // Loop back to start
+            this.currentIndex = 0;
+        }
+        this.updateCarousel();
+    }
+
+    startAutoPlay() {
+        if (this.autoPlayInterval) return;
+
+        this.autoPlayInterval = setInterval(() => {
+            this.next();
+        }, this.autoPlayDelay);
+    }
+
+    stopAutoPlay() {
+        if (this.autoPlayInterval) {
+            clearInterval(this.autoPlayInterval);
+            this.autoPlayInterval = null;
+        }
+    }
+
+    resetAutoPlay() {
+        this.stopAutoPlay();
+        this.startAutoPlay();
+    }
+
+    // Date-based site selection remains below
+}
+
+// ==================== Tag Filter Manager ====================
+class TagFilterManager {
+    constructor() {
+        this.activeFilters = new Map(); // Map<categoryId, selectedTag>
+    }
+
+    /**
+     * Collect all unique tags from a category's sites
+     */
+    collectTags(sites) {
+        const tags = new Set();
+        sites.forEach(site => {
+            if (site.tag) {
+                tags.add(site.tag);
+            }
+        });
+        return Array.from(tags).sort();
+    }
+
+    /**
+     * Create tag filter bar for a category
+     */
+    createTagFilterBar(categoryId, sites) {
+        const tags = this.collectTags(sites);
+
+        // Don't show filter if there's only one tag or no tags
+        if (tags.length <= 1) {
+            return null;
+        }
+
+        const filterBar = document.createElement('div');
+        filterBar.className = 'tag-filter-bar';
+        filterBar.setAttribute('data-category-id', categoryId);
+
+        // Add "全部" (All) button
+        const allButton = this.createTagButton('全部', true, categoryId);
+        filterBar.appendChild(allButton);
+
+        // Add tag buttons
+        tags.forEach(tag => {
+            const button = this.createTagButton(tag, false, categoryId);
+            filterBar.appendChild(button);
+        });
+
+        return filterBar;
+    }
+
+    /**
+     * Create a single tag filter button
+     */
+    createTagButton(tag, isActive, categoryId) {
+        const button = document.createElement('button');
+        button.className = 'tag-filter-btn' + (isActive ? ' active' : '');
+        button.textContent = tag;
+        button.setAttribute('data-tag', tag);
+
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.handleTagClick(categoryId, tag, button);
+        });
+
+        return button;
+    }
+
+    /**
+     * Handle tag button click
+     */
+    handleTagClick(categoryId, tag, clickedButton) {
+        const filterBar = clickedButton.parentElement;
+        const cardsContainer = filterBar.nextElementSibling;
+
+        // Update active state
+        filterBar.querySelectorAll('.tag-filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        clickedButton.classList.add('active');
+
+        // Store active filter
+        if (tag === '全部') {
+            this.activeFilters.delete(categoryId);
+        } else {
+            this.activeFilters.set(categoryId, tag);
+        }
+
+        // Filter cards
+        this.filterCards(cardsContainer, tag);
+    }
+
+    /**
+     * Filter cards based on selected tag
+     */
+    filterCards(cardsContainer, selectedTag) {
+        const cards = cardsContainer.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            const cardTag = card.querySelector('.card-tag');
+
+            if (selectedTag === '全部' || !cardTag) {
+                // Show all cards
+                card.style.display = '';
+                setTimeout(() => card.classList.add('fade-in'), 10);
+            } else {
+                // Filter by tag
+                const tagText = cardTag.textContent.trim();
+                if (tagText === selectedTag) {
+                    card.style.display = '';
+                    setTimeout(() => card.classList.add('fade-in'), 10);
+                } else {
+                    card.style.display = 'none';
+                    card.classList.remove('fade-in');
+                }
+            }
+        });
+    }
+
+    /**
+     * Reset all filters
+     */
+    resetFilters() {
+        this.activeFilters.clear();
+        document.querySelectorAll('.tag-filter-bar').forEach(filterBar => {
+            // Reset to "全部" button
+            const allButton = filterBar.querySelector('[data-tag="全部"]');
+            if (allButton) {
+                allButton.click();
+            }
+        });
     }
 }
 
@@ -1073,7 +1763,11 @@ class App {
         this.themeManager = new ThemeManager();
         this.favoritesManager = new FavoritesManager();
         this.historyManager = new HistoryManager();
-        this.siteRenderer = new SiteRenderer(this.favoritesManager, this.historyManager);
+        this.ratingManager = new RatingManager();
+        this.tagFilterManager = new TagFilterManager();
+        this.siteRenderer = new SiteRenderer(this.favoritesManager, this.historyManager, this.tagFilterManager, this.ratingManager);
+        this.dailyPicksCarousel = new DailyPicksCarousel(this.siteRenderer);
+        // LimeLab removed
         this.searchManager = new SearchManager();
         this.navigationManager = new NavigationManager();
         this.mobileMenuManager = new MobileMenuManager();
@@ -1085,6 +1779,11 @@ class App {
             // Make app available globally before loading sites
             window.app = this;
             await this.siteRenderer.loadSites();
+
+            // Initialize components after sites are loaded
+            this.dailyPicksCarousel.init();
+            // LimeLab removed
+
             this.setupServiceWorker();
         } catch (error) {
             console.error('Failed to initialize app:', error);

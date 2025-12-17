@@ -44,7 +44,7 @@
     <link rel="manifest" href="./manifest.json">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?v=20251218-2">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -161,14 +161,6 @@
                     </div>
                 </div>
             </div>
-            <button
-                class="mobile-menu-btn"
-                onclick="toggleSidebar()"
-                aria-label="打开菜单"
-                aria-expanded="false"
-            >
-                ☰
-            </button>
             <div class="theme-selector">
                 <button
                     class="theme-toggle"
@@ -329,6 +321,27 @@
                         </ul>
                     </li>
 
+                    <!-- 创意设计 -->
+                    <li class="menu-category" role="none">
+                        <div class="category-label" onclick="toggleCategory(this)">
+                            <span class="category-icon" aria-hidden="true">🎨</span>
+                            <span>创意设计</span>
+                            <span class="expand-icon">▼</span>
+                        </div>
+                        <ul class="submenu expanded">
+                            <li role="none">
+                                <a href="#creative-inspiration" role="menuitem" aria-label="灵感素材分类">
+                                    <span>├─ 灵感素材</span>
+                                </a>
+                            </li>
+                            <li role="none">
+                                <a href="#creative-tools" role="menuitem" aria-label="设计工具分类">
+                                    <span>└─ 设计工具</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!-- 科技资源 -->
                     <li class="menu-category" role="none">
                         <div class="category-label" onclick="toggleCategory(this)">
@@ -337,6 +350,11 @@
                             <span class="expand-icon">▼</span>
                         </div>
                         <ul class="submenu expanded">
+                            <li role="none">
+                                <a href="#tech-developer" role="menuitem" aria-label="开发者工具分类">
+                                    <span>├─ 开发者工具</span>
+                                </a>
+                            </li>
                             <li role="none">
                                 <a href="#tech-ai" role="menuitem" aria-label="AI科技分类">
                                     <span>├─ AI 科技</span>
@@ -364,6 +382,11 @@
                         </div>
                         <ul class="submenu expanded">
                             <li role="none">
+                                <a href="#life-daily" role="menuitem" aria-label="日常服务分类">
+                                    <span>├─ 日常服务</span>
+                                </a>
+                            </li>
+                            <li role="none">
                                 <a href="#life-shopping" role="menuitem" aria-label="在线购物分类">
                                     <span>├─ 在线购物</span>
                                 </a>
@@ -384,16 +407,39 @@
             <!-- Statistics -->
             <section class="stats" aria-label="网站统计">
                 <div class="stat-item">
-                    <div class="stat-number" id="totalSites" aria-label="网站总数">165+</div>
+                    <div class="stat-number" id="totalSites" aria-label="网站总数">180+</div>
                     <div class="stat-label">网站总数</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" aria-label="主分类">5</div>
+                    <div class="stat-number" aria-label="主分类">6</div>
                     <div class="stat-label">主分类</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number" aria-label="子分类">17</div>
+                    <div class="stat-number" aria-label="子分类">21</div>
                     <div class="stat-label">子分类</div>
+                </div>
+            </section>
+
+            <!-- Daily Picks Carousel -->
+            <section class="daily-picks-carousel" id="dailyPicksCarousel" aria-label="每日推荐">
+                <div class="carousel-header">
+                    <div class="carousel-title-wrapper">
+                        <h3 class="carousel-title">📅 每日推荐</h3>
+                        <span class="carousel-date" id="carouselDate">2024-12-17</span>
+                    </div>
+                    <p class="carousel-subtitle">每天为你精选5个优质网站</p>
+                </div>
+
+                <div class="carousel-container">
+                    <div class="carousel-track-container">
+                        <div class="carousel-track" id="carouselTrack">
+                            <!-- Will be dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <!-- Will be dynamically loaded -->
                 </div>
             </section>
 
@@ -442,6 +488,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Lime Lab Section removed -->
         </main>
     </div>
 
@@ -495,9 +543,9 @@
 
     <!-- Scripts -->
     <script src="./js/pinyin.js"></script>
-    <script src="./js/sites-data.js?v=20251217-2"></script>
-    <script src="./js/app.js"></script>
-    <script src="./js/effects.js"></script>
+    <script src="./js/sites-data.js?v=20251218-3"></script>
+    <script src="./js/app.js?v=20251218-3"></script>
+    <script src="./js/effects.js?v=20251218"></script>
     <script src="./js/online-users.js"></script>
     <script>
         // 初始化在线人数追踪

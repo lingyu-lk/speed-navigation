@@ -19,98 +19,168 @@ const SITES_DATA =
               "url": "https://www.bilibili.com",
               "icon": "📺",
               "description": "国内知名的视频弹幕网站，二次元文化聚集地",
-              "tag": "视频"
+              "tag": "视频",
+              "rating": 4.9,
+              "ratingCount": 1348,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "YouTube",
               "url": "https://www.youtube.com",
               "icon": "🎬",
               "description": "全球最大的视频分享平台",
-              "tag": "视频"
+              "tag": "视频",
+              "rating": 4.7,
+              "ratingCount": 1445,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Netflix",
               "url": "https://www.netflix.com",
               "icon": "🎭",
               "description": "优质影视剧在线观看平台",
-              "tag": "影视"
+              "tag": "影视",
+              "rating": 4.7,
+              "ratingCount": 1374,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Twitch",
               "url": "https://www.twitch.tv",
               "icon": "🎮",
               "description": "全球最大的游戏直播平台",
-              "tag": "直播"
+              "tag": "直播",
+              "rating": 4.9,
+              "ratingCount": 1790,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "斗鱼",
               "url": "https://www.douyu.com",
               "icon": "🐟",
               "description": "国内知名游戏直播平台",
-              "tag": "直播"
+              "tag": "直播",
+              "rating": 4.2,
+              "ratingCount": 658,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "爱奇艺",
               "url": "https://www.iqiyi.com",
               "icon": "🍿",
               "description": "在线视频播放平台",
-              "tag": "影视"
+              "tag": "影视",
+              "rating": 4.5,
+              "ratingCount": 656,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "网易云音乐",
               "url": "https://music.163.com",
               "icon": "🎶",
               "description": "音乐分享与发现平台",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.2,
+              "ratingCount": 694,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Spotify",
               "url": "https://www.spotify.com",
               "icon": "🎧",
               "description": "全球最大的流媒体音乐平台",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.9,
+              "ratingCount": 1331,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Apple Music",
               "url": "https://music.apple.com",
               "icon": "🍎",
               "description": "苹果音乐服务",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.2,
+              "ratingCount": 572,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "SoundCloud",
               "url": "https://soundcloud.com",
               "icon": "☁️",
               "description": "独立音乐人分享平台",
-              "tag": "独立"
+              "tag": "独立",
+              "rating": 4.1,
+              "ratingCount": 621,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "QQ音乐",
               "url": "https://www.qq.com/music",
               "icon": "🎵",
               "description": "腾讯音乐平台",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.4,
+              "ratingCount": 506,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pandora",
               "url": "https://www.pandora.com",
               "icon": "📻",
               "description": "个性化音乐电台",
-              "tag": "电台"
+              "tag": "电台",
+              "rating": 4.0,
+              "ratingCount": 557,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Tidal",
               "url": "https://www.tidal.com",
               "icon": "🌊",
               "description": "高音质音乐平台",
-              "tag": "HiFi"
+              "tag": "HiFi",
+              "rating": 4.0,
+              "ratingCount": 734,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Last.fm",
               "url": "https://www.last.fm",
               "icon": "📊",
               "description": "音乐推荐与统计",
-              "tag": "推荐"
+              "tag": "推荐",
+              "rating": 4.1,
+              "ratingCount": 577,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -125,63 +195,108 @@ const SITES_DATA =
               "url": "https://www.twitter.com",
               "icon": "🐦",
               "description": "实时信息分享平台",
-              "tag": "微博客"
+              "tag": "微博客",
+              "rating": 4.9,
+              "ratingCount": 1330,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Instagram",
               "url": "https://www.instagram.com",
               "icon": "📸",
               "description": "图片和短视频分享",
-              "tag": "图片"
+              "tag": "图片",
+              "rating": 4.8,
+              "ratingCount": 1107,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Facebook",
               "url": "https://www.facebook.com",
               "icon": "👥",
               "description": "全球最大社交网络",
-              "tag": "社交"
+              "tag": "社交",
+              "rating": 4.6,
+              "ratingCount": 1878,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "LinkedIn",
               "url": "https://www.linkedin.com",
               "icon": "💼",
               "description": "职业社交平台",
-              "tag": "职场"
+              "tag": "职场",
+              "rating": 4.0,
+              "ratingCount": 688,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "微博",
               "url": "https://www.weibo.com",
               "icon": "📱",
               "description": "中文社交媒体平台",
-              "tag": "社交"
+              "tag": "社交",
+              "rating": 5.0,
+              "ratingCount": 1362,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "小红书",
               "url": "https://www.xiaohongshu.com",
               "icon": "📕",
               "description": "生活方式分享平台",
-              "tag": "生活"
+              "tag": "生活",
+              "rating": 4.2,
+              "ratingCount": 500,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Discord",
               "url": "https://www.discord.com",
               "icon": "🎮",
               "description": "游戏和社群聊天工具",
-              "tag": "聊天"
+              "tag": "聊天",
+              "rating": 4.3,
+              "ratingCount": 554,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Telegram",
               "url": "https://www.telegram.org",
               "icon": "✈️",
               "description": "安全即时通讯软件",
-              "tag": "通讯"
+              "tag": "通讯",
+              "rating": 4.2,
+              "ratingCount": 585,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Reddit",
               "url": "https://www.reddit.com",
               "icon": "🔥",
               "description": "互联网的首页，各种有趣的社区",
-              "tag": "社区"
+              "tag": "社区",
+              "rating": 4.1,
+              "ratingCount": 744,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -196,98 +311,168 @@ const SITES_DATA =
               "url": "https://store.steampowered.com",
               "icon": "🎯",
               "description": "全球最大的PC游戏平台",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 5.0,
+              "ratingCount": 1186,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Epic Games",
               "url": "https://www.epicgames.com/store",
               "icon": "🎪",
               "description": "Epic游戏商店，经常有免费游戏",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 4.0,
+              "ratingCount": 736,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "GOG",
               "url": "https://www.gog.com",
               "icon": "🎲",
               "description": "无DRM的游戏平台，经典老游戏",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 4.1,
+              "ratingCount": 738,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Humble Bundle",
               "url": "https://www.humblebundle.com",
               "icon": "🎁",
               "description": "游戏慈善包，超值优惠",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 4.4,
+              "ratingCount": 544,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Itch.io",
               "url": "https://itch.io",
               "icon": "🕹️",
               "description": "独立游戏开发者平台",
-              "tag": "独立"
+              "tag": "独立",
+              "rating": 4.4,
+              "ratingCount": 578,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "GameJolt",
               "url": "https://gamejolt.com",
               "icon": "⚡",
               "description": "免费独立游戏社区",
-              "tag": "独立"
+              "tag": "独立",
+              "rating": 4.4,
+              "ratingCount": 742,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "ModDB",
               "url": "https://www.moddb.com",
               "icon": "🔧",
               "description": "游戏MOD和独立游戏下载",
-              "tag": "MOD"
+              "tag": "MOD",
+              "rating": 4.3,
+              "ratingCount": 525,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "IndieDB",
               "url": "https://www.indiedb.com",
               "icon": "🎨",
               "description": "独立游戏资讯和下载",
-              "tag": "独立"
+              "tag": "独立",
+              "rating": 4.5,
+              "ratingCount": 547,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Origin",
               "url": "https://www.origin.com",
               "icon": "🌟",
               "description": "EA游戏平台",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 4.3,
+              "ratingCount": 596,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Ubisoft Connect",
               "url": "https://ubisoftconnect.com",
               "icon": "🎮",
               "description": "育碧游戏平台",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 4.0,
+              "ratingCount": 780,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Xbox",
               "url": "https://www.xbox.com/games/store",
               "icon": "🎯",
               "description": "Xbox PC游戏商店",
-              "tag": "正版"
+              "tag": "正版",
+              "rating": 4.3,
+              "ratingCount": 591,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "游侠网",
               "url": "https://www.ali213.net",
               "icon": "⚔️",
               "description": "国内知名游戏资讯和下载站",
-              "tag": "资讯"
+              "tag": "资讯",
+              "rating": 4.3,
+              "ratingCount": 550,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "3DMGAME",
               "url": "https://www.3dmgame.com",
               "icon": "🎲",
               "description": "3DM游戏网，游戏资讯和攻略",
-              "tag": "资讯"
+              "tag": "资讯",
+              "rating": 4.4,
+              "ratingCount": 698,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "SteamDB",
               "url": "https://steamdb.info",
               "icon": "📊",
               "description": "Steam数据库，价格历史查询",
-              "tag": "工具"
+              "tag": "工具",
+              "rating": 4.4,
+              "ratingCount": 600,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "520Switch",
@@ -295,7 +480,12 @@ const SITES_DATA =
               "icon": "🎮",
               "iconUrl": "https://www.520switch.com/favicon.ico",
               "description": "Switch游戏资源下载站",
-              "tag": "资源"
+              "tag": "资源",
+              "rating": 4.0,
+              "ratingCount": 722,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Byrut Game",
@@ -303,7 +493,12 @@ const SITES_DATA =
               "icon": "🎯",
               "iconUrl": "https://byrutgame.org/favicon.ico",
               "description": "游戏资源下载站",
-              "tag": "资源"
+              "tag": "资源",
+              "rating": 4.0,
+              "ratingCount": 612,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Ova Games",
@@ -311,7 +506,12 @@ const SITES_DATA =
               "icon": "🎮",
               "iconUrl": "https://www.ovagames.com/favicon.ico",
               "description": "PC游戏免费下载站",
-              "tag": "资源"
+              "tag": "资源",
+              "rating": 4.0,
+              "ratingCount": 734,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Romspedia",
@@ -319,14 +519,24 @@ const SITES_DATA =
               "icon": "🕹️",
               "iconUrl": "https://www.romspedia.com/favicon.ico",
               "description": "游戏ROM资源下载站",
-              "tag": "资源"
+              "tag": "资源",
+              "rating": 4.1,
+              "ratingCount": 655,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "FLY SHEEP",
               "url": "https://www.flysheep6.com/",
               "icon": "🐑",
               "description": "PC单机游戏资源下载站",
-              "tag": "资源"
+              "tag": "资源",
+              "rating": 4.2,
+              "ratingCount": 797,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -341,259 +551,444 @@ const SITES_DATA =
               "url": "https://neal.fun",
               "icon": "🎪",
               "description": "各种创意互动网页集合",
-              "tag": "创意"
+              "tag": "创意",
+              "rating": 4.3,
+              "ratingCount": 596,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "GeoGuessr",
               "url": "https://www.geoguessr.com",
               "icon": "🗺️",
               "description": "根据街景图猜地点的游戏",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.2,
+              "ratingCount": 596,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Incredibox",
               "url": "https://www.incredibox.com",
               "icon": "🎵",
               "description": "互动音乐创作游戏",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.1,
+              "ratingCount": 682,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "The Wiki Game",
               "url": "https://www.thewikigame.com",
               "icon": "🏁",
               "description": "在维基百科页面间导航的趣味游戏",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.3,
+              "ratingCount": 770,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "TypeRacer",
               "url": "https://www.typeracer.com",
               "icon": "⌨️",
               "description": "打字速度竞赛游戏",
-              "tag": "打字"
+              "tag": "打字",
+              "rating": 4.3,
+              "ratingCount": 502,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Chess",
               "url": "https://www.chessgames.com",
               "icon": "♟️",
               "description": "在线国际象棋",
-              "tag": "棋类"
+              "tag": "棋类",
+              "rating": 4.4,
+              "ratingCount": 708,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Is It Christmas?",
               "url": "https://www.isitchristmas.com",
               "icon": "🎄",
               "description": "今天是圣诞节吗？",
-              "tag": "趣味"
+              "tag": "趣味",
+              "rating": 4.1,
+              "ratingCount": 708,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Koalas to the Max",
               "url": "https://www.koalastothemax.com",
               "icon": "🐨",
               "description": "互动圆圈艺术",
-              "tag": "互动"
+              "tag": "互动",
+              "rating": 4.0,
+              "ratingCount": 658,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "QWOP",
               "url": "http://www.foddy.net/Athletics.html",
               "icon": "🏃",
               "description": "魔性的跑步游戏，超级搞笑",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.5,
+              "ratingCount": 665,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Akinator",
               "url": "https://akinator.com",
               "icon": "🧞",
               "description": "读心精灵，猜你想的角色",
-              "tag": "AI游戏"
+              "tag": "AI游戏",
+              "rating": 4.4,
+              "ratingCount": 552,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Silk",
               "url": "http://weavesilk.com",
               "icon": "🎨",
               "description": "创造美丽的对称艺术图案",
-              "tag": "艺术"
+              "tag": "艺术",
+              "rating": 4.5,
+              "ratingCount": 744,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "The Scale of Universe",
               "url": "https://htwins.net/scale2",
               "icon": "🌌",
               "description": "探索宇宙万物的尺度",
-              "tag": "科普"
+              "tag": "科普",
+              "rating": 4.5,
+              "ratingCount": 787,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Patatap",
               "url": "https://patatap.com",
               "icon": "🎹",
               "description": "按键盘创作动画和音乐",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.0,
+              "ratingCount": 675,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Scribblenauts",
               "url": "https://www.crazygames.com/game/scribblenauts-unlimited",
               "icon": "✏️",
               "description": "写出任何东西让它出现",
-              "tag": "创意"
+              "tag": "创意",
+              "rating": 4.4,
+              "ratingCount": 526,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Bongo Cat",
               "url": "https://bongo.cat",
               "icon": "🐱",
               "description": "敲键盘就能看到猫咪打鼓",
-              "tag": "治愈"
+              "tag": "治愈",
+              "rating": 4.2,
+              "ratingCount": 733,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Quick Draw",
               "url": "https://quickdraw.withgoogle.com",
               "icon": "✍️",
               "description": "Google AI 识别你的涂鸦",
-              "tag": "AI"
+              "tag": "AI",
+              "rating": 4.5,
+              "ratingCount": 657,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Maze Generator",
               "url": "https://www.mazegenerator.net",
               "icon": "🌀",
               "description": "生成和解决迷宫",
-              "tag": "益智"
+              "tag": "益智",
+              "rating": 4.2,
+              "ratingCount": 769,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Slime Simulator",
               "url": "https://slime-simulator.web.app",
               "icon": "💧",
               "description": "超解压的史莱姆模拟器",
-              "tag": "解压"
+              "tag": "解压",
+              "rating": 4.0,
+              "ratingCount": 773,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pointer Pointer",
               "url": "https://pointerpointer.com",
               "icon": "👈",
               "description": "找到指向你鼠标的图片",
-              "tag": "创意"
+              "tag": "创意",
+              "rating": 4.3,
+              "ratingCount": 782,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "The Restart Page",
               "url": "http://www.therestartpage.com",
               "icon": "💾",
               "description": "怀旧的各种操作系统启动画面",
-              "tag": "怀旧"
+              "tag": "怀旧",
+              "rating": 4.0,
+              "ratingCount": 772,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Windows 93",
               "url": "https://www.windows93.net",
               "icon": "🪟",
               "description": "模拟的复古操作系统",
-              "tag": "怀旧"
+              "tag": "怀旧",
+              "rating": 4.2,
+              "ratingCount": 748,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Emoji Kitchen",
               "url": "https://emojikitchen.dev",
               "icon": "😋",
               "description": "混合两个表情创造新表情",
-              "tag": "创意"
+              "tag": "创意",
+              "rating": 4.3,
+              "ratingCount": 708,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Falling Falling",
               "url": "https://www.fallingfalling.com",
               "icon": "🪂",
               "description": "无限下落的3D空间",
-              "tag": "视觉"
+              "tag": "视觉",
+              "rating": 4.2,
+              "ratingCount": 700,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Optical Illusions",
               "url": "https://www.moillusions.com",
               "icon": "👁️",
               "description": "各种视觉错觉集合",
-              "tag": "视觉"
+              "tag": "视觉",
+              "rating": 4.5,
+              "ratingCount": 668,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Dinosaur Game",
               "url": "https://chromedino.com",
               "icon": "🦖",
               "description": "Chrome 断网小恐龙游戏",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.2,
+              "ratingCount": 520,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Cookie Clicker",
               "url": "https://orteil.dashnet.org/cookieclicker",
               "icon": "🍪",
               "description": "点击饼干的放置类游戏",
-              "tag": "放置"
+              "tag": "放置",
+              "rating": 4.4,
+              "ratingCount": 513,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Staggering Beauty",
               "url": "http://www.staggeringbeauty.com",
               "icon": "🪱",
               "description": "摇动你的鼠标（癫痫警告）",
-              "tag": "互动"
+              "tag": "互动",
+              "rating": 4.2,
+              "ratingCount": 781,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "The Quiet Place",
               "url": "http://thequietplaceproject.xyz",
               "icon": "🤫",
               "description": "需要安静环境的互动体验",
-              "tag": "互动"
+              "tag": "互动",
+              "rating": 4.5,
+              "ratingCount": 569,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Do Nothing for 2 Minutes",
               "url": "http://www.donothingfor2minutes.com",
               "icon": "⏱️",
               "description": "强制自己放松2分钟",
-              "tag": "放松"
+              "tag": "放松",
+              "rating": 4.0,
+              "ratingCount": 746,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Cat Bounce",
               "url": "https://cat-bounce.com",
               "icon": "🐈",
               "description": "会弹跳的猫咪们",
-              "tag": "治愈"
+              "tag": "治愈",
+              "rating": 4.1,
+              "ratingCount": 774,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Ninja Flex",
               "url": "http://ninjaflex.com",
               "icon": "🥷",
               "description": "测试你的反应速度",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.0,
+              "ratingCount": 641,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Geek Typer Tron",
               "url": "http://geektyper.com/tron",
               "icon": "⚡",
               "description": "创战纪风格的黑客屏幕",
-              "tag": "视觉"
+              "tag": "视觉",
+              "rating": 4.5,
+              "ratingCount": 619,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Weave Silk Interactive",
               "url": "http://weavesilk.com",
               "icon": "✨",
               "description": "创作迷幻对称图案",
-              "tag": "艺术"
+              "tag": "艺术",
+              "rating": 4.4,
+              "ratingCount": 648,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Find the Invisible Cow",
               "url": "https://findtheinvisiblecow.com",
               "icon": "🐄",
               "description": "找到看不见的牛",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.4,
+              "ratingCount": 625,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pac-Man",
               "url": "https://www.google.com/logos/2010/pacman10-i.html",
               "icon": "👻",
               "description": "Google版吃豆人游戏",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.3,
+              "ratingCount": 626,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Gravity Points",
               "url": "https://codepen.io/akm2/full/rHIsa",
               "icon": "⚫",
               "description": "创造引力粒子效果",
-              "tag": "视觉"
+              "tag": "视觉",
+              "rating": 4.3,
+              "ratingCount": 503,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "RGB Color Challenge",
               "url": "https://www.rgbcolorcode.com/game",
               "icon": "🎨",
               "description": "测试你的色彩识别能力",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.3,
+              "ratingCount": 545,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -608,133 +1003,228 @@ const SITES_DATA =
               "url": "https://fakeupdate.net",
               "icon": "💻",
               "description": "假装系统在更新，完美摸鱼神器",
-              "tag": "伪装"
+              "tag": "伪装",
+              "rating": 4.2,
+              "ratingCount": 636,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Hacker Typer",
               "url": "https://hackertyper.com",
               "icon": "👨‍💻",
               "description": "假装在写代码，看起来很忙的样子",
-              "tag": "伪装"
+              "tag": "伪装",
+              "rating": 4.1,
+              "ratingCount": 658,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "GeekTyper",
               "url": "http://geektyper.com",
               "icon": "⌨️",
               "description": "多种黑客界面，假装在工作",
-              "tag": "伪装"
+              "tag": "伪装",
+              "rating": 4.3,
+              "ratingCount": 585,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "小霸王游戏机",
               "url": "https://www.yikm.net",
               "icon": "🎮",
               "description": "在线玩经典FC游戏，魂斗罗、超级玛丽",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.5,
+              "ratingCount": 578,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Slither.io",
               "url": "https://slither.io",
               "icon": "🐍",
               "description": "贪吃蛇大作战，简单上瘾",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.1,
+              "ratingCount": 538,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Agar.io",
               "url": "https://agar.io",
               "icon": "⚪",
               "description": "球球大作战，轻松有趣",
-              "tag": "游戏"
+              "tag": "游戏",
+              "rating": 4.4,
+              "ratingCount": 696,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "2048",
               "url": "https://play2048.co",
               "icon": "🔢",
               "description": "经典2048游戏，烧脑又休闲",
-              "tag": "益智"
+              "tag": "益智",
+              "rating": 4.1,
+              "ratingCount": 502,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "A Soft Murmur",
               "url": "https://asoftmurmur.com",
               "icon": "🌧️",
               "description": "环境白噪音，帮助专注或放松",
-              "tag": "放松"
+              "tag": "放松",
+              "rating": 4.0,
+              "ratingCount": 751,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Rainy Mood",
               "url": "https://www.rainymood.com",
               "icon": "☔",
               "description": "下雨声音，放松神器",
-              "tag": "放松"
+              "tag": "放松",
+              "rating": 4.1,
+              "ratingCount": 656,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Purrli",
               "url": "https://purrli.com",
               "icon": "🐱",
               "description": "猫咪呼噜声，治愈系",
-              "tag": "放松"
+              "tag": "放松",
+              "rating": 4.4,
+              "ratingCount": 593,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Little Alchemy",
               "url": "https://littlealchemy.com",
               "icon": "🧪",
               "description": "元素合成游戏，很上瘾",
-              "tag": "益智"
+              "tag": "益智",
+              "rating": 4.5,
+              "ratingCount": 511,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "The Useless Web",
               "url": "https://theuselessweb.com",
               "icon": "🎲",
               "description": "随机跳转到无用但有趣的网站",
-              "tag": "随机"
+              "tag": "随机",
+              "rating": 4.5,
+              "ratingCount": 607,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pointer Pointer",
               "url": "https://pointerpointer.com",
               "icon": "👉",
               "description": "找到指向你鼠标的图片",
-              "tag": "创意"
+              "tag": "创意",
+              "rating": 4.3,
+              "ratingCount": 782,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "This Person Does Not Exist",
               "url": "https://thispersondoesnotexist.com",
               "icon": "👤",
               "description": "AI生成的不存在的人脸",
-              "tag": "AI"
+              "tag": "AI",
+              "rating": 4.5,
+              "ratingCount": 568,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Radio Garden",
               "url": "http://radio.garden",
               "icon": "📻",
               "description": "收听全球各地的广播电台",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.4,
+              "ratingCount": 709,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Calm",
               "url": "https://www.calm.com",
               "icon": "🧘",
               "description": "冥想和放松音乐",
-              "tag": "放松"
+              "tag": "放松",
+              "rating": 4.4,
+              "ratingCount": 784,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Every Noise",
               "url": "https://everynoise.com",
               "icon": "🎵",
               "description": "探索所有音乐类型",
-              "tag": "音乐"
+              "tag": "音乐",
+              "rating": 4.3,
+              "ratingCount": 708,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "窗外",
               "url": "https://window-swap.com",
               "icon": "🪟",
               "description": "看看世界各地的窗外风景",
-              "tag": "视频"
+              "tag": "视频",
+              "rating": 4.4,
+              "ratingCount": 601,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "云游故宫",
               "url": "https://www.dpm.org.cn/lights/royal.html",
               "icon": "🏯",
               "description": "线上逛故宫，文化摸鱼",
-              "tag": "文化"
+              "tag": "文化",
+              "rating": 4.5,
+              "ratingCount": 700,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         }
@@ -757,56 +1247,96 @@ const SITES_DATA =
               "url": "https://www.notion.so",
               "icon": "📝",
               "description": "强大的笔记和协作工具",
-              "tag": "笔记"
+              "tag": "笔记",
+              "rating": 4.3,
+              "ratingCount": 736,
+              "hot": false,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Canva",
               "url": "https://www.canva.com",
               "icon": "🖼️",
               "description": "在线平面设计平台",
-              "tag": "设计"
+              "tag": "设计",
+              "rating": 4.8,
+              "ratingCount": 1434,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Excalidraw",
               "url": "https://excalidraw.com",
               "icon": "✏️",
               "description": "简单易用的手绘风格白板工具",
-              "tag": "白板"
+              "tag": "白板",
+              "rating": 4.4,
+              "ratingCount": 741,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "DeepL",
               "url": "https://www.deepl.com",
               "icon": "🌐",
               "description": "最好用的在线翻译工具",
-              "tag": "翻译"
+              "tag": "翻译",
+              "rating": 4.4,
+              "ratingCount": 604,
+              "hot": false,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "TinyPNG",
               "url": "https://tinypng.com",
               "icon": "🖼️",
               "description": "免费的图片压缩工具",
-              "tag": "图片"
+              "tag": "图片",
+              "rating": 4.1,
+              "ratingCount": 523,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Photopea",
               "url": "https://www.photopea.com",
               "icon": "🎨",
               "description": "在线版 Photoshop",
-              "tag": "编辑"
+              "tag": "编辑",
+              "rating": 4.5,
+              "ratingCount": 506,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Remove.bg",
               "url": "https://www.remove.bg",
               "icon": "🎭",
               "description": "AI 自动抠图工具",
-              "tag": "AI"
+              "tag": "AI",
+              "rating": 4.5,
+              "ratingCount": 763,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Convertio",
               "url": "https://convertio.co",
               "icon": "🔄",
               "description": "在线文件格式转换",
-              "tag": "转换"
+              "tag": "转换",
+              "rating": 4.5,
+              "ratingCount": 754,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -821,56 +1351,96 @@ const SITES_DATA =
               "url": "https://www.microsoft.com/microsoft-365",
               "icon": "📝",
               "description": "微软办公套件",
-              "tag": "办公"
+              "tag": "办公",
+              "rating": 4.5,
+              "ratingCount": 744,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Google Workspace",
               "url": "https://workspace.google.com",
               "icon": "📄",
               "description": "谷歌办公套件",
-              "tag": "协作"
+              "tag": "协作",
+              "rating": 4.4,
+              "ratingCount": 588,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Slack",
               "url": "https://www.slack.com",
               "icon": "💬",
               "description": "团队沟通协作工具",
-              "tag": "沟通"
+              "tag": "沟通",
+              "rating": 4.2,
+              "ratingCount": 739,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Trello",
               "url": "https://trello.com",
               "icon": "📋",
               "description": "看板式项目管理工具",
-              "tag": "管理"
+              "tag": "管理",
+              "rating": 4.1,
+              "ratingCount": 655,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Asana",
               "url": "https://www.asana.com",
               "icon": "✅",
               "description": "团队任务管理平台",
-              "tag": "任务"
+              "tag": "任务",
+              "rating": 4.0,
+              "ratingCount": 770,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Monday",
               "url": "https://monday.com",
               "icon": "📊",
               "description": "工作操作系统",
-              "tag": "项目"
+              "tag": "项目",
+              "rating": 4.0,
+              "ratingCount": 730,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Airtable",
               "url": "https://www.airtable.com",
               "icon": "📊",
               "description": "在线数据库和协作平台",
-              "tag": "数据"
+              "tag": "数据",
+              "rating": 4.1,
+              "ratingCount": 711,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Miro",
               "url": "https://miro.com",
               "icon": "🖼️",
               "description": "在线白板协作工具",
-              "tag": "白板"
+              "tag": "白板",
+              "rating": 4.1,
+              "ratingCount": 693,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -885,56 +1455,96 @@ const SITES_DATA =
               "url": "https://www.pexels.com",
               "icon": "📸",
               "description": "免费高质量图片和视频",
-              "tag": "素材"
+              "tag": "素材",
+              "rating": 4.4,
+              "ratingCount": 692,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pixabay",
               "url": "https://pixabay.com",
               "icon": "🖼️",
               "description": "免费图片和视频素材",
-              "tag": "素材"
+              "tag": "素材",
+              "rating": 4.1,
+              "ratingCount": 614,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Shutterstock",
               "url": "https://www.shutterstock.com",
               "icon": "📷",
               "description": "专业图片视频素材库",
-              "tag": "付费"
+              "tag": "付费",
+              "rating": 4.5,
+              "ratingCount": 672,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Vimeo",
               "url": "https://www.vimeo.com",
               "icon": "🎥",
               "description": "高质量视频分享平台",
-              "tag": "视频"
+              "tag": "视频",
+              "rating": 4.0,
+              "ratingCount": 614,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Flickr",
               "url": "https://www.flickr.com",
               "icon": "📸",
               "description": "图片存储和分享社区",
-              "tag": "社区"
+              "tag": "社区",
+              "rating": 4.3,
+              "ratingCount": 628,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "500px",
               "url": "https://www.500px.com",
               "icon": "📷",
               "description": "摄影师作品展示平台",
-              "tag": "摄影"
+              "tag": "摄影",
+              "rating": 4.5,
+              "ratingCount": 507,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "GIPHY",
               "url": "https://giphy.com",
               "icon": "🎬",
               "description": "GIF 动图搜索引擎",
-              "tag": "GIF"
+              "tag": "GIF",
+              "rating": 4.4,
+              "ratingCount": 642,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Imgur",
               "url": "https://imgur.com",
               "icon": "🖼️",
               "description": "图片分享社区",
-              "tag": "分享"
+              "tag": "分享",
+              "rating": 4.4,
+              "ratingCount": 532,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -949,56 +1559,96 @@ const SITES_DATA =
               "url": "https://www.dropbox.com",
               "icon": "📦",
               "description": "老牌云存储服务",
-              "tag": "存储"
+              "tag": "存储",
+              "rating": 4.4,
+              "ratingCount": 519,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Google Drive",
               "url": "https://drive.google.com",
               "icon": "💾",
               "description": "谷歌云端硬盘",
-              "tag": "存储"
+              "tag": "存储",
+              "rating": 4.7,
+              "ratingCount": 1818,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "OneDrive",
               "url": "https://onedrive.live.com",
               "icon": "☁️",
               "description": "微软云存储",
-              "tag": "存储"
+              "tag": "存储",
+              "rating": 4.1,
+              "ratingCount": 719,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "iCloud",
               "url": "https://www.icloud.com",
               "icon": "☁️",
               "description": "苹果云服务",
-              "tag": "Apple"
+              "tag": "Apple",
+              "rating": 4.3,
+              "ratingCount": 582,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "百度网盘",
               "url": "https://pan.baidu.com",
               "icon": "☁️",
               "description": "国内主流云存储",
-              "tag": "存储"
+              "tag": "存储",
+              "rating": 4.2,
+              "ratingCount": 540,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "阿里云盘",
               "url": "https://www.aliyundrive.com",
               "icon": "☁️",
               "description": "不限速的云存储",
-              "tag": "存储"
+              "tag": "存储",
+              "rating": 4.3,
+              "ratingCount": 516,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Box",
               "url": "https://www.box.com",
               "icon": "📦",
               "description": "企业级云存储",
-              "tag": "企业"
+              "tag": "企业",
+              "rating": 4.2,
+              "ratingCount": 696,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "MEGA",
               "url": "https://mega.nz",
               "icon": "🔒",
               "description": "加密云存储",
-              "tag": "安全"
+              "tag": "安全",
+              "rating": 4.0,
+              "ratingCount": 532,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -1013,35 +1663,60 @@ const SITES_DATA =
               "url": "https://thepiratebay.org/",
               "icon": "🏴‍☠️",
               "description": "最知名的BT站点",
-              "tag": "BT"
+              "tag": "BT",
+              "rating": 4.1,
+              "ratingCount": 510,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "1337x",
               "url": "https://1337x.to/",
               "icon": "🎯",
               "description": "界面友好，资源丰富",
-              "tag": "BT"
+              "tag": "BT",
+              "rating": 4.2,
+              "ratingCount": 529,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Nyaa",
               "url": "https://nyaa.si/",
               "icon": "🐱",
               "description": "动漫资源专用站",
-              "tag": "动漫"
+              "tag": "动漫",
+              "rating": 4.1,
+              "ratingCount": 776,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "BTDigg",
               "url": "https://btdig.com/",
               "icon": "🔎",
               "description": "BT种子DHT搜索引擎",
-              "tag": "搜索"
+              "tag": "搜索",
+              "rating": 4.1,
+              "ratingCount": 604,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "BT4G",
               "url": "https://bt4gprx.com/",
               "icon": "🔍",
               "description": "DHT磁力搜索引擎",
-              "tag": "磁力"
+              "tag": "磁力",
+              "rating": 4.2,
+              "ratingCount": 716,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         }
@@ -1064,56 +1739,96 @@ const SITES_DATA =
               "url": "https://www.coursera.org",
               "icon": "🎓",
               "description": "世界顶尖大学的在线课程",
-              "tag": "课程"
+              "tag": "课程",
+              "rating": 4.5,
+              "ratingCount": 677,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Udemy",
               "url": "https://www.udemy.com",
               "icon": "📖",
               "description": "海量在线课程平台",
-              "tag": "课程"
+              "tag": "课程",
+              "rating": 4.2,
+              "ratingCount": 617,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Khan Academy",
               "url": "https://www.khanacademy.org",
               "icon": "🏫",
               "description": "免费的在线学习平台",
-              "tag": "免费"
+              "tag": "免费",
+              "rating": 4.2,
+              "ratingCount": 694,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Duolingo",
               "url": "https://www.duolingo.com",
               "icon": "🌍",
               "description": "免费好玩的语言学习平台",
-              "tag": "语言"
+              "tag": "语言",
+              "rating": 4.1,
+              "ratingCount": 758,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "TED",
               "url": "https://www.ted.com",
               "icon": "🎤",
               "description": "Ideas worth spreading",
-              "tag": "演讲"
+              "tag": "演讲",
+              "rating": 4.1,
+              "ratingCount": 582,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Wikipedia",
               "url": "https://www.wikipedia.org",
               "icon": "📚",
               "description": "自由的百科全书",
-              "tag": "百科"
+              "tag": "百科",
+              "rating": 4.4,
+              "ratingCount": 507,
+              "hot": false,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "知乎",
               "url": "https://www.zhihu.com",
               "icon": "💡",
               "description": "有问题，就会有答案",
-              "tag": "问答"
+              "tag": "问答",
+              "rating": 4.0,
+              "ratingCount": 652,
+              "hot": false,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Medium",
               "url": "https://www.medium.com",
               "icon": "✍️",
               "description": "优质文章阅读平台",
-              "tag": "阅读"
+              "tag": "阅读",
+              "rating": 4.1,
+              "ratingCount": 634,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -1128,56 +1843,96 @@ const SITES_DATA =
               "url": "https://github.com",
               "icon": "🐙",
               "description": "全球最大的代码托管平台",
-              "tag": "代码"
+              "tag": "代码",
+              "rating": 4.9,
+              "ratingCount": 1857,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Stack Overflow",
               "url": "https://stackoverflow.com",
               "icon": "❓",
               "description": "程序员问答社区",
-              "tag": "问答"
+              "tag": "问答",
+              "rating": 4.5,
+              "ratingCount": 608,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Figma",
               "url": "https://www.figma.com",
               "icon": "🎨",
               "description": "在线协作设计工具",
-              "tag": "设计"
+              "tag": "设计",
+              "rating": 4.8,
+              "ratingCount": 1442,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "CodePen",
               "url": "https://codepen.io",
               "icon": "✏️",
               "description": "前端代码演示和分享",
-              "tag": "前端"
+              "tag": "前端",
+              "rating": 4.5,
+              "ratingCount": 576,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Replit",
               "url": "https://replit.com",
               "icon": "🚀",
               "description": "在线编程协作平台",
-              "tag": "IDE"
+              "tag": "IDE",
+              "rating": 4.4,
+              "ratingCount": 630,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "LeetCode",
               "url": "https://www.leetcode.com",
               "icon": "🧩",
               "description": "算法题刷题平台",
-              "tag": "算法"
+              "tag": "算法",
+              "rating": 5.0,
+              "ratingCount": 1545,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "MDN",
               "url": "https://developer.mozilla.org",
               "icon": "📚",
               "description": "Web 开发者文档",
-              "tag": "文档"
+              "tag": "文档",
+              "rating": 4.9,
+              "ratingCount": 1228,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "npm",
               "url": "https://www.npmjs.com",
               "icon": "📦",
               "description": "JavaScript 包管理器",
-              "tag": "包管理"
+              "tag": "包管理",
+              "rating": 4.2,
+              "ratingCount": 707,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -1192,56 +1947,336 @@ const SITES_DATA =
               "url": "https://dribbble.com",
               "icon": "🏀",
               "description": "设计师作品展示与交流社区",
-              "tag": "设计"
+              "tag": "设计",
+              "rating": 4.7,
+              "ratingCount": 1245,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Behance",
               "url": "https://www.behance.net",
               "icon": "🎪",
               "description": "Adobe 旗下创意作品平台",
-              "tag": "作品"
+              "tag": "作品",
+              "rating": 4.6,
+              "ratingCount": 1963,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Unsplash",
               "url": "https://unsplash.com",
               "icon": "📷",
               "description": "高质量免费图片素材库",
-              "tag": "图片"
+              "tag": "图片",
+              "rating": 4.5,
+              "ratingCount": 762,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pinterest",
               "url": "https://www.pinterest.com",
               "icon": "📌",
               "description": "图片灵感收集平台",
-              "tag": "灵感"
+              "tag": "灵感",
+              "rating": 4.3,
+              "ratingCount": 715,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Awwwards",
               "url": "https://www.awwwards.com",
               "icon": "🏆",
               "description": "全球优秀网站设计展示",
-              "tag": "网站"
+              "tag": "网站",
+              "rating": 4.2,
+              "ratingCount": 729,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "ArtStation",
               "url": "https://www.artstation.com",
               "icon": "🎮",
               "description": "游戏艺术作品展示平台",
-              "tag": "艺术"
+              "tag": "艺术",
+              "rating": 4.0,
+              "ratingCount": 635,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Pixiv",
               "url": "https://www.pixiv.net",
               "icon": "🎨",
               "description": "插画交流平台",
-              "tag": "插画"
+              "tag": "插画",
+              "rating": 4.2,
+              "ratingCount": 548,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "DeviantArt",
               "url": "https://www.deviantart.com",
               "icon": "🖌️",
               "description": "艺术家社区",
-              "tag": "艺术"
+              "tag": "艺术",
+              "rating": 4.1,
+              "ratingCount": 634,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creative-design",
+      "icon": "🎨",
+      "name": "创意设计",
+      "description": "激发创意，提升设计技能",
+      "subcategories": [
+        {
+          "id": "creative-inspiration",
+          "icon": "💡",
+          "name": "灵感素材",
+          "description": "设计灵感和素材资源",
+          "sites": [
+            {
+              "name": "站酷",
+              "url": "https://www.zcool.com.cn",
+              "icon": "🎨",
+              "description": "中国设计师互动平台",
+              "tag": "设计",
+              "rating": 4.6,
+              "ratingCount": 1200,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "Dribbble",
+              "url": "https://dribbble.com",
+              "icon": "🏀",
+              "description": "全球顶尖设计师作品展示",
+              "tag": "灵感",
+              "rating": 4.8,
+              "ratingCount": 1500,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "Behance",
+              "url": "https://www.behance.net",
+              "icon": "💼",
+              "description": "Adobe设计作品展示平台",
+              "tag": "作品集",
+              "rating": 4.7,
+              "ratingCount": 1300,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "UI中国",
+              "url": "https://www.ui.cn",
+              "icon": "🖌️",
+              "description": "UI设计师社区",
+              "tag": "UI",
+              "rating": 4.5,
+              "ratingCount": 900,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        },
+        {
+          "id": "creative-tools",
+          "icon": "🛠️",
+          "name": "设计工具",
+          "description": "专业设计软件和在线工具",
+          "sites": [
+            {
+              "name": "Figma",
+              "url": "https://www.figma.com",
+              "icon": "🎨",
+              "description": "协作式UI设计工具",
+              "tag": "设计",
+              "rating": 4.9,
+              "ratingCount": 1800,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "Canva",
+              "url": "https://www.canva.com",
+              "icon": "✨",
+              "description": "在线平面设计平台",
+              "tag": "设计",
+              "rating": 4.7,
+              "ratingCount": 1500,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "即时设计",
+              "url": "https://js.design",
+              "icon": "⚡",
+              "description": "国产UI设计协作工具",
+              "tag": "设计",
+              "rating": 4.6,
+              "ratingCount": 1000,
+              "hot": false,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "蓝湖",
+              "url": "https://lanhuapp.com",
+              "icon": "🌊",
+              "description": "设计稿交付协作平台",
+              "tag": "协作",
+              "rating": 4.5,
+              "ratingCount": 800,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creative-design",
+      "icon": "🎨",
+      "name": "创意设计",
+      "description": "激发创意，提升设计技能",
+      "subcategories": [
+        {
+          "id": "creative-inspiration",
+          "icon": "💡",
+          "name": "灵感素材",
+          "description": "设计灵感和素材资源",
+          "sites": [
+            {
+              "name": "站酷",
+              "url": "https://www.zcool.com.cn",
+              "icon": "🎨",
+              "description": "中国设计师互动平台",
+              "tag": "设计",
+              "rating": 4.3,
+              "ratingCount": 613,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "Dribbble",
+              "url": "https://dribbble.com",
+              "icon": "🏀",
+              "description": "全球顶尖设计师作品展示",
+              "tag": "灵感",
+              "rating": 4.7,
+              "ratingCount": 1245,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "Behance",
+              "url": "https://www.behance.net",
+              "icon": "💼",
+              "description": "Adobe设计作品展示平台",
+              "tag": "作品集",
+              "rating": 4.6,
+              "ratingCount": 1963,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "UI中国",
+              "url": "https://www.ui.cn",
+              "icon": "🖌️",
+              "description": "UI设计师社区",
+              "tag": "UI",
+              "rating": 4.2,
+              "ratingCount": 529,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        },
+        {
+          "id": "creative-tools",
+          "icon": "🛠️",
+          "name": "设计工具",
+          "description": "专业设计软件和在线工具",
+          "sites": [
+            {
+              "name": "Figma",
+              "url": "https://www.figma.com",
+              "icon": "🎨",
+              "description": "协作式UI设计工具",
+              "tag": "设计",
+              "rating": 4.8,
+              "ratingCount": 1442,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "Canva",
+              "url": "https://www.canva.com",
+              "icon": "✨",
+              "description": "在线平面设计平台",
+              "tag": "设计",
+              "rating": 4.8,
+              "ratingCount": 1434,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "即时设计",
+              "url": "https://js.design",
+              "icon": "⚡",
+              "description": "国产UI设计协作工具",
+              "tag": "设计",
+              "rating": 4.2,
+              "ratingCount": 582,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "蓝湖",
+              "url": "https://lanhuapp.com",
+              "icon": "🌊",
+              "description": "设计稿交付协作平台",
+              "tag": "协作",
+              "rating": 4.2,
+              "ratingCount": 734,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         }
@@ -1254,6 +2289,118 @@ const SITES_DATA =
       "description": "探索科技，掌握前沿",
       "subcategories": [
         {
+          "id": "tech-developer",
+          "icon": "👨‍💻",
+          "name": "开发者工具",
+          "description": "程序员必备工具和资源",
+          "sites": [
+            {
+              "name": "VS Code Online",
+              "url": "https://vscode.dev",
+              "icon": "💻",
+              "description": "在线VS Code编辑器",
+              "tag": "编辑器",
+              "rating": 4.8,
+              "ratingCount": 1500,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "CodeSandbox",
+              "url": "https://codesandbox.io",
+              "icon": "📦",
+              "description": "在线代码沙箱",
+              "tag": "开发",
+              "rating": 4.7,
+              "ratingCount": 1200,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "LeetCode",
+              "url": "https://leetcode.com",
+              "icon": "🧠",
+              "description": "算法题库和面试准备",
+              "tag": "算法",
+              "rating": 4.9,
+              "ratingCount": 2000,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "MDN",
+              "url": "https://developer.mozilla.org",
+              "icon": "📚",
+              "description": "Web开发文档",
+              "tag": "文档",
+              "rating": 4.9,
+              "ratingCount": 1800,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        },
+        {
+          "id": "tech-developer",
+          "icon": "👨‍💻",
+          "name": "开发者工具",
+          "description": "程序员必备工具和资源",
+          "sites": [
+            {
+              "name": "VS Code Online",
+              "url": "https://vscode.dev",
+              "icon": "💻",
+              "description": "在线VS Code编辑器",
+              "tag": "编辑器",
+              "rating": 4.7,
+              "ratingCount": 1291,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "CodeSandbox",
+              "url": "https://codesandbox.io",
+              "icon": "📦",
+              "description": "在线代码沙箱",
+              "tag": "开发",
+              "rating": 4.2,
+              "ratingCount": 526,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "LeetCode",
+              "url": "https://leetcode.com",
+              "icon": "🧠",
+              "description": "算法题库和面试准备",
+              "tag": "算法",
+              "rating": 5.0,
+              "ratingCount": 1545,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "MDN",
+              "url": "https://developer.mozilla.org",
+              "icon": "📚",
+              "description": "Web开发文档",
+              "tag": "文档",
+              "rating": 4.9,
+              "ratingCount": 1228,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        },
+        {
           "id": "tech-ai",
           "icon": "🤖",
           "name": "AI 科技",
@@ -1264,56 +2411,96 @@ const SITES_DATA =
               "url": "https://chat.openai.com",
               "icon": "🤖",
               "description": "OpenAI 的智能对话助手",
-              "tag": "对话"
+              "tag": "对话",
+              "rating": 4.8,
+              "ratingCount": 1946,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Claude",
               "url": "https://claude.ai",
               "icon": "✨",
               "description": "Anthropic 的 AI 助手",
-              "tag": "对话"
+              "tag": "对话",
+              "rating": 4.5,
+              "ratingCount": 566,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Midjourney",
               "url": "https://www.midjourney.com",
               "icon": "🎨",
               "description": "AI 图像生成工具",
-              "tag": "绘画"
+              "tag": "绘画",
+              "rating": 4.0,
+              "ratingCount": 626,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Hugging Face",
               "url": "https://huggingface.co",
               "icon": "🤗",
               "description": "机器学习模型社区",
-              "tag": "模型"
+              "tag": "模型",
+              "rating": 4.3,
+              "ratingCount": 656,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Perplexity",
               "url": "https://www.perplexity.ai",
               "icon": "🔍",
               "description": "AI 搜索引擎",
-              "tag": "搜索"
+              "tag": "搜索",
+              "rating": 4.2,
+              "ratingCount": 571,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Copy.ai",
               "url": "https://www.copy.ai",
               "icon": "✍️",
               "description": "AI 文案生成工具",
-              "tag": "写作"
+              "tag": "写作",
+              "rating": 4.4,
+              "ratingCount": 703,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Runway",
               "url": "https://runwayml.com",
               "icon": "🎬",
               "description": "AI 视频编辑工具",
-              "tag": "视频"
+              "tag": "视频",
+              "rating": 4.5,
+              "ratingCount": 594,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Jasper",
               "url": "https://www.jasper.ai",
               "icon": "📝",
               "description": "AI 内容创作平台",
-              "tag": "创作"
+              "tag": "创作",
+              "rating": 4.1,
+              "ratingCount": 634,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -1328,77 +2515,132 @@ const SITES_DATA =
               "url": "https://sourceforge.net",
               "icon": "🔧",
               "description": "老牌开源软件下载站",
-              "tag": "开源"
+              "tag": "开源",
+              "rating": 4.4,
+              "ratingCount": 535,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "MSDN我告诉你",
               "url": "https://msdn.itellyou.cn",
               "icon": "💻",
               "description": "原版Windows和Office镜像下载",
-              "tag": "系统"
+              "tag": "系统",
+              "rating": 4.2,
+              "ratingCount": 529,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "异次元软件世界",
               "url": "https://www.iplaysoft.com",
               "icon": "🌟",
               "description": "优质软件推荐和下载",
-              "tag": "推荐"
+              "tag": "推荐",
+              "rating": 4.2,
+              "ratingCount": 535,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "小众软件",
               "url": "https://www.appinn.com",
               "icon": "📦",
               "description": "发现免费好用的小软件",
-              "tag": "推荐"
+              "tag": "推荐",
+              "rating": 4.5,
+              "ratingCount": 575,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "AlternativeTo",
               "url": "https://alternativeto.net",
               "icon": "🔄",
               "description": "寻找软件的最佳替代品",
-              "tag": "工具"
+              "tag": "工具",
+              "rating": 4.3,
+              "ratingCount": 518,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Softpedia",
               "url": "https://www.softpedia.com",
               "icon": "📥",
               "description": "国际知名软件下载网站",
-              "tag": "下载"
+              "tag": "下载",
+              "rating": 4.4,
+              "ratingCount": 706,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "FileHippo",
               "url": "https://filehippo.com",
               "icon": "🦛",
               "description": "安全的软件下载平台",
-              "tag": "下载"
+              "tag": "下载",
+              "rating": 4.0,
+              "ratingCount": 531,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Ninite",
               "url": "https://ninite.com",
               "icon": "⚡",
               "description": "一键批量安装常用软件",
-              "tag": "安装"
+              "tag": "安装",
+              "rating": 4.5,
+              "ratingCount": 700,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Chocolatey",
               "url": "https://chocolatey.org",
               "icon": "🍫",
               "description": "Windows包管理器",
-              "tag": "包管理"
+              "tag": "包管理",
+              "rating": 4.1,
+              "ratingCount": 569,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Homebrew",
               "url": "https://brew.sh",
               "icon": "🍺",
               "description": "macOS和Linux包管理器",
-              "tag": "包管理"
+              "tag": "包管理",
+              "rating": 4.3,
+              "ratingCount": 745,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "腾讯软件中心",
               "url": "https://pc.qq.com",
               "icon": "🐧",
               "description": "腾讯官方软件下载平台",
-              "tag": "下载"
+              "tag": "下载",
+              "rating": 4.1,
+              "ratingCount": 528,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -1413,56 +2655,96 @@ const SITES_DATA =
               "url": "https://www.36kr.com",
               "icon": "🚀",
               "description": "科技创业媒体",
-              "tag": "科技"
+              "tag": "科技",
+              "rating": 4.5,
+              "ratingCount": 664,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "虎嗅",
               "url": "https://www.huxiu.com",
               "icon": "🦊",
               "description": "商业科技资讯",
-              "tag": "商业"
+              "tag": "商业",
+              "rating": 4.4,
+              "ratingCount": 708,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "TechCrunch",
               "url": "https://techcrunch.com",
               "icon": "💻",
               "description": "国际科技新闻",
-              "tag": "科技"
+              "tag": "科技",
+              "rating": 4.4,
+              "ratingCount": 744,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "The Verge",
               "url": "https://www.theverge.com",
               "icon": "📱",
               "description": "科技文化媒体",
-              "tag": "科技"
+              "tag": "科技",
+              "rating": 4.3,
+              "ratingCount": 718,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Hacker News",
               "url": "https://news.ycombinator.com",
               "icon": "🔶",
               "description": "黑客和创业者新闻",
-              "tag": "科技"
+              "tag": "科技",
+              "rating": 4.4,
+              "ratingCount": 698,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "BBC",
               "url": "https://www.bbc.com",
               "icon": "📻",
               "description": "英国广播公司",
-              "tag": "新闻"
+              "tag": "新闻",
+              "rating": 4.2,
+              "ratingCount": 653,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "New York Times",
               "url": "https://www.nytimes.com",
               "icon": "📰",
               "description": "纽约时报",
-              "tag": "新闻"
+              "tag": "新闻",
+              "rating": 4.3,
+              "ratingCount": 508,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Reuters",
               "url": "https://www.reuters.com",
               "icon": "🌐",
               "description": "路透社",
-              "tag": "新闻"
+              "tag": "新闻",
+              "rating": 4.4,
+              "ratingCount": 683,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         }
@@ -1475,6 +2757,94 @@ const SITES_DATA =
       "description": "便捷生活，品质享受",
       "subcategories": [
         {
+          "id": "life-daily",
+          "icon": "🏠",
+          "name": "日常服务",
+          "description": "生活必备便捷服务",
+          "sites": [
+            {
+              "name": "高德地图",
+              "url": "https://www.amap.com",
+              "icon": "🗺️",
+              "description": "导航和位置服务",
+              "tag": "地图",
+              "rating": 4.8,
+              "ratingCount": 2000,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "美团外卖",
+              "url": "https://www.meituan.com",
+              "icon": "🍔",
+              "description": "在线订餐平台",
+              "tag": "外卖",
+              "rating": 4.6,
+              "ratingCount": 1800,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "12306",
+              "url": "https://www.12306.cn",
+              "icon": "🚄",
+              "description": "中国铁路客票",
+              "tag": "出行",
+              "rating": 4.3,
+              "ratingCount": 1500,
+              "hot": false,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        },
+        {
+          "id": "life-daily",
+          "icon": "🏠",
+          "name": "日常服务",
+          "description": "生活必备便捷服务",
+          "sites": [
+            {
+              "name": "高德地图",
+              "url": "https://www.amap.com",
+              "icon": "🗺️",
+              "description": "导航和位置服务",
+              "tag": "地图",
+              "rating": 5.0,
+              "ratingCount": 1545,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "美团外卖",
+              "url": "https://www.meituan.com",
+              "icon": "🍔",
+              "description": "在线订餐平台",
+              "tag": "外卖",
+              "rating": 4.6,
+              "ratingCount": 1363,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
+            },
+            {
+              "name": "12306",
+              "url": "https://www.12306.cn",
+              "icon": "🚄",
+              "description": "中国铁路客票",
+              "tag": "出行",
+              "rating": 4.3,
+              "ratingCount": 554,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
+            }
+          ]
+        },
+        {
           "id": "life-shopping",
           "icon": "🛍️",
           "name": "在线购物",
@@ -1485,56 +2855,96 @@ const SITES_DATA =
               "url": "https://www.taobao.com",
               "icon": "🛒",
               "description": "国内最大的C2C购物平台",
-              "tag": "购物"
+              "tag": "购物",
+              "rating": 4.9,
+              "ratingCount": 1131,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "京东",
               "url": "https://www.jd.com",
               "icon": "🐶",
               "description": "自营电商平台",
-              "tag": "购物"
+              "tag": "购物",
+              "rating": 4.9,
+              "ratingCount": 1090,
+              "hot": true,
+              "recommended": true,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Amazon",
               "url": "https://www.amazon.com",
               "icon": "📦",
               "description": "全球最大的电商平台",
-              "tag": "国际"
+              "tag": "国际",
+              "rating": 4.8,
+              "ratingCount": 1677,
+              "hot": true,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "eBay",
               "url": "https://www.ebay.com",
               "icon": "🏷️",
               "description": "在线拍卖及购物网站",
-              "tag": "拍卖"
+              "tag": "拍卖",
+              "rating": 4.1,
+              "ratingCount": 792,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "AliExpress",
               "url": "https://www.aliexpress.com",
               "icon": "🌍",
               "description": "全球速卖通",
-              "tag": "国际"
+              "tag": "国际",
+              "rating": 4.4,
+              "ratingCount": 531,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "天猫",
               "url": "https://www.tmall.com",
               "icon": "😺",
               "description": "品质购物平台",
-              "tag": "品牌"
+              "tag": "品牌",
+              "rating": 4.1,
+              "ratingCount": 566,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "拼多多",
               "url": "https://www.pinduoduo.com",
               "icon": "🍊",
               "description": "社交电商平台",
-              "tag": "拼团"
+              "tag": "拼团",
+              "rating": 4.1,
+              "ratingCount": 719,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Shopify",
               "url": "https://www.shopify.com",
               "icon": "🛍️",
               "description": "独立站电商平台",
-              "tag": "建站"
+              "tag": "建站",
+              "rating": 4.1,
+              "ratingCount": 519,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         },
@@ -1549,56 +2959,96 @@ const SITES_DATA =
               "url": "https://www.bloomberg.com",
               "icon": "📈",
               "description": "彭博财经新闻",
-              "tag": "财经"
+              "tag": "财经",
+              "rating": 4.5,
+              "ratingCount": 616,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Coinbase",
               "url": "https://www.coinbase.com",
               "icon": "₿",
               "description": "加密货币交易平台",
-              "tag": "加密"
+              "tag": "加密",
+              "rating": 4.2,
+              "ratingCount": 538,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "TradingView",
               "url": "https://www.tradingview.com",
               "icon": "📊",
               "description": "专业金融图表和分析",
-              "tag": "交易"
+              "tag": "交易",
+              "rating": 4.0,
+              "ratingCount": 527,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Investing",
               "url": "https://www.investing.com",
               "icon": "💹",
               "description": "全球金融市场资讯",
-              "tag": "市场"
+              "tag": "市场",
+              "rating": 4.4,
+              "ratingCount": 631,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Binance",
               "url": "https://www.binance.com",
               "icon": "🪙",
               "description": "全球最大的加密货币交易所",
-              "tag": "加密"
+              "tag": "加密",
+              "rating": 4.4,
+              "ratingCount": 577,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "Yahoo Finance",
               "url": "https://finance.yahoo.com",
               "icon": "💵",
               "description": "雅虎财经",
-              "tag": "财经"
+              "tag": "财经",
+              "rating": 4.1,
+              "ratingCount": 573,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "MarketWatch",
               "url": "https://www.marketwatch.com",
               "icon": "📰",
               "description": "市场观察财经新闻",
-              "tag": "新闻"
+              "tag": "新闻",
+              "rating": 4.1,
+              "ratingCount": 789,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             },
             {
               "name": "XE",
               "url": "https://www.xe.com",
               "icon": "💱",
               "description": "汇率换算工具",
-              "tag": "工具"
+              "tag": "工具",
+              "rating": 4.4,
+              "ratingCount": 732,
+              "hot": false,
+              "recommended": false,
+              "updateDate": "2024-12-17"
             }
           ]
         }
@@ -1607,3 +3057,8 @@ const SITES_DATA =
   ]
 }
 ;
+
+// Expose to window for compatibility
+if (typeof window !== 'undefined') {
+    window.SITES_DATA = SITES_DATA;
+}
