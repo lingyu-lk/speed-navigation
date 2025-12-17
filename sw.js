@@ -11,7 +11,6 @@ const PRECACHE_URLS = [
     './js/pinyin.js',
     './js/sites-data.js',
     './js/effects.js',
-    './js/hot-search.js',
     './js/online-users.js',
     './data/sites.json',
     './manifest.json'
@@ -86,7 +85,7 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // 跳过热搜 API 请求（需要实时数据）
+    // 跳过第三方 API 请求（需要实时数据）
     if (url.hostname.includes('tenapi.cn') ||
         url.hostname.includes('api.') ||
         url.pathname.includes('/api/')) {

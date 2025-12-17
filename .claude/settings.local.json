@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push)",
+      "Bash(git config:*)",
+      "Bash(ssh-keygen:*)",
+      "Bash(cat:*)",
+      "Bash(ssh-add:*)",
+      "Bash(clip)",
+      "Bash(ssh:*)",
+      "Bash(git remote:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nrefactor: 移除热搜榜单模块\n\n- 删除热搜榜单展示区域和相关 HTML 结构\n- 移除热搜功能 JavaScript 文件 (js/hot-search.js)\n- 清理所有热搜相关 CSS 样式\n- 删除热搜测试页面 (hot-search-test.html)\n- 更新 Service Worker 预缓存配置\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n)\")"
+    ]
+  }
+}
