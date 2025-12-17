@@ -1028,6 +1028,13 @@ const SITES_DATA =
               "icon": "🐱",
               "description": "动漫资源专用站",
               "tag": "动漫"
+            },
+            {
+              "name": "BTDigg",
+              "url": "https://btdig.com/",
+              "icon": "🔎",
+              "description": "BT种子DHT搜索引擎",
+              "tag": "搜索"
             }
           ]
         }
