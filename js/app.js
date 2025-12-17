@@ -671,9 +671,10 @@ class NavigationManager {
 
 // ==================== Site Renderer ====================
 class SiteRenderer {
-    constructor(favoritesManager, historyManager) {
+    constructor(favoritesManager, historyManager, siteModalManager) {
         this.favoritesManager = favoritesManager;
         this.historyManager = historyManager;
+        this.siteModalManager = siteModalManager;
     }
 
     async loadSites() {
@@ -759,12 +760,10 @@ class SiteRenderer {
     }
 
     createRecentVisitItem(site) {
-        const card = document.createElement('a');
-        card.href = site.url;
+        const card = document.createElement('div');
         card.className = 'card';
-        card.target = '_blank';
-        card.rel = 'noopener noreferrer';
         card.setAttribute('data-url', site.url);
+        card.style.cursor = 'pointer';
 
         // Add fade-in animation class
         setTimeout(() => {
@@ -798,11 +797,12 @@ class SiteRenderer {
             <span class="time-badge" title="最后访问时间">${timeAgo}</span>
         `;
 
-        // Add click handler for history
+        // Add click handler to open modal
         card.addEventListener('click', (e) => {
-            this.historyManager.add(site);
-            // Update recent visits display
-            this.renderRecentVisits();
+            e.preventDefault();
+            if (this.siteModalManager) {
+                this.siteModalManager.openModal(site, '最近访问');
+            }
         });
 
         return card;
@@ -824,18 +824,18 @@ class SiteRenderer {
             if (category.subcategories) {
                 // Render each subcategory
                 category.subcategories.forEach(subcategory => {
-                    const subCategoryEl = this.createCategoryElement(subcategory);
+                    const subCategoryEl = this.createCategoryElement(subcategory, category.name);
                     content.appendChild(subCategoryEl);
                 });
             } else {
                 // Fallback: single-level category (backward compatibility)
-                const categoryEl = this.createCategoryElement(category);
+                const categoryEl = this.createCategoryElement(category, category.name);
                 content.appendChild(categoryEl);
             }
         });
     }
 
-    createCategoryElement(category) {
+    createCategoryElement(category, parentCategoryName) {
         const categoryDiv = document.createElement('div');
         categoryDiv.className = 'category';
         categoryDiv.id = category.id;
@@ -852,7 +852,7 @@ class SiteRenderer {
         cardsDiv.className = 'cards';
 
         category.sites.forEach(site => {
-            const card = this.createCardElement(site);
+            const card = this.createCardElement(site, parentCategoryName || category.name);
             cardsDiv.appendChild(card);
         });
 
@@ -862,13 +862,11 @@ class SiteRenderer {
         return categoryDiv;
     }
 
-    createCardElement(site) {
-        const card = document.createElement('a');
-        card.href = site.url;
+    createCardElement(site, categoryName) {
+        const card = document.createElement('div');
         card.className = 'card';
-        card.target = '_blank';
-        card.rel = 'noopener noreferrer';
         card.setAttribute('data-url', site.url);
+        card.style.cursor = 'pointer';
 
         // Add fade-in animation class
         setTimeout(() => {
@@ -904,11 +902,12 @@ class SiteRenderer {
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
         `;
 
-        // Add click handler for history
+        // Add click handler to open modal instead of direct navigation
         card.addEventListener('click', (e) => {
-            this.historyManager.add(site);
-            // Update recent visits display
-            this.renderRecentVisits();
+            e.preventDefault();
+            if (this.siteModalManager) {
+                this.siteModalManager.openModal(site, categoryName);
+            }
         });
 
         // Add context menu for favorite toggle
@@ -962,6 +961,139 @@ class SiteRenderer {
                     <p>无法加载网站数据，请刷新页面重试。</p>
                 </div>
             `;
+        }
+    }
+}
+
+// ==================== Site Modal Manager ====================
+class SiteModalManager {
+    constructor(historyManager) {
+        this.historyManager = historyManager;
+        this.modal = document.getElementById('siteModal');
+        this.overlay = document.getElementById('modalOverlay');
+        this.closeBtn = document.getElementById('modalCloseBtn');
+        this.cancelBtn = document.getElementById('modalCancelBtn');
+        this.visitBtn = document.getElementById('modalVisitBtn');
+        this.currentSite = null;
+        this.init();
+    }
+
+    init() {
+        // Close modal on overlay click
+        this.overlay?.addEventListener('click', () => this.closeModal());
+
+        // Close modal on close button click
+        this.closeBtn?.addEventListener('click', () => this.closeModal());
+
+        // Close modal on cancel button click
+        this.cancelBtn?.addEventListener('click', () => this.closeModal());
+
+        // Visit site on visit button click
+        this.visitBtn?.addEventListener('click', () => this.visitSite());
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+                this.closeModal();
+            }
+        });
+    }
+
+    openModal(site, categoryName) {
+        this.currentSite = site;
+
+        // Set modal content
+        this.updateModalContent(site, categoryName);
+
+        // Show modal
+        this.modal?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeModal() {
+        this.modal?.classList.remove('active');
+        document.body.style.overflow = '';
+        this.currentSite = null;
+    }
+
+    updateModalContent(site, categoryName) {
+        // Update title
+        const modalTitle = document.getElementById('modalTitle');
+        if (modalTitle) modalTitle.textContent = site.name;
+
+        // Update category
+        const modalCategory = document.getElementById('modalCategory');
+        if (modalCategory) modalCategory.textContent = categoryName || '未分类';
+
+        // Update description
+        const modalDescription = document.getElementById('modalDescription');
+        if (modalDescription) modalDescription.textContent = site.description || '暂无描述';
+
+        // Update URL
+        const modalUrlText = document.getElementById('modalUrlText');
+        if (modalUrlText) modalUrlText.textContent = site.url;
+
+        // Update icon
+        const modalFavicon = document.getElementById('modalFavicon');
+        const modalIconFallback = document.getElementById('modalIconFallback');
+
+        if (modalFavicon && modalIconFallback) {
+            let domain = '';
+            try {
+                const url = new URL(site.url);
+                domain = url.hostname;
+            } catch (e) {
+                domain = site.url;
+            }
+
+            const faviconUrl = site.iconUrl || `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+            modalFavicon.src = faviconUrl;
+            modalFavicon.style.display = 'block';
+            modalIconFallback.style.display = 'none';
+            modalIconFallback.textContent = site.icon || '🌐';
+
+            modalFavicon.onerror = () => {
+                modalFavicon.style.display = 'none';
+                modalIconFallback.style.display = 'block';
+            };
+        }
+
+        // Update stats
+        const history = this.historyManager.getAll();
+        const siteHistory = history.find(item => item.url === site.url);
+
+        const modalVisits = document.getElementById('modalVisits');
+        if (modalVisits) {
+            const visitsCount = siteHistory ? siteHistory.visits : 0;
+            modalVisits.querySelector('strong').textContent = visitsCount;
+        }
+
+        const modalLastVisit = document.getElementById('modalLastVisit');
+        if (modalLastVisit) {
+            if (siteHistory && siteHistory.timestamp) {
+                const lastVisit = Utils.formatDate(new Date(siteHistory.timestamp));
+                modalLastVisit.querySelector('strong').textContent = lastVisit;
+            } else {
+                modalLastVisit.querySelector('strong').textContent = '从未访问';
+            }
+        }
+    }
+
+    visitSite() {
+        if (this.currentSite) {
+            // Record history
+            this.historyManager.add(this.currentSite);
+
+            // Open site in new tab
+            window.open(this.currentSite.url, '_blank', 'noopener,noreferrer');
+
+            // Close modal
+            this.closeModal();
+
+            // Trigger recent visits update if app is available
+            if (window.app && window.app.siteRenderer) {
+                window.app.siteRenderer.renderRecentVisits();
+            }
         }
     }
 }
@@ -1075,7 +1207,8 @@ class App {
         this.themeManager = new ThemeManager();
         this.favoritesManager = new FavoritesManager();
         this.historyManager = new HistoryManager();
-        this.siteRenderer = new SiteRenderer(this.favoritesManager, this.historyManager);
+        this.siteModalManager = new SiteModalManager(this.historyManager);
+        this.siteRenderer = new SiteRenderer(this.favoritesManager, this.historyManager, this.siteModalManager);
         this.searchManager = new SearchManager();
         this.navigationManager = new NavigationManager();
         this.mobileMenuManager = new MobileMenuManager();
