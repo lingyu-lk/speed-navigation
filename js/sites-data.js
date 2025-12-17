@@ -1028,13 +1028,6 @@ const SITES_DATA =
               "icon": "🐱",
               "description": "动漫资源专用站",
               "tag": "动漫"
-            },
-            {
-              "name": "不太灵",
-              "url": "http://www.bturl.tv/",
-              "icon": "🔍",
-              "description": "磁力搜索工具",
-              "tag": "搜索"
             }
           ]
         }
