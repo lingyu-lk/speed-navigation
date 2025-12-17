@@ -905,8 +905,15 @@ class SiteRenderer {
         // Add click handler to open modal instead of direct navigation
         card.addEventListener('click', (e) => {
             e.preventDefault();
+            e.stopPropagation();
+            console.log('Card clicked:', site.name);
+            console.log('siteModalManager:', this.siteModalManager);
             if (this.siteModalManager) {
                 this.siteModalManager.openModal(site, categoryName);
+            } else {
+                console.error('siteModalManager is not available!');
+                // Fallback: direct navigation
+                window.open(site.url, '_blank', 'noopener,noreferrer');
             }
         });
 
