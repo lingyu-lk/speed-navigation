@@ -397,6 +397,40 @@
                 </div>
             </section>
 
+            <!-- Hot Search -->
+            <section class="hot-search" id="hotSearch" aria-label="热搜榜单">
+                <div class="hot-search-header">
+                    <div class="hot-search-title">
+                        <span class="hot-search-icon">🔥</span>
+                        <h3>热搜榜单</h3>
+                    </div>
+                    <div class="hot-search-platforms">
+                        <button class="platform-btn active" data-platform="weibo">
+                            <span class="platform-btn-icon">🐦</span>
+                            <span>微博</span>
+                        </button>
+                        <button class="platform-btn" data-platform="zhihu">
+                            <span class="platform-btn-icon">📘</span>
+                            <span>知乎</span>
+                        </button>
+                        <button class="platform-btn" data-platform="baidu">
+                            <span class="platform-btn-icon">🔍</span>
+                            <span>百度</span>
+                        </button>
+                        <button class="platform-btn" data-platform="douyin">
+                            <span class="platform-btn-icon">🎵</span>
+                            <span>抖音</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hot-search-list" id="hotSearchList">
+                    <div class="hot-search-loading">
+                        <div class="hot-search-loading-icon">⏳</div>
+                        <div>正在加载热搜...</div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Recent Visits -->
             <section class="recent-visits" id="recentVisits" aria-label="最近访问">
                 <div class="recent-visits-header">
@@ -498,6 +532,7 @@
     <script src="./js/sites-data.js?v=20251217-2"></script>
     <script src="./js/app.js"></script>
     <script src="./js/effects.js"></script>
+    <script src="./js/hot-search.js"></script>
     <script src="./js/online-users.js"></script>
     <script>
         // 初始化在线人数追踪
