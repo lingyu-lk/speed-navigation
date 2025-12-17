@@ -982,6 +982,11 @@ class SiteModalManager {
         this.cancelBtn = document.getElementById('modalCancelBtn');
         this.visitBtn = document.getElementById('modalVisitBtn');
         this.currentSite = null;
+
+        console.log('SiteModalManager initialized');
+        console.log('Modal element:', this.modal);
+        console.log('Overlay element:', this.overlay);
+
         this.init();
     }
 
@@ -1007,14 +1012,22 @@ class SiteModalManager {
     }
 
     openModal(site, categoryName) {
+        console.log('openModal called with:', site.name, categoryName);
+        console.log('Modal element in openModal:', this.modal);
+
         this.currentSite = site;
 
         // Set modal content
         this.updateModalContent(site, categoryName);
 
         // Show modal
-        this.modal?.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (this.modal) {
+            this.modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            console.log('Modal should be visible now');
+        } else {
+            console.error('Modal element not found!');
+        }
     }
 
     closeModal() {
