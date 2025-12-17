@@ -6,27 +6,31 @@
 
 # HTML 文件 - 不缓存，确保始终获取最新版本
 /*.html
-  Cache-Control: no-cache, must-revalidate
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 
-# 数据文件 - 短缓存（5分钟），方便快速更新
+# 数据文件 - 不缓存，立即更新
 /js/sites-data.js
-  Cache-Control: public, max-age=300, must-revalidate
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
 
 /data/*
-  Cache-Control: public, max-age=300, must-revalidate
+  Cache-Control: no-cache, no-store, must-revalidate
 
-# 应用代码 - 中等缓存（1天），平衡更新速度和性能
+# 应用代码 - 短缓存（10分钟）
 /js/app.js
-  Cache-Control: public, max-age=86400, must-revalidate
+  Cache-Control: public, max-age=600, must-revalidate
 
-# 其他 JS 文件（工具库等）- 长缓存
+# 其他 JS 文件（工具库等）- 中等缓存
 /js/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
 
 # 静态资源缓存 - CSS 文件
 /css/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
 
 # 静态资源缓存 - assets 目录（图片、字体等）
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=2592000, immutable
