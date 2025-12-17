@@ -863,8 +863,6 @@ class SiteRenderer {
     }
 
     createCardElement(site, categoryName) {
-        console.log('Creating card for:', site.name, 'in category:', categoryName);
-
         const card = document.createElement('div');
         card.className = 'card';
         card.setAttribute('data-url', site.url);
@@ -904,26 +902,14 @@ class SiteRenderer {
             <span class="card-tag">${Utils.sanitizeHTML(site.tag)}</span>
         `;
 
-        // Add click handler to open modal instead of direct navigation
-        console.log('Adding click handler to card:', site.name);
+        // Add click handler to open modal
         card.addEventListener('click', (e) => {
-            console.log('=== CARD CLICKED ===');
-            console.log('Event:', e);
-            console.log('Site:', site.name);
             e.preventDefault();
             e.stopPropagation();
-            console.log('Card clicked:', site.name);
-            console.log('siteModalManager:', this.siteModalManager);
             if (this.siteModalManager) {
                 this.siteModalManager.openModal(site, categoryName);
-            } else {
-                console.error('siteModalManager is not available!');
-                // Fallback: direct navigation
-                window.open(site.url, '_blank', 'noopener,noreferrer');
             }
         });
-
-        console.log('Card created and event listener added for:', site.name);
 
         // Add context menu for favorite toggle
         card.addEventListener('contextmenu', (e) => {
@@ -990,11 +976,6 @@ class SiteModalManager {
         this.cancelBtn = document.getElementById('modalCancelBtn');
         this.visitBtn = document.getElementById('modalVisitBtn');
         this.currentSite = null;
-
-        console.log('SiteModalManager initialized');
-        console.log('Modal element:', this.modal);
-        console.log('Overlay element:', this.overlay);
-
         this.init();
     }
 
@@ -1020,28 +1001,34 @@ class SiteModalManager {
     }
 
     openModal(site, categoryName) {
-        console.log('openModal called with:', site.name, categoryName);
-        console.log('Modal element in openModal:', this.modal);
-
         this.currentSite = site;
 
         // Set modal content
         this.updateModalContent(site, categoryName);
 
-        // Show modal
+        // Show modal with force reflow
         if (this.modal) {
+            // Force a reflow to ensure styles are applied
+            this.modal.offsetHeight;
+
             this.modal.classList.add('active');
             document.body.style.overflow = 'hidden';
-            console.log('Modal should be visible now');
+
+            // Ensure the modal is on top
+            this.modal.style.zIndex = '99999';
+
+            console.log('Modal opened for:', site.name);
         } else {
             console.error('Modal element not found!');
         }
     }
 
     closeModal() {
-        this.modal?.classList.remove('active');
-        document.body.style.overflow = '';
-        this.currentSite = null;
+        if (this.modal) {
+            this.modal.classList.remove('active');
+            document.body.style.overflow = '';
+            this.currentSite = null;
+        }
     }
 
     updateModalContent(site, categoryName) {

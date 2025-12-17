@@ -1508,21 +1508,23 @@ html.theme-transitioning *::after {
 
 /* ==================== Site Detail Modal ==================== */
 .site-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    display: flex;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     padding: 20px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
 }
 
 .site-modal.active {
-    opacity: 1;
-    visibility: visible;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 .site-modal-overlay {
@@ -1531,6 +1533,7 @@ html.theme-transitioning *::after {
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+    z-index: 1;
 }
 
 .site-modal-content {
@@ -1550,6 +1553,7 @@ html.theme-transitioning *::after {
     transform: scale(0.9) translateY(20px);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2;
 }
 
 .site-modal.active .site-modal-content {
