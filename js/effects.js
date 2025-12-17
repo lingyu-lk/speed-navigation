@@ -2,8 +2,10 @@
 class MouseTrail {
     constructor() {
         this.particles = [];
-        this.maxParticles = 20;
+        this.maxParticles = 15; // Reduced from 20
         this.colors = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b'];
+        this.lastTime = 0;
+        this.throttleDelay = 50; // Add throttle to reduce CPU usage
         this.init();
     }
 
@@ -13,11 +15,16 @@ class MouseTrail {
     }
 
     createParticle(e) {
+        // Throttle particle creation
+        const now = Date.now();
+        if (now - this.lastTime < this.throttleDelay) return;
+        this.lastTime = now;
+
         const particle = document.createElement('div');
         particle.className = 'mouse-particle';
 
         const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-        const size = Math.random() * 8 + 4;
+        const size = Math.random() * 6 + 3; // Reduced size range
 
         particle.style.cssText = `
             position: fixed;
@@ -29,7 +36,7 @@ class MouseTrail {
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
-            animation: particleFade 0.8s ease-out forwards;
+            animation: particleFade 0.6s ease-out forwards;
         `;
 
         document.body.appendChild(particle);
@@ -45,6 +52,11 @@ class MouseTrail {
 
     animate() {
         requestAnimationFrame(() => this.animate());
+    }
+
+    destroy() {
+        this.particles.forEach(p => p.remove());
+        this.particles = [];
     }
 }
 
@@ -125,12 +137,19 @@ class BackgroundDecoration {
         const config = this.decorations[theme];
         if (!config) return;
 
+        // Adjust frequency based on performance
+        const baseInterval = 2000 / config.count;
+        const interval = window.effectsManager?.isLowPerformance
+            ? baseInterval * 2
+            : baseInterval;
+
         // Create decorations periodically
         this.intervalId = setInterval(() => {
-            if (document.querySelectorAll('.decoration-item').length < 20) {
+            const maxDecorations = window.effectsManager?.isLowPerformance ? 10 : 20;
+            if (document.querySelectorAll('.decoration-item').length < maxDecorations) {
                 this.createDecoration(config);
             }
-        }, 2000 / config.count);
+        }, interval);
     }
 
     createDecoration(config) {
@@ -195,7 +214,8 @@ class BackgroundDecoration {
 // ==================== Effects Manager ====================
 class EffectsManager {
     constructor() {
-        this.enabled = true; // 默认开启
+        this.enabled = true;
+        this.isLowPerformance = false;
         this.mouseTrail = null;
         this.clickRipple = null;
         this.backgroundDecoration = null;
@@ -203,21 +223,75 @@ class EffectsManager {
     }
 
     init() {
-        // 直接启用特效
+        // Detect performance capability
+        this.detectPerformance();
+
+        // Auto-disable effects on low performance devices
+        if (this.isLowPerformance) {
+            console.log('Low performance device detected, optimizing effects...');
+        }
+
+        // Enable effects with appropriate settings
         this.enable();
     }
 
-    enable() {
-        if (!this.mouseTrail) {
-            this.mouseTrail = new MouseTrail();
+    detectPerformance() {
+        // Check for hardware concurrency (CPU cores)
+        const cores = navigator.hardwareConcurrency || 2;
+
+        // Check for device memory (if available)
+        const memory = navigator.deviceMemory || 4;
+
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Check for mobile device
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // Determine if device is low performance
+        this.isLowPerformance = prefersReducedMotion ||
+                                (cores <= 2 && memory <= 4) ||
+                                (isMobile && memory <= 2);
+
+        // Completely disable effects if user prefers reduced motion
+        if (prefersReducedMotion) {
+            this.enabled = false;
         }
+    }
+
+    enable() {
+        if (!this.enabled) {
+            console.log('Effects disabled due to user preference');
+            return;
+        }
+
+        if (!this.isLowPerformance) {
+            // Full effects for high-performance devices
+            if (!this.mouseTrail) {
+                this.mouseTrail = new MouseTrail();
+            }
+        }
+
         if (!this.clickRipple) {
             this.clickRipple = new ClickRipple();
         }
+
         if (!this.backgroundDecoration) {
             this.backgroundDecoration = new BackgroundDecoration();
         }
+
         document.body.classList.add('effects-enabled');
+    }
+
+    disable() {
+        if (this.mouseTrail) {
+            this.mouseTrail.destroy();
+            this.mouseTrail = null;
+        }
+        if (this.backgroundDecoration) {
+            this.backgroundDecoration.clear();
+        }
+        document.body.classList.remove('effects-enabled');
     }
 }
 

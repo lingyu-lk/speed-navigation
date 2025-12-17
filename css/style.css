@@ -28,29 +28,29 @@
 
 /* Dark mode colors */
 [data-theme="dark"] {
-    --bg-primary: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #2d1b4e 100%);
-    --bg-card: rgba(30, 35, 45, 0.95);
+    --bg-primary: linear-gradient(135deg, #141820 0%, #1e2330 50%, #2a1f3d 100%);
+    --bg-card: rgba(30, 35, 45, 0.98);
     --bg-white: #1e2330;
-    --text-primary: #e4e6eb;
-    --text-secondary: #b8bac0;
-    --text-tertiary: #9ca3af;
-    --text-muted: #8b92a0;
-    --text-light: #6b7280;
-    --border-color: #2d3340;
-    --border-input: #3d4350;
-    --shadow-light: rgba(0,0,0,0.3);
-    --shadow-medium: rgba(0,0,0,0.5);
-    --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
-    --accent-color: #7c3aed;
-    --accent-hover: rgba(124, 58, 237, 0.15);
-    --accent-hover-strong: rgba(124, 58, 237, 0.25);
-    --stat-bg: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(168, 85, 247, 0.15));
+    --text-primary: #e8eaed;
+    --text-secondary: #c4c6cc;
+    --text-tertiary: #a8adb8;
+    --text-muted: #9298a5;
+    --text-light: #7a8088;
+    --border-color: #333842;
+    --border-input: #434852;
+    --shadow-light: rgba(0,0,0,0.35);
+    --shadow-medium: rgba(0,0,0,0.55);
+    --accent-gradient: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    --accent-color: #8b5cf6;
+    --accent-hover: rgba(139, 92, 246, 0.15);
+    --accent-hover-strong: rgba(139, 92, 246, 0.25);
+    --stat-bg: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(167, 139, 250, 0.15));
 
     /* Logo colors - 柔和的紫色 */
-    --logo-color-1: #8b7beb;
-    --logo-color-2: #b68ff7;
-    --logo-icon-main: #8b7beb;
-    --logo-icon-light: #c4b5fd;
+    --logo-color-1: #a78bfa;
+    --logo-color-2: #c4b5fd;
+    --logo-icon-main: #a78bfa;
+    --logo-icon-light: #ddd6fe;
 }
 
 /* Cherry Blossom - 樱花粉 */
@@ -58,26 +58,26 @@
     --bg-primary: linear-gradient(135deg, #ffeef8 0%, #ffc2e2 50%, #ff9fd5 100%);
     --bg-card: rgba(255, 255, 255, 0.95);
     --bg-white: white;
-    --text-primary: #4a1942;
-    --text-secondary: #6b2e5f;
-    --text-tertiary: #8b4578;
-    --text-muted: #a65c91;
-    --text-light: #c273aa;
+    --text-primary: #3d0f35;
+    --text-secondary: #5c2554;
+    --text-tertiary: #7d3a6f;
+    --text-muted: #9d5289;
+    --text-light: #b86ba0;
     --border-color: #ffe8f5;
     --border-input: #ffd4ec;
     --shadow-light: rgba(255, 105, 180, 0.1);
     --shadow-medium: rgba(255, 105, 180, 0.2);
-    --accent-gradient: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-    --accent-color: #ff69b4;
+    --accent-gradient: linear-gradient(135deg, #ff85b8 0%, #ff1493 100%);
+    --accent-color: #ff85b8;
     --accent-hover: rgba(255, 105, 180, 0.1);
     --accent-hover-strong: rgba(255, 105, 180, 0.15);
     --stat-bg: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(255, 20, 147, 0.1));
 
     /* Logo colors - 柔和的粉色 */
-    --logo-color-1: #ff8fc7;
-    --logo-color-2: #ffa8d8;
-    --logo-icon-main: #ff8fc7;
-    --logo-icon-light: #ffc4e8;
+    --logo-color-1: #ff70a6;
+    --logo-color-2: #ff90c1;
+    --logo-icon-main: #ff70a6;
+    --logo-icon-light: #ffa8d0;
 }
 
 /* Ocean Blue - 海洋蓝 */
@@ -113,25 +113,25 @@
     --bg-card: rgba(255, 255, 255, 0.95);
     --bg-white: white;
     --text-primary: #14532d;
-    --text-secondary: #15803d;
-    --text-tertiary: #16a34a;
-    --text-muted: #22c55e;
-    --text-light: #4ade80;
+    --text-secondary: #166534;
+    --text-tertiary: #15803d;
+    --text-muted: #16a34a;
+    --text-light: #22c55e;
     --border-color: #dcfce7;
     --border-input: #bbf7d0;
     --shadow-light: rgba(34, 197, 94, 0.1);
     --shadow-medium: rgba(34, 197, 94, 0.2);
-    --accent-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    --accent-color: #10b981;
-    --accent-hover: rgba(16, 185, 129, 0.1);
-    --accent-hover-strong: rgba(16, 185, 129, 0.15);
-    --stat-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+    --accent-gradient: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    --accent-color: #34d399;
+    --accent-hover: rgba(52, 211, 153, 0.1);
+    --accent-hover-strong: rgba(52, 211, 153, 0.15);
+    --stat-bg: linear-gradient(135deg, rgba(52, 211, 153, 0.1), rgba(16, 185, 129, 0.1));
 
-    /* Logo colors - 柔和的绿色（比亮绿色柔和） */
-    --logo-color-1: #4ade80;
-    --logo-color-2: #22c55e;
-    --logo-icon-main: #4ade80;
-    --logo-icon-light: #86efac;
+    /* Logo colors - 自然的森林绿 */
+    --logo-color-1: #34d399;
+    --logo-color-2: #10b981;
+    --logo-icon-main: #34d399;
+    --logo-icon-light: #6ee7b7;
 }
 
 /* Sunset Orange - 日落橙 */
@@ -139,26 +139,26 @@
     --bg-primary: linear-gradient(135deg, #7c2d12 0%, #ea580c 50%, #f97316 100%);
     --bg-card: rgba(255, 255, 255, 0.95);
     --bg-white: white;
-    --text-primary: #7c2d12;
-    --text-secondary: #9a3412;
-    --text-tertiary: #c2410c;
-    --text-muted: #ea580c;
-    --text-light: #f97316;
+    --text-primary: #6b2710;
+    --text-secondary: #8a3214;
+    --text-tertiary: #b53f0f;
+    --text-muted: #d94f0d;
+    --text-light: #f56b14;
     --border-color: #ffedd5;
     --border-input: #fed7aa;
     --shadow-light: rgba(249, 115, 22, 0.1);
     --shadow-medium: rgba(249, 115, 22, 0.2);
-    --accent-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-    --accent-color: #f59e0b;
-    --accent-hover: rgba(245, 158, 11, 0.1);
-    --accent-hover-strong: rgba(245, 158, 11, 0.15);
-    --stat-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(239, 68, 68, 0.1));
+    --accent-gradient: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+    --accent-color: #fb923c;
+    --accent-hover: rgba(251, 146, 60, 0.1);
+    --accent-hover-strong: rgba(251, 146, 60, 0.15);
+    --stat-bg: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(249, 115, 22, 0.1));
 
-    /* Logo colors - 柔和的橙红色 */
+    /* Logo colors - 温暖的橙红色 */
     --logo-color-1: #fb923c;
-    --logo-color-2: #f87171;
+    --logo-color-2: #fbbf24;
     --logo-icon-main: #fb923c;
-    --logo-icon-light: #fdba74;
+    --logo-icon-light: #fcd34d;
 }
 
 /* ==================== Base Styles ==================== */
@@ -172,7 +172,20 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
     background: var(--bg-primary);
     min-height: 100vh;
-    transition: background 0.3s ease;
+    transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth theme transition */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                fill 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* ==================== Top Navigation ==================== */
@@ -258,52 +271,44 @@ body {
 .online-users-badge {
     display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    background: transparent;
+    gap: 5px;
+    padding: 6px 12px;
+    background: var(--bg-white);
     border-radius: 12px;
-    font-size: 0.75em;
-    color: var(--text-muted);
+    font-size: 0.8em;
+    color: var(--text-secondary);
     transition: all 0.3s ease;
     cursor: help;
-    opacity: 0.6;
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--border-color);
 }
 
 .online-users-badge svg {
-    color: var(--text-muted);
+    color: var(--text-secondary);
     stroke-width: 2;
-    opacity: 0.7;
+    transition: color 0.3s ease;
 }
 
 .online-users-badge:hover {
-    background: var(--bg-primary);
-    opacity: 1;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px var(--shadow-light);
+    background: var(--accent-hover);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-light);
 }
 
 .online-users-badge:hover svg {
     color: var(--accent-color);
-    opacity: 1;
 }
 
 #onlineUsersCount {
-    font-weight: 500;
-    color: var(--text-secondary);
-    min-width: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 20px;
     text-align: center;
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 .online-users-badge:hover #onlineUsersCount {
     color: var(--accent-color);
-    font-weight: 600;
-}
-
-#onlineUsersCount[data-count="0"],
-#onlineUsersCount:empty {
-    color: var(--text-muted);
 }
 
 .search-container {
@@ -317,20 +322,20 @@ body {
     display: flex;
     align-items: center;
     background: var(--bg-white);
-    border: 1px solid #dfe1e5;
+    border: 2px solid var(--border-input);
     border-radius: 24px;
     height: 44px;
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .search-wrapper:hover {
-    box-shadow: 0 1px 6px rgba(32,33,36,0.28);
-    border-color: rgba(223,225,229,0);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    border-color: var(--accent-color);
 }
 
 .search-wrapper:focus-within {
-    box-shadow: 0 1px 6px rgba(32,33,36,0.28);
-    border-color: rgba(223,225,229,0);
+    box-shadow: 0 2px 10px var(--shadow-medium);
+    border-color: var(--accent-color);
 }
 
 .search-engine-selector {
@@ -361,7 +366,7 @@ body {
 .current-engine-icon svg {
     width: 16px;
     height: 16px;
-    color: #5f6368;
+    color: var(--text-secondary);
 }
 
 .current-engine-icon img {
@@ -372,13 +377,13 @@ body {
 
 .current-engine {
     font-size: 14px;
-    font-weight: 400;
-    color: #5f6368;
+    font-weight: 500;
+    color: var(--text-secondary);
     white-space: nowrap;
 }
 
 .dropdown-icon {
-    color: #5f6368;
+    color: var(--text-secondary);
     transition: transform 0.2s ease;
     opacity: 0.8;
 }
@@ -390,7 +395,7 @@ body {
 .search-divider {
     width: 1px;
     height: 28px;
-    background: #dadce0;
+    background: var(--border-input);
     margin: 0 8px;
 }
 
@@ -401,12 +406,12 @@ body {
     background: transparent;
     font-size: 16px;
     outline: none;
-    color: #202124;
+    color: var(--text-primary);
     font-family: arial, sans-serif;
 }
 
 .search-wrapper input::placeholder {
-    color: #9aa0a6;
+    color: var(--text-muted);
 }
 
 .search-btn {
@@ -417,15 +422,17 @@ body {
     height: 40px;
     background: transparent;
     border: none;
-    color: #5f6368;
+    color: var(--text-secondary);
     cursor: pointer;
-    transition: background 0.1s ease;
+    transition: all 0.2s ease;
     border-radius: 50%;
     margin-right: 4px;
 }
 
 .search-btn:hover {
-    background: rgba(0,0,0,0.04);
+    background: var(--accent-hover);
+    color: var(--accent-color);
+    transform: scale(1.1);
 }
 
 .search-dropdown {
@@ -434,14 +441,14 @@ body {
     left: 0;
     right: 0;
     background: var(--bg-white);
-    border: 1px solid #dadce0;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px var(--shadow-medium);
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4px);
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     z-index: 1000;
 }
 
@@ -455,20 +462,22 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
+    padding: 12px 16px;
     cursor: pointer;
-    transition: background 0.1s ease;
+    transition: all 0.2s ease;
     font-size: 14px;
-    min-height: 40px;
+    min-height: 44px;
 }
 
 .search-option:hover {
-    background: #f1f3f4;
+    background: var(--accent-hover);
+    transform: translateX(4px);
 }
 
 .search-option.selected {
-    background: #e8f0fe;
-    color: #1a73e8;
+    background: var(--accent-hover-strong);
+    color: var(--accent-color);
+    font-weight: 600;
 }
 
 .option-icon {
@@ -483,7 +492,7 @@ body {
 .option-icon svg {
     width: 18px;
     height: 18px;
-    color: #5f6368;
+    color: var(--text-secondary);
 }
 
 .option-icon img {
@@ -494,12 +503,12 @@ body {
 
 .option-name {
     font-size: 14px;
-    color: #202124;
+    color: var(--text-primary);
 }
 
 .search-option.selected .option-name {
-    color: #1a73e8;
-    font-weight: 500;
+    color: var(--accent-color);
+    font-weight: 600;
 }
 
 /* ==================== Theme Selector ==================== */
@@ -518,11 +527,13 @@ body {
     border-radius: 20px;
     cursor: pointer;
     font-size: 0.9em;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-light);
 }
 
 .theme-toggle:hover {
     transform: scale(1.05);
+    box-shadow: 0 4px 12px var(--shadow-medium);
 }
 
 .theme-toggle .dropdown-arrow {
@@ -538,16 +549,18 @@ body {
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    background: var(--bg-primary);
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px var(--shadow-medium);
-    min-width: 150px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow-medium);
+    min-width: 200px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
+    overflow: hidden;
 }
 
 .theme-dropdown.show {
@@ -559,31 +572,91 @@ body {
 .theme-option {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
+    gap: 12px;
+    padding: 14px 18px;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
+    position: relative;
 }
 
 .theme-option:first-child {
-    border-radius: 12px 12px 0 0;
+    border-radius: 16px 16px 0 0;
 }
 
 .theme-option:last-child {
-    border-radius: 0 0 12px 12px;
+    border-radius: 0 0 16px 16px;
 }
 
 .theme-option:hover {
-    background: var(--bg-hover);
+    background: var(--accent-hover);
+    transform: translateX(4px);
+}
+
+.theme-option.active {
+    background: var(--accent-hover-strong);
+    font-weight: 600;
+}
+
+.theme-option.active::after {
+    content: '✓';
+    position: absolute;
+    right: 18px;
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 .theme-option .theme-icon {
-    font-size: 1.2em;
+    font-size: 1.3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.theme-option .theme-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    border: 2px solid var(--border-color);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.theme-option:hover .theme-preview {
+    transform: scale(1.1);
+}
+
+/* Theme preview colors */
+.theme-option[data-theme="light"] .theme-preview {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.theme-option[data-theme="dark"] .theme-preview {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+}
+
+.theme-option[data-theme="cherry"] .theme-preview {
+    background: linear-gradient(135deg, #ff85b8 0%, #ff1493 100%);
+}
+
+.theme-option[data-theme="ocean"] .theme-preview {
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+
+.theme-option[data-theme="forest"] .theme-preview {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}
+
+.theme-option[data-theme="sunset"] .theme-preview {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
 }
 
 .theme-option .theme-name {
     color: var(--text-primary);
-    font-size: 0.9em;
+    font-size: 0.95em;
+    flex: 1;
 }
 
 /* ==================== Main Container ==================== */

@@ -147,10 +147,19 @@ class ThemeManager {
     }
 
     applyTheme(theme) {
+        // Add transitioning class for smooth theme change
+        document.documentElement.classList.add('theme-transitioning');
+
         document.documentElement.setAttribute('data-theme', theme);
         this.theme = theme;
         StorageManager.set(CONFIG.STORAGE_KEYS.THEME, theme);
         this.updateToggleButton();
+        this.updateActiveThemeOption();
+
+        // Remove transitioning class after animation
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transitioning');
+        }, 300);
     }
 
     toggle() {
@@ -167,6 +176,22 @@ class ThemeManager {
                 buttonText.textContent = this.themeNames[this.theme];
             }
             button.setAttribute('aria-label', `当前主题: ${this.themeNames[this.theme]}`);
+        }
+    }
+
+    updateActiveThemeOption() {
+        const dropdown = document.querySelector('.theme-dropdown');
+        if (!dropdown) return;
+
+        // Remove active class from all options
+        dropdown.querySelectorAll('.theme-option').forEach(option => {
+            option.classList.remove('active');
+        });
+
+        // Add active class to current theme
+        const activeOption = dropdown.querySelector(`.theme-option[data-theme="${this.theme}"]`);
+        if (activeOption) {
+            activeOption.classList.add('active');
         }
     }
 
