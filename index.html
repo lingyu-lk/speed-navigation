@@ -402,31 +402,64 @@
                 <div class="hot-search-header">
                     <div class="hot-search-title">
                         <span class="hot-search-icon">🔥</span>
-                        <h3>热搜榜单</h3>
-                    </div>
-                    <div class="hot-search-platforms">
-                        <button class="platform-btn active" data-platform="weibo">
-                            <span class="platform-btn-icon">🐦</span>
-                            <span>微博</span>
-                        </button>
-                        <button class="platform-btn" data-platform="zhihu">
-                            <span class="platform-btn-icon">📘</span>
-                            <span>知乎</span>
-                        </button>
-                        <button class="platform-btn" data-platform="baidu">
-                            <span class="platform-btn-icon">🔍</span>
-                            <span>百度</span>
-                        </button>
-                        <button class="platform-btn" data-platform="douyin">
-                            <span class="platform-btn-icon">🎵</span>
-                            <span>抖音</span>
-                        </button>
+                        <h3>实时热搜榜</h3>
                     </div>
                 </div>
-                <div class="hot-search-list" id="hotSearchList">
-                    <div class="hot-search-loading">
-                        <div class="hot-search-loading-icon">⏳</div>
-                        <div>正在加载热搜...</div>
+                <div class="hot-search-container" id="hotSearchContainer">
+                    <!-- 微博热搜 -->
+                    <div class="hot-search-column">
+                        <div class="hot-search-column-header">
+                            <span class="hot-search-column-icon">🐦</span>
+                            <span>微博热搜</span>
+                        </div>
+                        <div class="hot-search-list" id="weiboList">
+                            <div class="hot-search-loading">
+                                <div class="hot-search-loading-icon">⏳</div>
+                                <div>加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 知乎热榜 -->
+                    <div class="hot-search-column">
+                        <div class="hot-search-column-header">
+                            <span class="hot-search-column-icon">📘</span>
+                            <span>知乎热榜</span>
+                        </div>
+                        <div class="hot-search-list" id="zhihuList">
+                            <div class="hot-search-loading">
+                                <div class="hot-search-loading-icon">⏳</div>
+                                <div>加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 百度热搜 -->
+                    <div class="hot-search-column">
+                        <div class="hot-search-column-header">
+                            <span class="hot-search-column-icon">🔍</span>
+                            <span>百度热搜</span>
+                        </div>
+                        <div class="hot-search-list" id="baiduList">
+                            <div class="hot-search-loading">
+                                <div class="hot-search-loading-icon">⏳</div>
+                                <div>加载中...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 抖音热榜 -->
+                    <div class="hot-search-column">
+                        <div class="hot-search-column-header">
+                            <span class="hot-search-column-icon">🎵</span>
+                            <span>抖音热榜</span>
+                        </div>
+                        <div class="hot-search-list" id="douyinList">
+                            <div class="hot-search-loading">
+                                <div class="hot-search-loading-icon">⏳</div>
+                                <div>加载中...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

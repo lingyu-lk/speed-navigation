@@ -1,67 +1,92 @@
 // ==================== Hot Search Manager ====================
 class HotSearchManager {
     constructor() {
-        this.currentPlatform = 'weibo';
         this.cache = {}; // 缓存数据
         this.cacheExpiry = 5 * 60 * 1000; // 缓存5分钟
 
-        // API配置 - 使用免费的热搜API
-        this.apiConfig = {
-            weibo: {
-                name: '微博热搜',
-                url: 'https://api.vvhan.com/api/hotlist/wbHot',
-                parseData: (data) => this.parseVvhanData(data)
-            },
-            zhihu: {
-                name: '知乎热榜',
-                url: 'https://api.vvhan.com/api/hotlist/zhihuHot',
-                parseData: (data) => this.parseVvhanData(data)
-            },
-            baidu: {
-                name: '百度热搜',
-                url: 'https://api.vvhan.com/api/hotlist/baiduRD',
-                parseData: (data) => this.parseVvhanData(data)
-            },
-            douyin: {
-                name: '抖音热榜',
-                url: 'https://api.vvhan.com/api/hotlist/douyinHot',
-                parseData: (data) => this.parseVvhanData(data)
-            }
+        // API配置 - 多个备用API
+        this.apiConfigs = {
+            weibo: [
+                {
+                    name: 'vvhan',
+                    url: 'https://api.vvhan.com/api/hotlist/wbHot',
+                    parse: (data) => this.parseVvhanData(data)
+                },
+                {
+                    name: 'oioweb',
+                    url: 'https://api.oioweb.cn/api/hot/weibo',
+                    parse: (data) => this.parseOiowebData(data)
+                }
+            ],
+            zhihu: [
+                {
+                    name: 'vvhan',
+                    url: 'https://api.vvhan.com/api/hotlist/zhihuHot',
+                    parse: (data) => this.parseVvhanData(data)
+                },
+                {
+                    name: 'oioweb',
+                    url: 'https://api.oioweb.cn/api/hot/zhihu',
+                    parse: (data) => this.parseOiowebData(data)
+                }
+            ],
+            baidu: [
+                {
+                    name: 'vvhan',
+                    url: 'https://api.vvhan.com/api/hotlist/baiduRD',
+                    parse: (data) => this.parseVvhanData(data)
+                },
+                {
+                    name: 'oioweb',
+                    url: 'https://api.oioweb.cn/api/hot/baidu',
+                    parse: (data) => this.parseOiowebData(data)
+                }
+            ],
+            douyin: [
+                {
+                    name: 'vvhan',
+                    url: 'https://api.vvhan.com/api/hotlist/douyinHot',
+                    parse: (data) => this.parseVvhanData(data)
+                },
+                {
+                    name: 'oioweb',
+                    url: 'https://api.oioweb.cn/api/hot/douyin',
+                    parse: (data) => this.parseOiowebData(data)
+                }
+            ]
+        };
+
+        this.platformNames = {
+            weibo: '微博热搜',
+            zhihu: '知乎热榜',
+            baidu: '百度热搜',
+            douyin: '抖音热榜'
         };
 
         this.init();
     }
 
     init() {
-        this.setupPlatformButtons();
-        this.loadHotSearch(this.currentPlatform);
+        // 同时加载所有平台的热搜
+        this.loadAllHotSearch();
     }
 
-    setupPlatformButtons() {
-        const buttons = document.querySelectorAll('.platform-btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const platform = btn.dataset.platform;
-                if (platform === this.currentPlatform) return;
+    async loadAllHotSearch() {
+        const platforms = ['weibo', 'zhihu', 'baidu', 'douyin'];
 
-                // 更新按钮状态
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                // 切换平台
-                this.currentPlatform = platform;
-                this.loadHotSearch(platform);
-            });
-        });
+        // 并发加载所有平台
+        await Promise.all(
+            platforms.map(platform => this.loadHotSearch(platform))
+        );
     }
 
     async loadHotSearch(platform) {
-        const listEl = document.getElementById('hotSearchList');
+        const listEl = document.getElementById(`${platform}List`);
         if (!listEl) return;
 
         // 检查缓存
         if (this.isCacheValid(platform)) {
-            this.renderHotSearch(this.cache[platform].data);
+            this.renderHotSearch(platform, this.cache[platform].data);
             return;
         }
 
@@ -69,42 +94,68 @@ class HotSearchManager {
         listEl.innerHTML = `
             <div class="hot-search-loading">
                 <div class="hot-search-loading-icon">⏳</div>
-                <div>正在加载${this.apiConfig[platform].name}...</div>
+                <div style="font-size: 0.85em;">加载中...</div>
             </div>
         `;
 
+        // 尝试多个API
+        const apis = this.apiConfigs[platform];
+        let success = false;
+
+        for (const api of apis) {
+            try {
+                console.log(`尝试加载 ${platform} 从 ${api.name}...`);
+                const data = await this.fetchFromAPI(api);
+
+                if (data && data.length > 0) {
+                    // 只取前5条
+                    const top5 = data.slice(0, 5);
+
+                    // 缓存数据
+                    this.cache[platform] = {
+                        data: top5,
+                        timestamp: Date.now()
+                    };
+
+                    // 渲染
+                    this.renderHotSearch(platform, top5);
+                    success = true;
+                    break;
+                }
+            } catch (error) {
+                console.warn(`从 ${api.name} 加载 ${platform} 失败:`, error);
+                // 继续尝试下一个API
+            }
+        }
+
+        if (!success) {
+            this.showError(platform);
+        }
+    }
+
+    async fetchFromAPI(api) {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000); // 10秒超时
+
         try {
-            const config = this.apiConfig[platform];
-            const response = await fetch(config.url);
+            const response = await fetch(api.url, {
+                signal: controller.signal,
+                mode: 'cors',
+                cache: 'no-cache'
+            });
+
+            clearTimeout(timeout);
 
             if (!response.ok) {
-                throw new Error('网络请求失败');
+                throw new Error(`HTTP ${response.status}`);
             }
 
             const result = await response.json();
-
-            // 解析数据
-            const data = config.parseData(result);
-
-            if (!data || data.length === 0) {
-                throw new Error('暂无数据');
-            }
-
-            // 只取前10条
-            const top10 = data.slice(0, 10);
-
-            // 缓存数据
-            this.cache[platform] = {
-                data: top10,
-                timestamp: Date.now()
-            };
-
-            // 渲染
-            this.renderHotSearch(top10);
+            return api.parse(result);
 
         } catch (error) {
-            console.error('加载热搜失败:', error);
-            this.showError(platform);
+            clearTimeout(timeout);
+            throw error;
         }
     }
 
@@ -121,11 +172,29 @@ class HotSearchManager {
         }));
     }
 
-    renderHotSearch(data) {
-        const listEl = document.getElementById('hotSearchList');
+    parseOiowebData(result) {
+        if (!result || !result.code || result.code !== 200 || !result.data) {
+            return [];
+        }
+
+        return result.data.map(item => ({
+            title: item.title || '',
+            url: item.url || '#',
+            hot: item.hot || '',
+            tag: item.tag || ''
+        }));
+    }
+
+    renderHotSearch(platform, data) {
+        const listEl = document.getElementById(`${platform}List`);
         if (!listEl) return;
 
         listEl.innerHTML = '';
+
+        if (!data || data.length === 0) {
+            this.showError(platform);
+            return;
+        }
 
         data.forEach((item, index) => {
             const itemEl = document.createElement('a');
@@ -133,6 +202,7 @@ class HotSearchManager {
             itemEl.href = item.url;
             itemEl.target = '_blank';
             itemEl.rel = 'noopener noreferrer';
+            itemEl.title = item.title;
 
             // 格式化热度值
             const hotValue = this.formatHotValue(item.hot);
@@ -141,16 +211,11 @@ class HotSearchManager {
                 <div class="hot-search-rank">${index + 1}</div>
                 <div class="hot-search-content">
                     <div class="hot-search-text">${this.escapeHtml(item.title)}</div>
-                    <div class="hot-search-meta">
-                        ${hotValue ? `
-                            <span class="hot-search-hot">
-                                🔥 ${hotValue}
-                            </span>
-                        ` : ''}
-                        ${item.tag ? `
-                            <span class="hot-search-tag">${this.escapeHtml(item.tag)}</span>
-                        ` : ''}
-                    </div>
+                    ${hotValue ? `
+                        <div class="hot-search-meta">
+                            <span class="hot-search-hot">🔥 ${hotValue}</span>
+                        </div>
+                    ` : ''}
                 </div>
             `;
 
@@ -164,26 +229,31 @@ class HotSearchManager {
                     itemEl.style.opacity = '1';
                     itemEl.style.transform = 'translateY(0)';
                 });
-            }, index * 30);
+            }, index * 50);
 
             listEl.appendChild(itemEl);
         });
     }
 
     showError(platform) {
-        const listEl = document.getElementById('hotSearchList');
+        const listEl = document.getElementById(`${platform}List`);
         if (!listEl) return;
 
         listEl.innerHTML = `
             <div class="hot-search-error">
                 <div class="hot-search-error-icon">😔</div>
-                <div>加载${this.apiConfig[platform].name}失败</div>
-                <div style="margin-top: 8px; font-size: 0.9em; opacity: 0.7;">请检查网络连接或稍后重试</div>
-                <button class="hot-search-refresh" onclick="window.hotSearchManager.loadHotSearch('${platform}')">
-                    重新加载
+                <div style="font-size: 0.85em; margin-top: 5px;">暂时无法加载</div>
+                <button class="hot-search-refresh" onclick="window.hotSearchManager.retryLoad('${platform}')" style="font-size: 0.8em; padding: 6px 12px; margin-top: 8px;">
+                    重试
                 </button>
             </div>
         `;
+    }
+
+    retryLoad(platform) {
+        // 清除缓存并重新加载
+        delete this.cache[platform];
+        this.loadHotSearch(platform);
     }
 
     isCacheValid(platform) {
@@ -197,6 +267,11 @@ class HotSearchManager {
     formatHotValue(hot) {
         if (!hot) return '';
 
+        // 如果已经是带单位的字符串，直接返回
+        if (typeof hot === 'string' && (hot.includes('万') || hot.includes('亿'))) {
+            return hot;
+        }
+
         // 如果是数字
         const num = parseInt(hot);
         if (!isNaN(num)) {
@@ -208,11 +283,12 @@ class HotSearchManager {
             return num.toString();
         }
 
-        // 如果是字符串（如"100万"）
-        return hot;
+        // 其他情况直接返回
+        return hot.toString();
     }
 
     escapeHtml(text) {
+        if (!text) return '';
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
