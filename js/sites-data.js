@@ -1035,6 +1035,13 @@ const SITES_DATA =
               "icon": "🔎",
               "description": "BT种子DHT搜索引擎",
               "tag": "搜索"
+            },
+            {
+              "name": "BT4G",
+              "url": "https://bt4gprx.com/",
+              "icon": "🔍",
+              "description": "DHT磁力搜索引擎",
+              "tag": "磁力"
             }
           ]
         }
