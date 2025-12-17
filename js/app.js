@@ -863,6 +863,8 @@ class SiteRenderer {
     }
 
     createCardElement(site, categoryName) {
+        console.log('Creating card for:', site.name, 'in category:', categoryName);
+
         const card = document.createElement('div');
         card.className = 'card';
         card.setAttribute('data-url', site.url);
@@ -903,7 +905,11 @@ class SiteRenderer {
         `;
 
         // Add click handler to open modal instead of direct navigation
+        console.log('Adding click handler to card:', site.name);
         card.addEventListener('click', (e) => {
+            console.log('=== CARD CLICKED ===');
+            console.log('Event:', e);
+            console.log('Site:', site.name);
             e.preventDefault();
             e.stopPropagation();
             console.log('Card clicked:', site.name);
@@ -916,6 +922,8 @@ class SiteRenderer {
                 window.open(site.url, '_blank', 'noopener,noreferrer');
             }
         });
+
+        console.log('Card created and event listener added for:', site.name);
 
         // Add context menu for favorite toggle
         card.addEventListener('contextmenu', (e) => {
