@@ -1512,8 +1512,8 @@ html.theme-transitioning *::after {
     inset: 0 !important;
     z-index: 9999 !important;
     display: flex !important;
-    align-items: center;
-    justify-content: center;
+    align-items: center !important;
+    justify-content: center !important;
     padding: 20px;
     opacity: 0;
     visibility: hidden;
@@ -1528,24 +1528,24 @@ html.theme-transitioning *::after {
 }
 
 .site-modal-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    position: absolute !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.6) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    z-index: 1;
+    z-index: 9990 !important;
 }
 
 .site-modal-content {
-    position: relative;
-    background: var(--bg-card);
+    position: relative !important;
+    background: var(--bg-card) !important;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 24px;
     max-width: 600px;
     width: 100%;
     max-height: 90vh;
-    overflow: hidden;
+    overflow-y: auto;
     box-shadow:
         0 20px 60px rgba(0, 0, 0, 0.3),
         0 8px 24px rgba(0, 0, 0, 0.2),
@@ -1553,15 +1553,18 @@ html.theme-transitioning *::after {
     transform: scale(0.9) translateY(20px);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 2;
+    z-index: 9991 !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .site-modal.active .site-modal-content {
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0) !important;
 }
 
 .modal-close-btn {
-    position: absolute;
+    position: absolute !important;
     top: 20px;
     right: 20px;
     width: 40px;
@@ -1572,11 +1575,11 @@ html.theme-transitioning *::after {
     backdrop-filter: blur(10px);
     color: var(--text-secondary);
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    z-index: 1;
+    z-index: 10 !important;
 }
 
 .modal-close-btn:hover {

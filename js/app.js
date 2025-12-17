@@ -1011,13 +1011,25 @@ class SiteModalManager {
             // Force a reflow to ensure styles are applied
             this.modal.offsetHeight;
 
+            // Add active class
             this.modal.classList.add('active');
             document.body.style.overflow = 'hidden';
 
-            // Ensure the modal is on top
+            // Force z-index
             this.modal.style.zIndex = '99999';
 
+            // Force content to be visible
+            const modalContent = this.modal.querySelector('.site-modal-content');
+            if (modalContent) {
+                modalContent.style.display = 'block';
+                modalContent.style.opacity = '1';
+                modalContent.style.visibility = 'visible';
+                modalContent.style.zIndex = '9991';
+                modalContent.style.position = 'relative';
+            }
+
             console.log('Modal opened for:', site.name);
+            console.log('Modal content element:', modalContent);
         } else {
             console.error('Modal element not found!');
         }
